@@ -4,38 +4,97 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ברוכה הבאה! — BA Beauty</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d0d0d;color:#fff;font-family:'Heebo',sans-serif;direction:rtl;text-align:right;min-height:100vh}
-.container{max-width:640px;margin:0 auto;padding:40px 20px}
+html{scroll-behavior:smooth}
+body{background:#0d0d0d;color:#fff;font-family:'Heebo',sans-serif;direction:rtl;text-align:right;min-height:100vh;overflow-x:hidden}
+.container{max-width:660px;margin:0 auto;padding:40px 20px 60px}
 h1,h2,h3{font-family:'Playfair Display',serif}
 
-/* Confetti */
-.confetti-piece{position:fixed;width:10px;height:10px;top:-20px;border-radius:2px;animation:confettiFall linear forwards}
-@keyframes confettiFall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+/* ── Confetti ─────────────────────────────────────── */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
 
-/* Plan Badge */
-.plan-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;border:2px solid;font-weight:700;font-size:15px;margin-bottom:24px}
+/* ── Celebration Emoji ────────────────────────────── */
+.celebration-emoji{text-align:center;font-size:72px;animation:celebBounce 1.2s ease infinite alternate;display:block;margin-bottom:12px}
+@keyframes celebBounce{
+  0%{transform:scale(1) translateY(0)}
+  60%{transform:scale(1.18) translateY(-14px)}
+  100%{transform:scale(1.05) translateY(-4px)}
+}
+
+/* ── Plan Badge ───────────────────────────────────── */
+.plan-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:50px;border:2px solid;font-weight:700;font-size:15px;margin-bottom:20px}
 .plan-badge.basic{background:#f5f0eb;border-color:#c4837a;color:#c4837a}
 .plan-badge.pro{background:#1a1200;border-color:#c9a84c;color:#c9a84c}
 .plan-badge.growth{background:#001a0a;border-color:#4caf7d;color:#4caf7d}
 
-/* Hero */
-.hero{text-align:center;padding:40px 0 20px}
-.hero h1{font-size:clamp(28px,5vw,42px);margin-bottom:12px}
-.hero p{color:#aaa;font-size:16px}
+/* ── Hero ─────────────────────────────────────────── */
+.hero{text-align:center;padding:32px 0 16px}
+.hero h1{font-size:clamp(26px,6vw,44px);margin-bottom:10px;line-height:1.25}
+.hero p{color:#aaa;font-size:16px;margin-bottom:6px}
 
-/* Receipt */
-.receipt{background:#1a1a1a;border-radius:20px;padding:28px 24px;margin:24px 0}
-.receipt-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #2a2a2a;font-size:15px}
+/* ── Validation Section ───────────────────────────── */
+.validation{background:linear-gradient(135deg,#0f1a0f,#152315);border:1px solid #4caf7d55;border-radius:20px;padding:28px 24px;margin:24px 0}
+.validation h2{color:#4caf7d;font-size:20px;margin-bottom:20px;font-family:'Heebo',sans-serif;font-weight:700}
+.validation-reason{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
+.validation-reason:last-child{margin-bottom:0}
+.validation-icon{font-size:26px;flex-shrink:0;line-height:1}
+.validation-text h4{font-size:15px;font-weight:700;margin-bottom:3px;color:#fff}
+.validation-text p{font-size:13px;color:#aaa;line-height:1.5}
+
+/* ── Receipt ──────────────────────────────────────── */
+.receipt-wrapper{position:relative;margin:24px 0}
+.receipt-tape{height:14px;background:repeating-linear-gradient(90deg,#f5f0eb 0,#f5f0eb 14px,transparent 14px,transparent 22px);border-radius:4px 4px 0 0;opacity:.35}
+.receipt{background:#f9f5f0;color:#1a1a1a;border-radius:0 0 12px 12px;padding:28px 24px;border:2px dashed #d9cfc8;border-top:none}
+.receipt-header{text-align:center;border-bottom:2px dashed #d9cfc8;padding-bottom:16px;margin-bottom:16px}
+.receipt-header h3{font-size:18px;color:#1a1a1a;font-family:'Playfair Display',serif;margin-bottom:4px}
+.receipt-header p{font-size:12px;color:#888;direction:ltr;text-align:center}
+.receipt-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed #d9cfc8;font-size:14px}
 .receipt-row:last-child{border-bottom:none}
-.receipt-row .label{color:#888}
-.receipt-row .value{font-weight:700}
-.receipt-total{font-size:18px;margin-top:8px}
-.receipt-total .value{color:#4caf7d;font-size:22px}
+.receipt-row .label{color:#666}
+.receipt-row .value{font-weight:700;color:#1a1a1a}
+.receipt-total{font-size:17px;margin-top:8px;padding-top:14px!important;border-top:2px dashed #d9cfc8!important;border-bottom:none!important}
+.receipt-total .value{font-size:21px}
+.receipt-footer{text-align:center;margin-top:18px;padding-top:14px;border-top:1px dashed #d9cfc8;font-size:12px;color:#888}
+.receipt-footer strong{display:block;margin-bottom:10px;color:#555;font-size:13px}
+.btn-contact{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#25d366;color:#fff;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'Heebo',sans-serif;transition:opacity .2s}
+.btn-contact:hover{opacity:.88}
 
-/* Features */
+/* ── Countdown ────────────────────────────────────── */
+.countdown-box{border-radius:20px;padding:28px 24px;text-align:center;margin:24px 0;border:2px solid}
+.countdown-box h3{font-size:18px;font-family:'Heebo',sans-serif;font-weight:700;margin-bottom:8px}
+.countdown-sub{color:#aaa;font-size:13px;margin-bottom:20px}
+.flip-clock{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0 16px}
+.flip-unit{display:flex;flex-direction:column;align-items:center;gap:4px}
+.flip-digit{font-family:'Playfair Display',serif;font-size:clamp(36px,9vw,58px);font-weight:700;min-width:64px;text-align:center;background:rgba(0,0,0,.25);border-radius:12px;padding:8px 12px;line-height:1;position:relative;overflow:hidden}
+.flip-digit::after{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(0,0,0,.3)}
+.flip-label{font-size:11px;color:#aaa;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.flip-sep{font-family:'Playfair Display',serif;font-size:clamp(30px,7vw,48px);font-weight:700;opacity:.7;margin-bottom:16px;align-self:flex-start;padding-top:10px}
+.progress-wrap{background:rgba(0,0,0,.2);border-radius:50px;height:10px;margin:12px 0 10px;overflow:hidden}
+.progress-bar{height:100%;border-radius:50px;transition:width 1s linear}
+.progress-text{font-size:12px;color:#aaa;margin-top:4px}
+
+/* ── Timeline ─────────────────────────────────────── */
+.timeline{margin:32px 0}
+.timeline h2{font-size:22px;margin-bottom:24px;color:#fff}
+.timeline-track{position:relative;padding-right:20px}
+.timeline-track::before{content:'';position:absolute;right:11px;top:0;bottom:0;width:2px;background:linear-gradient(#2a2a2a,#2a2a2a 60%,transparent)}
+.tl-step{display:flex;align-items:flex-start;gap:20px;margin-bottom:28px;position:relative}
+.tl-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px;z-index:1;position:relative}
+.tl-icon.done{background:#4caf7d;box-shadow:0 0 0 4px #4caf7d33}
+.tl-icon.active{background:#c9a84c;box-shadow:0 0 0 4px #c9a84c33;animation:pulse 1.8s ease infinite}
+.tl-icon.pending{background:#2a2a2a;border:2px solid #3a3a3a}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 4px #c9a84c33}50%{box-shadow:0 0 0 10px #c9a84c11}}
+.tl-body{flex:1}
+.tl-body h4{font-size:15px;font-weight:700;margin-bottom:3px}
+.tl-body p{font-size:13px;color:#888;line-height:1.5}
+.tl-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:5px;font-weight:600}
+.tl-badge.done{background:#4caf7d22;color:#4caf7d}
+.tl-badge.active{background:#c9a84c22;color:#c9a84c}
+.tl-badge.pending{background:#2a2a2a;color:#666}
+
+/* ── Features ─────────────────────────────────────── */
 .features-box{background:#1f1f1f;border:1px solid #3a3a3a;border-radius:16px;padding:20px 24px;margin:20px 0}
 .features-box h3{color:#fff;font-size:16px;margin-bottom:16px;font-family:'Heebo',sans-serif;font-weight:700}
 .feature-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #2a2a2a}
@@ -44,109 +103,216 @@ h1,h2,h3{font-family:'Playfair Display',serif}
 .feature-text{flex:1;font-size:14px;color:#ddd}
 .feature-value{background:#2a2a2a;color:#888;font-size:11px;padding:3px 8px;border-radius:20px;white-space:nowrap}
 
-/* Countdown */
-.countdown-box{background:linear-gradient(135deg,#1a1200,#2a1f00);border:1px solid #c9a84c44;border-radius:20px;padding:28px 24px;text-align:center;margin:24px 0}
-.countdown-box h3{color:#c9a84c;font-size:16px;margin-bottom:16px}
-.countdown-timer{font-family:'Playfair Display',serif;font-size:clamp(32px,8vw,52px);color:#fff;letter-spacing:4px}
-.countdown-label{color:#888;font-size:13px;margin-top:8px}
-
-/* Next Steps */
-.steps{margin:32px 0}
-.steps h2{font-size:22px;margin-bottom:20px;color:#fff}
-.step{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px}
-.step-num{background:#c4837a;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;margin-top:2px}
-.step-content h4{font-size:15px;margin-bottom:4px}
-.step-content p{color:#888;font-size:13px}
-
-/* Upsell */
-.upsell-card{border-radius:20px;padding:28px 24px;margin:24px 0;position:relative}
+/* ── Upsell ───────────────────────────────────────── */
+.upsell-card{border-radius:20px;padding:28px 24px;margin:24px 0;position:relative;overflow:hidden}
+.upsell-card::before{content:'⚡ הצעה אחרונה לפני הבנייה';position:absolute;top:0;right:0;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:0 0 0 12px;letter-spacing:.5px}
 .upsell-card.pro-upsell{background:linear-gradient(160deg,#1a1200,#2a1f00);border:2px solid #c9a84c}
 .upsell-card.growth-upsell{background:linear-gradient(160deg,#001a0a,#002a12);border:2px solid #4caf7d}
 .upsell-card.celebration{background:linear-gradient(160deg,#001a0a,#002a12);border:2px solid #4caf7d;text-align:center}
-.upsell-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.upsell-card.celebration::before{display:none}
+.upsell-title{font-size:20px;font-weight:700;margin-bottom:8px;margin-top:18px}
 .upsell-title.gold{color:#c9a84c}
 .upsell-title.green{color:#4caf7d}
-.upsell-btn{width:100%;padding:16px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-top:16px;font-family:'Heebo',sans-serif;transition:opacity 0.2s}
-.upsell-btn.gold{background:#c9a84c;color:#000}
-.upsell-btn.green{background:#4caf7d;color:#fff}
-.upsell-btn:hover{opacity:0.9}
+.scarcity-note{font-size:13px;color:#e74c3c;margin:6px 0 14px;font-weight:600}
+.value-stack{background:rgba(0,0,0,.25);border-radius:12px;padding:14px 16px;margin:14px 0}
+.value-stack-title{font-size:12px;color:#aaa;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.value-stack-item{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:#ddd}
+.value-stack-total{display:flex;justify-content:space-between;font-size:15px;font-weight:700;border-top:1px solid #444;margin-top:8px;padding-top:8px}
+.upsell-btn{width:100%;padding:16px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-top:16px;font-family:'Heebo',sans-serif;transition:all .2s;letter-spacing:.3px}
+.upsell-btn.gold{background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#000}
+.upsell-btn.green{background:linear-gradient(135deg,#4caf7d,#6ec99a);color:#fff}
+.upsell-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 
-/* Footer */
+/* ── Refer ────────────────────────────────────────── */
+.refer-box{background:linear-gradient(135deg,#1a0d1a,#250d25);border:1px solid #9b59b655;border-radius:20px;padding:26px 24px;margin:24px 0;text-align:center}
+.refer-box h3{color:#c39bd3;font-size:19px;font-weight:700;margin-bottom:8px;font-family:'Heebo',sans-serif}
+.refer-box p{color:#aaa;font-size:14px;margin-bottom:18px;line-height:1.6}
+.btn-whatsapp{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;background:#25d366;color:#fff;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;font-family:'Heebo',sans-serif}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
+.btn-whatsapp svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
+
+/* ── Footer ───────────────────────────────────────── */
 footer{text-align:center;padding:40px 20px;border-top:1px solid #2a2a2a;margin-top:40px;color:#666;font-size:13px}
 .btn-back{display:inline-block;margin-top:16px;color:#c4837a;text-decoration:none;font-size:14px}
+
+/* ── Mobile ───────────────────────────────────────── */
+@media(max-width:480px){
+  .flip-digit{font-size:36px;min-width:52px;padding:6px 8px}
+  .flip-sep{font-size:30px}
+  .container{padding:24px 16px 60px}
+}
 </style>
 </head>
 <body>
 
+<canvas id="confetti-canvas"></canvas>
+
 <div class="container">
+
+  <!-- HERO -->
   <div class="hero">
     <div id="plan-badge-container"></div>
-    <h1 id="hero-title">🎉 ברוכה הבאה!</h1>
+    <span class="celebration-emoji">🎉</span>
+    <h1 id="hero-title">ברוכה הבאה למשפחה! 🎊</h1>
     <p id="hero-sub"></p>
   </div>
 
-  <div class="receipt" id="receipt">
-    <div class="receipt-row">
-      <span class="label">חבילה</span>
-      <span class="value" id="r-plan"></span>
+  <!-- VALIDATION: why this was the right decision -->
+  <div class="validation">
+    <h2>✅ עשית את הבחירה הנכונה</h2>
+    <div class="validation-reason">
+      <span class="validation-icon">💼</span>
+      <div class="validation-text">
+        <h4>אתר מקצועי = עוד לקוחות בדלת</h4>
+        <p>עסקים עם אתר מקצועי מקבלים עד 3× יותר פניות — לקוחות מחפשות אתכן, ועכשיו הן ימצאו.</p>
+      </div>
     </div>
-    <div class="receipt-row">
-      <span class="label">עסק</span>
-      <span class="value" id="r-business"></span>
+    <div class="validation-reason">
+      <span class="validation-icon">⏱️</span>
+      <div class="validation-text">
+        <h4>אתר תוך 48 שעות — לא תמצאי מהיר יותר</h4>
+        <p>המתחרות שלך ממשיכות לחכות. את כבר בדרך — האתר שלך יהיה חי עוד לפני סוף השבוע.</p>
+      </div>
     </div>
-    <div class="receipt-row">
-      <span class="label">תשלום חודשי</span>
-      <span class="value" id="r-monthly"></span>
-    </div>
-    <div class="receipt-row">
-      <span class="label">סוף תקופת ניסיון</span>
-      <span class="value" id="r-trial-end"></span>
-    </div>
-    <div class="receipt-row receipt-total">
-      <span class="label">סה"כ היום</span>
-      <span class="value" id="r-total">0₪ (7 ימי ניסיון חינם)</span>
+    <div class="validation-reason">
+      <span class="validation-icon">💸</span>
+      <div class="validation-text">
+        <h4>תמורה אמיתית על כל שקל</h4>
+        <p>אתר כזה אצל מעצב פרטי? 5,000–15,000₪ חד-פעמי. את משלמת פחות ממחיר קפה ביום — וגם עם 7 ימי ניסיון חינם.</p>
+      </div>
     </div>
   </div>
 
+  <!-- RECEIPT -->
+  <div class="receipt-wrapper">
+    <div class="receipt-tape"></div>
+    <div class="receipt" id="receipt">
+      <div class="receipt-header">
+        <h3>🧾 אישור הזמנה — BA Beauty</h3>
+        <p id="r-confnum" style="margin-top:6px;font-weight:700;color:#555;font-size:14px"></p>
+      </div>
+      <div class="receipt-row">
+        <span class="label">חבילה</span>
+        <span class="value" id="r-plan"></span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">עסק</span>
+        <span class="value" id="r-business"></span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">תשלום חודשי</span>
+        <span class="value" id="r-monthly"></span>
+      </div>
+      <div class="receipt-row">
+        <span class="label">סוף תקופת ניסיון</span>
+        <span class="value" id="r-trial-end"></span>
+      </div>
+      <div class="receipt-row receipt-total">
+        <span class="label" style="font-weight:700">סה"כ היום</span>
+        <span class="value" id="r-total" style="color:#27ae60">0₪ ✓</span>
+      </div>
+      <div class="receipt-footer">
+        <strong>📌 שמרי את הדף הזה לעיון עתידי</strong>
+        <a class="btn-contact" id="btn-add-contact" href="#" onclick="addContact(event)">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.417A9.952 9.952 0 0011.999 22C17.522 22 22 17.523 22 12S17.522 2 11.999 2z"/></svg>
+          הוסיפי לאנשי הקשר
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown-box" id="countdown-box">
+    <h3>🔨 האתר שלך בבנייה</h3>
+    <p class="countdown-sub">כל שעה שעוברת — האתר שלך קרוב יותר ל-100% מוכן</p>
+    <div class="flip-clock">
+      <div class="flip-unit">
+        <div class="flip-digit" id="cd-h">48</div>
+        <div class="flip-label">שעות</div>
+      </div>
+      <div class="flip-sep">:</div>
+      <div class="flip-unit">
+        <div class="flip-digit" id="cd-m">00</div>
+        <div class="flip-label">דקות</div>
+      </div>
+      <div class="flip-sep">:</div>
+      <div class="flip-unit">
+        <div class="flip-digit" id="cd-s">00</div>
+        <div class="flip-label">שניות</div>
+      </div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+    </div>
+    <p class="progress-text" id="progress-text">0% הושלם</p>
+  </div>
+
+  <!-- FEATURES -->
   <div class="features-box" id="features-box">
     <h3 id="features-title">מה כלול בחבילה שלך:</h3>
     <div id="features-list"></div>
   </div>
 
-  <div class="countdown-box">
-    <h3>⏱️ האתר שלך יהיה מוכן עוד:</h3>
-    <div class="countdown-timer" id="countdown">48:00:00</div>
-    <p class="countdown-label">שעות : דקות : שניות</p>
-  </div>
-
+  <!-- UPSELL -->
   <div id="upsell-section"></div>
 
-  <div class="steps">
-    <h2>מה קורה עכשיו?</h2>
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h4>נציגה שלנו תצור קשר תוך 24 שעות</h4>
-        <p>נשמע על העסק שלך ונתאים את האתר בדיוק אליו</p>
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <h2>מה קורה עכשיו? 📍</h2>
+    <div class="timeline-track">
+
+      <div class="tl-step">
+        <div class="tl-icon done">✅</div>
+        <div class="tl-body">
+          <h4>שלחת פרטים</h4>
+          <p>הרשמה הושלמה בהצלחה — הפרטים שלך אצלנו</p>
+          <span class="tl-badge done">הושלם ✓</span>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h4>נשלח לך שאלון עיצוב קצר</h4>
-        <p>צבעים, לוגו, תמונות — 5 דקות וזהו</p>
+
+      <div class="tl-step">
+        <div class="tl-icon active">📞</div>
+        <div class="tl-body">
+          <h4>נציגה יוצרת קשר תוך 24 שעות</h4>
+          <p>נשמע על העסק שלך, נתאים את הכיוון, ונתחיל לבנות</p>
+          <span class="tl-badge active">⏳ בתהליך — עד 24 שעות</span>
+        </div>
       </div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h4>האתר שלך יהיה מוכן תוך 48 שעות</h4>
-        <p>תקבלי לינק לאישור לפני שהאתר עולה לאוויר</p>
+
+      <div class="tl-step">
+        <div class="tl-icon pending">📋</div>
+        <div class="tl-body">
+          <h4>שאלון עיצוב קצר</h4>
+          <p>צבעים, לוגו, תמונות — 5 דקות וזהו. בנוחות מהנייד</p>
+          <span class="tl-badge pending">ממתין</span>
+        </div>
       </div>
+
+      <div class="tl-step">
+        <div class="tl-icon pending">🚀</div>
+        <div class="tl-body">
+          <h4>האתר שלך עולה לאוויר!</h4>
+          <p>תקבלי לינק לאישור לפני ההשקה. ה-48 שעות מתחילות עכשיו</p>
+          <span class="tl-badge pending">עוד ~48 שעות</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <a href="index.html" class="btn-back">← חזרה לדף הבית</a>
+  <!-- REFER -->
+  <div class="refer-box">
+    <h3>💜 שתפי חברה — ותרוויחי חודש חינם!</h3>
+    <p>הכירי חברה שצריכה אתר לעסק שלה?<br>שלחי לה את הקישור — ואם היא תצטרף, תקבלי <strong style="color:#c39bd3">חודש שלם חינם</strong> 🎁</p>
+    <a class="btn-whatsapp" id="btn-whatsapp-share" href="#" onclick="shareWhatsApp(event)">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.417A9.952 9.952 0 0011.999 22C17.522 22 22 17.523 22 12S17.522 2 11.999 2z"/></svg>
+      שלחי לחברה בוואטסאפ
+    </a>
+  </div>
+
+  <div style="text-align:center">
+    <a href="index.html" class="btn-back">← חזרה לדף הבית</a>
+  </div>
 </div>
 
 <footer>
@@ -155,9 +321,10 @@ footer{text-align:center;padding:40px 20px;border-top:1px solid #2a2a2a;margin-t
 </footer>
 
 <script>
+/* ─── DATA ───────────────────────────────────────── */
 const PACKAGES = {
-  basic: {
-    id:'basic',name:'בסיסי',price:49,currency:'₪',period:'חודש',trialDays:7,color:'#c4837a',
+  basic:{
+    id:'basic',name:'בסיסי',price:49,currency:'₪',period:'חודש',trialDays:7,color:'#c4837a',colorRgb:'196,131,122',
     features:[
       {icon:'🌐',text:'דומיין משלך',value:'₪200/שנה'},
       {icon:'🖥',text:'אתר פרימיום מותאם אישית',value:'₪3,000'},
@@ -165,10 +332,17 @@ const PACKAGES = {
       {icon:'💬',text:'כפתור וואטסאפ ישיר',value:'כלול'},
       {icon:'⚡️',text:'אחסון מהיר ומאובטח',value:'כלול'},
       {icon:'🚀',text:'מוכן תוך 48 שעות',value:'בלעדי'}
+    ],
+    upsellTarget:'pro',upsellDiff:38,upsellItems:[
+      {label:'עדכוני תוכן שוטפים',val:'₪1,200'},
+      {label:'3 סבבי עיצוב בשנה',val:'₪900'},
+      {label:'כפתור הזמנת תורים',val:'₪600'},
+      {label:'דף ביקורות גוגל',val:'₪300'},
+      {label:'תמיכה עדיפות וואטסאפ',val:'₪500'}
     ]
   },
-  pro: {
-    id:'pro',name:'PRO',price:87,currency:'₪',period:'חודש',trialDays:7,color:'#c9a84c',
+  pro:{
+    id:'pro',name:'PRO',price:87,currency:'₪',period:'חודש',trialDays:7,color:'#c9a84c',colorRgb:'201,168,76',
     features:[
       {icon:'✨',text:'הכל שב-BASIC',value:'כלול'},
       {icon:'🛠',text:'עדכוני תוכן שוטפים',value:'תוך 48 שעות'},
@@ -177,10 +351,18 @@ const PACKAGES = {
       {icon:'⭐️',text:'דף ביקורות גוגל',value:'אוטומטי'},
       {icon:'⚡️',text:'תמיכה עדיפות וואטסאפ',value:'תוך 24 שעות'},
       {icon:'🔒',text:'גיבויים שוטפים',value:'הגנה מלאה'}
+    ],
+    upsellTarget:'growth',upsellDiff:110,upsellItems:[
+      {label:'חיבור Fresha / Booksy',val:'₪2,000'},
+      {label:'דף "על העסק" עם סיפור מותג',val:'₪800'},
+      {label:'גלריה אינסטגרם אוטומטית',val:'₪600'},
+      {label:'תמיכה פרימיום 4 שעות',val:'₪1,200'},
+      {label:'דוח ביצועים חודשי',val:'₪500'},
+      {label:'ריענון עיצובי שנתי',val:'₪1,500'}
     ]
   },
-  growth: {
-    id:'growth',name:'GROWTH',price:197,currency:'₪',period:'חודש',trialDays:7,color:'#4caf7d',
+  growth:{
+    id:'growth',name:'GROWTH',price:197,currency:'₪',period:'חודש',trialDays:7,color:'#4caf7d',colorRgb:'76,175,125',
     features:[
       {icon:'✨',text:'הכל שב-PRO',value:'כלול'},
       {icon:'📲',text:'חיבור מערכת תורים',value:'Fresha / Booksy'},
@@ -189,62 +371,96 @@ const PACKAGES = {
       {icon:'💬',text:'וואטסאפ עדיפות פרימיום',value:'תגובה תוך 4 שעות'},
       {icon:'📊',text:'דוח ביצועים חודשי',value:'כמה ביקורים, מאיפה'},
       {icon:'🎨',text:'ריענון עיצובי שנתי',value:'אתר תמיד טרי'}
-    ]
+    ],
+    upsellTarget:null
   }
 };
 
-function formatPrice(pkg){return `${pkg.price}${pkg.currency}/${pkg.period}`;}
-
-// Read URL params (Polar integration)
+/* ─── SESSION / URL PARAMS ───────────────────────── */
 const urlParams = new URLSearchParams(window.location.search);
 const planFromUrl = urlParams.get('plan');
 const nameFromUrl = urlParams.get('name');
 if(planFromUrl) sessionStorage.setItem('bs_plan', planFromUrl);
 if(nameFromUrl) sessionStorage.setItem('bs_name', nameFromUrl);
 
-// Guard: redirect if payment not complete
 if(sessionStorage.getItem('bs_payment_complete') !== 'true' && !planFromUrl){
   window.location.href = 'thank-you.html';
 }
 
-const name = sessionStorage.getItem('bs_name') || 'את';
+const name     = sessionStorage.getItem('bs_name') || 'את';
 const business = sessionStorage.getItem('bs_business') || 'העסק שלך';
-const plan = sessionStorage.getItem('bs_plan') || 'basic';
-const pkg = PACKAGES[plan];
+const plan     = sessionStorage.getItem('bs_plan') || 'basic';
+const pkg      = PACKAGES[plan] || PACKAGES.basic;
 
-// Confetti
-function launchConfetti(){
-  const colors = ['#c4837a','#c9a84c','#4caf7d','#fff','#f0c0b0'];
-  for(let i=0;i<60;i++){
-    const el = document.createElement('div');
-    el.className = 'confetti-piece';
-    el.style.cssText = `left:${Math.random()*100}vw;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${2+Math.random()*3}s;animation-delay:${Math.random()*2}s;border-radius:${Math.random()>0.5?'50%':'2px'}`;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(), 6000);
+/* ─── CONFETTI ────────────────────────────────────── */
+(function launchConfetti(){
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const colors = ['#c4837a','#c9a84c','#4caf7d','#fff','#f0c0b0','#9b59b6','#3498db','#e74c3c'];
+  const pieces = [];
+  const COUNT = 140;
+  for(let i=0;i<COUNT;i++){
+    pieces.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*-canvas.height,
+      w: 6+Math.random()*10,
+      h: 4+Math.random()*6,
+      r: Math.random()*Math.PI*2,
+      dr: (Math.random()-.5)*.2,
+      dx: (Math.random()-.5)*3,
+      dy: 2+Math.random()*4,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      circle: Math.random()>.5
+    });
   }
-}
-launchConfetti();
+  let start = null;
+  const DURATION = 4000;
+  function draw(ts){
+    if(!start) start = ts;
+    const elapsed = ts - start;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    const alpha = Math.max(0, 1 - (elapsed - 2500)/1500);
+    ctx.globalAlpha = alpha;
+    pieces.forEach(p=>{
+      p.y += p.dy;
+      p.x += p.dx;
+      p.r += p.dr;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.r);
+      ctx.fillStyle = p.color;
+      if(p.circle){ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
+      else{ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      ctx.restore();
+    });
+    if(elapsed < DURATION) requestAnimationFrame(draw);
+    else{ctx.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  requestAnimationFrame(draw);
+  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+})();
 
-// Plan badge
-const badgeEl = document.getElementById('plan-badge-container');
-const badgeClass = plan;
+/* ─── PLAN BADGE ─────────────────────────────────── */
 const badgeTexts = {basic:'✓ חבילה בסיסית — 49₪/חודש', pro:'👑 חבילת PRO — 87₪/חודש', growth:'🚀 חבילת GROWTH — 197₪/חודש'};
-badgeEl.innerHTML = `<div class="plan-badge ${badgeClass}">${badgeTexts[plan]}</div>`;
+document.getElementById('plan-badge-container').innerHTML =
+  `<div class="plan-badge ${plan}">${badgeTexts[plan]}</div>`;
 
-// Hero
-document.getElementById('hero-title').textContent = `🎉 ברוכה הבאה, ${name}!`;
+/* ─── HERO ───────────────────────────────────────── */
+document.getElementById('hero-title').innerHTML = `ברוכה הבאה למשפחה, ${name}! 🎊`;
 document.getElementById('hero-sub').textContent = `${business} — הצטרפת רשמית לחבילת ${pkg.name}`;
 
-// Receipt
+/* ─── RECEIPT ────────────────────────────────────── */
+const confNum = String(100000 + Math.floor(Math.random()*900000));
+document.getElementById('r-confnum').textContent = `מספר אישור: #${confNum}`;
 document.getElementById('r-plan').textContent = pkg.name;
 document.getElementById('r-business').textContent = business;
-document.getElementById('r-monthly').textContent = formatPrice(pkg);
-const trialEnd = new Date();
-trialEnd.setDate(trialEnd.getDate()+7);
+document.getElementById('r-monthly').textContent = `${pkg.price}${pkg.currency}/${pkg.period}`;
+const trialEnd = new Date(); trialEnd.setDate(trialEnd.getDate()+7);
 document.getElementById('r-trial-end').textContent = trialEnd.toLocaleDateString('he-IL');
-document.getElementById('receipt').style.borderColor = pkg.color;
 
-// Features
+/* ─── FEATURES ───────────────────────────────────── */
 document.getElementById('features-title').textContent = `מה כלול בחבילת ${pkg.name} שלך:`;
 document.getElementById('features-list').innerHTML = pkg.features.map(f=>`
   <div class="feature-item">
@@ -253,53 +469,105 @@ document.getElementById('features-list').innerHTML = pkg.features.map(f=>`
     <span class="feature-value">${f.value}</span>
   </div>`).join('');
 
-// Countdown
-function startCountdown(){
-  const start = parseInt(sessionStorage.getItem('bs_countdown_start')) || Date.now();
-  const target = start + 48*60*60*1000;
+/* ─── COUNTDOWN (flip-clock style) ──────────────────*/
+(function startCountdown(){
+  const KEY = 'bs_countdown_start';
+  if(!sessionStorage.getItem(KEY)) sessionStorage.setItem(KEY, Date.now());
+  const startTs = parseInt(sessionStorage.getItem(KEY));
+  const TOTAL = 48*3600*1000;
+  const target = startTs + TOTAL;
+
+  // Apply plan color
+  const box = document.getElementById('countdown-box');
+  box.style.background = `linear-gradient(135deg, rgba(${pkg.colorRgb},.08), rgba(${pkg.colorRgb},.18))`;
+  box.style.borderColor = pkg.color + '88';
+  document.getElementById('countdown-box').querySelector('h3').style.color = pkg.color;
+  document.querySelectorAll('.flip-digit').forEach(d=>d.style.color = pkg.color);
+  document.getElementById('progress-bar').style.background = `linear-gradient(90deg, ${pkg.color}88, ${pkg.color})`;
+
   function tick(){
-    const remaining = target - Date.now();
-    if(remaining<=0){document.getElementById('countdown').textContent='00:00:00';return;}
-    const h = Math.floor(remaining/3600000).toString().padStart(2,'0');
-    const m = Math.floor((remaining%3600000)/60000).toString().padStart(2,'0');
-    const s = Math.floor((remaining%60000)/1000).toString().padStart(2,'0');
-    document.getElementById('countdown').textContent = `${h}:${m}:${s}`;
-    setTimeout(tick, 1000);
+    const now = Date.now();
+    const rem = Math.max(0, target - now);
+    const elapsed = now - startTs;
+    const pct = Math.min(100, (elapsed/TOTAL*100)).toFixed(1);
+
+    const h = Math.floor(rem/3600000);
+    const m = Math.floor((rem%3600000)/60000);
+    const s = Math.floor((rem%60000)/1000);
+
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = `${pct}% הושלם`;
+
+    if(rem > 0) setTimeout(tick, 1000);
   }
   tick();
-}
-startCountdown();
+})();
 
-// Upsell
+/* ─── UPSELL ─────────────────────────────────────── */
 const upsell = document.getElementById('upsell-section');
-if(plan==='basic'){
+if(plan === 'basic'){
+  const up = pkg.upsellItems;
+  const total = '₪3,500';
   upsell.innerHTML = `
     <div class="upsell-card pro-upsell">
-      <p class="upsell-title gold">שדרגי ל-PRO — לפני שנתחיל לבנות</p>
-      <p style="color:#aaa;font-size:14px;margin-bottom:12px">הוסיפי רק 38₪/חודש וקבלי:</p>
-      ${PACKAGES.pro.features.slice(1).map(f=>`<div class="feature-item"><span class="feature-icon">${f.icon}</span><span class="feature-text" style="color:#ddd">${f.text}</span></div>`).join('')}
-      <button class="upsell-btn gold" onclick="upgradePlan('pro')">שדרגי ל-PRO — 87₪/חודש ←</button>
+      <p class="upsell-title gold">👑 שדרגי ל-PRO — לפני שנתחיל לבנות</p>
+      <p class="scarcity-note">⚠️ הצעה זו תפוג ברגע שנתחיל לבנות את האתר שלך</p>
+      <p style="color:#aaa;font-size:14px">הוסיפי רק 38₪/חודש וקבלי ערך עצום:</p>
+      <div class="value-stack">
+        <div class="value-stack-title">ערך כולל שמקבלים</div>
+        ${up.map(i=>`<div class="value-stack-item"><span>${i.label}</span><span style="color:#c9a84c;font-weight:700">${i.val}</span></div>`).join('')}
+        <div class="value-stack-total"><span>ערך שנתי כולל</span><span style="color:#c9a84c">${total}+</span></div>
+      </div>
+      <button class="upsell-btn gold" onclick="upgradePlan('pro')">✨ שדרגי ל-PRO — 87₪/חודש בלבד ←</button>
     </div>`;
-} else if(plan==='pro'){
+} else if(plan === 'pro'){
+  const up = pkg.upsellItems;
+  const total = '₪6,600';
   upsell.innerHTML = `
     <div class="upsell-card growth-upsell">
-      <p class="upsell-title green">הוסיפי GROWTH — האתר שלך יביא לקוחות אקטיבית</p>
-      <p style="color:#aaa;font-size:14px;margin-bottom:12px">הוסיפי רק 110₪/חודש וקבלי:</p>
-      ${PACKAGES.growth.features.slice(1).map(f=>`<div class="feature-item"><span class="feature-icon">${f.icon}</span><span class="feature-text" style="color:#ddd">${f.text}</span></div>`).join('')}
-      <button class="upsell-btn green" onclick="upgradePlan('growth')">שדרגי ל-GROWTH — 197₪/חודש ←</button>
+      <p class="upsell-title green">🚀 שדרגי ל-GROWTH — האתר שלך יביא לקוחות אקטיבית</p>
+      <p class="scarcity-note">⚠️ הצעה זו תפוג ברגע שנתחיל לבנות את האתר שלך</p>
+      <p style="color:#aaa;font-size:14px">הוסיפי רק 110₪/חודש וקבלי:</p>
+      <div class="value-stack">
+        <div class="value-stack-title">ערך כולל שמקבלים</div>
+        ${up.map(i=>`<div class="value-stack-item"><span>${i.label}</span><span style="color:#4caf7d;font-weight:700">${i.val}</span></div>`).join('')}
+        <div class="value-stack-total"><span>ערך שנתי כולל</span><span style="color:#4caf7d">${total}+</span></div>
+      </div>
+      <button class="upsell-btn green" onclick="upgradePlan('growth')">🚀 שדרגי ל-GROWTH — 197₪/חודש ←</button>
     </div>`;
 } else {
   upsell.innerHTML = `
     <div class="upsell-card celebration" style="text-align:center;padding:32px">
-      <div style="font-size:48px;margin-bottom:16px">🎉</div>
-      <p style="color:#4caf7d;font-size:20px;font-weight:700;margin-bottom:8px">בחרת את החבילה המלאה ביותר שלנו!</p>
-      <p style="color:#aaa;font-size:15px">האתר שלך הולך להיות מושלם.</p>
+      <div style="font-size:54px;margin-bottom:16px">👑</div>
+      <p style="color:#4caf7d;font-size:22px;font-weight:700;margin-bottom:8px">בחרת את החבילה המלאה ביותר שלנו!</p>
+      <p style="color:#aaa;font-size:15px">האתר שלך הולך להיות מושלם — ממש ברמה הגבוהה ביותר שיש.</p>
     </div>`;
 }
 
 function upgradePlan(newPlan){
   sessionStorage.setItem('bs_plan', newPlan);
   location.reload();
+}
+
+/* ─── ADD CONTACT (vCard) ────────────────────────── */
+function addContact(e){
+  e.preventDefault();
+  const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:BA Beauty\nTEL;TYPE=CELL:+972501234567\nEMAIL:hello@babeauty.co.il\nURL:https://babeauty.co.il\nEND:VCARD`;
+  const blob = new Blob([vcard],{type:'text/vcard'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'BA-Beauty.vcf';
+  a.click();
+}
+
+/* ─── WHATSAPP SHARE ─────────────────────────────── */
+function shareWhatsApp(e){
+  e.preventDefault();
+  const msg = encodeURIComponent(`היי! 🌸 הרגע נרשמתי ל-BA Beauty — בונים לי אתר לעסק תוך 48 שעות, מחיר ממש שווה ויש גם ניסיון חינם! אם גם את צריכה אתר לעסק, הנה הקישור: https://babeauty.co.il`);
+  window.open(`https://wa.me/?text=${msg}`, '_blank');
 }
 </script>
 </body>

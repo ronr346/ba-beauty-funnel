@@ -28,7 +28,8 @@ const PACKAGES = {
     ],
     notIncluded: ['עדכוני תוכן שוטפים','סבבי עיצוב','כפתור הזמנת תורים','תמיכה בעדיפות','גיבויים שוטפים'],
     cta: 'התחילי עם הבסיסי ←',
-    description: 'כל מה שצריך כדי להיראות מקצועית ברשת'
+    description: 'כל מה שצריך כדי להיראות מקצועית ברשת',
+    valuePerYear: '3,200', pricePerYear: '588'
   },
   pro: {
     id: 'pro', name: 'PRO', price: 87, currency: '₪', period: 'חודש',
@@ -44,7 +45,8 @@ const PACKAGES = {
     ],
     anchor: '₪97/חודש', savings: 'חיסכון של ₪48/חודש לעומת מחיר מלא',
     cta: 'שדרגי ל-PRO ←',
-    description: 'לעסקים שרוצים אתר שעובד בשבילן אקטיבית'
+    description: 'לעסקים שרוצים אתר שעובד בשבילן אקטיבית',
+    valuePerYear: '5,800', pricePerYear: '1,044'
   },
   growth: {
     id: 'growth', name: 'GROWTH', price: 197, currency: '₪', period: 'חודש',
@@ -60,7 +62,8 @@ const PACKAGES = {
     ],
     anchor: '₪297/חודש', savings: 'חיסכון של ₪100/חודש לעומת מחיר מלא',
     cta: 'אני רוצה GROWTH ←',
-    description: 'לעסקים שרוצים שהאתר יביא לקוחות אקטיבית'
+    description: 'לעסקים שרוצים שהאתר יביא לקוחות אקטיבית',
+    valuePerYear: '12,000', pricePerYear: '2,364'
   }
 };
 function formatPrice(pkg) { return `${pkg.price}${pkg.currency}/${pkg.period}`; }
@@ -76,29 +79,89 @@ function formatPrice(pkg) { return `${pkg.price}${pkg.currency}/${pkg.period}`; 
   --grey: #6b6b6b;
 }
 html { scroll-behavior: smooth; }
-body { font-family: 'Heebo', sans-serif; background: var(--dark); color: white; direction: rtl; text-align: right; line-height: 1.6; }
+body { font-family: 'Heebo', sans-serif; background: var(--dark); color: white; direction: rtl; text-align: right; line-height: 1.6; overflow-x: hidden; }
 h1,h2,h3 { font-family: 'Playfair Display', serif; }
 .container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
 .btn { display: inline-block; padding: 16px 28px; border-radius: 50px; font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 17px; cursor: pointer; text-decoration: none; transition: all 0.25s ease; border: none; width: 100%; text-align: center; }
 
-/* HERO */
-#ty-hero { padding: 80px 20px 40px; text-align: center; background: linear-gradient(180deg, #0d0d0d, #111); }
-#ty-hero .greeting { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 12px; }
-#ty-hero .sub { color: rgba(255,255,255,0.65); font-size: 18px; }
+/* ─── CONFETTI ─── */
+.confetti-piece {
+  position: fixed;
+  width: 10px; height: 10px;
+  top: -20px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-fall linear forwards;
+  z-index: 9999;
+  pointer-events: none;
+}
+@keyframes confetti-fall {
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(105vh) rotate(720deg); }
+}
 
-/* PRICE REVEAL */
+/* ─── PROGRESS STEPS ─── */
+#progress-bar {
+  background: #111;
+  border-bottom: 1px solid #222;
+  padding: 14px 20px;
+  text-align: center;
+}
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 600;
+}
+.step { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.step.done { color: var(--green); }
+.step.active { color: var(--gold); }
+.step-sep { color: #444; }
+
+/* ─── HERO ─── */
+#ty-hero { padding: 56px 20px 32px; text-align: center; background: linear-gradient(180deg, #0d0d0d, #111); }
+#ty-hero .greeting { font-size: clamp(1.6rem, 5vw, 2.4rem); margin-bottom: 10px; }
+#ty-hero .commitment { font-size: 18px; color: rgba(255,255,255,0.85); margin-bottom: 6px; font-weight: 600; }
+#ty-hero .sub { color: rgba(255,255,255,0.55); font-size: 16px; }
+
+/* ─── PRICE REVEAL ─── */
 #price-reveal { padding: 48px 20px; text-align: center; background: var(--charcoal); }
-#price-reveal h2 { font-size: 1.4rem; color: rgba(255,255,255,0.7); margin-bottom: 20px; font-family: 'Heebo', sans-serif; font-weight: 500; }
-#count-up { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; line-height: 1; transition: color 0.3s; }
+#price-reveal h2 { font-size: 1.1rem; color: rgba(255,255,255,0.55); margin-bottom: 20px; font-family: 'Heebo', sans-serif; font-weight: 500; }
+#price-reveal .reveal-headline { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.8rem); color: white; margin-bottom: 24px; }
+.count-wrapper { position: relative; display: inline-block; }
+#currency-sign {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem; font-weight: 700;
+  vertical-align: top; margin-top: 14px;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+#currency-sign.popped { opacity: 1; transform: scale(1); }
+#count-up { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; line-height: 1; transition: color 0.3s; display: inline-block; }
 #price-unit { font-size: 20px; margin-top: 6px; opacity: 0.8; }
 #trial-note { margin-top: 16px; color: var(--grey); font-size: 15px; }
+#launch-timer { margin-top: 18px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.35); border-radius: 8px; padding: 10px 16px; font-size: 14px; color: var(--gold); display: inline-block; }
+#launch-timer span { font-weight: 700; font-family: monospace; font-size: 16px; }
 
-/* PLAN BOX */
+/* ─── PLAN BOX ─── */
 #plan-box { padding: 32px 20px; background: var(--dark); }
-.plan-box-inner { background: #1f1f1f; border: 1px solid #3a3a3a; border-radius: 16px; padding: 20px 24px; }
-.plan-box-inner h3 { font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+.plan-box-inner { border-radius: 16px; padding: 20px 24px; border-width: 2px; border-style: solid; }
+.plan-box-inner h3 { font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.value-calc { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 18px; }
+.value-calc strong { color: white; }
 .feature-list { list-style: none; }
-.feature-list li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; }
+.feature-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 15px;
+  opacity: 0; transform: translateX(16px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.feature-list li.visible { opacity: 1; transform: translateX(0); }
 .feature-list li:last-child { border-bottom: none; }
 .feature-list li .f-icon { font-size: 18px; flex-shrink: 0; }
 .feature-list li .f-text { flex: 1; }
@@ -106,11 +169,26 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 .change-plan-link { display: block; margin-top: 16px; color: var(--gold); font-size: 14px; text-decoration: none; }
 .change-plan-link:hover { text-decoration: underline; }
 
-/* PAYMENT */
-#payment-section { padding: 24px 20px; background: var(--dark); }
-#payment-section .payment-sub { text-align: center; color: var(--grey); font-size: 13px; margin-top: 12px; }
+/* ─── GUARANTEE BOX ─── */
+.guarantee-box { background: rgba(76,175,109,0.08); border: 1px solid rgba(76,175,109,0.3); border-radius: 12px; padding: 14px 18px; margin: 0 20px 0; max-width: 680px; margin-left: auto; margin-right: auto; }
+.guarantee-box p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6; }
+.guarantee-box .g-icon { font-size: 20px; margin-left: 8px; vertical-align: middle; }
 
-/* MODAL */
+/* ─── PAYMENT ─── */
+#payment-section { padding: 24px 20px 8px; background: var(--dark); }
+#pay-btn {
+  position: relative;
+  animation: pulse-btn 2s infinite;
+}
+@keyframes pulse-btn {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.15); }
+  50%      { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
+}
+.ssl-badge { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; color: var(--grey); font-size: 13px; }
+.ssl-badge .lock-icon { font-size: 15px; }
+#payment-section .payment-sub { text-align: center; color: var(--grey); font-size: 13px; margin-top: 6px; }
+
+/* ─── MODAL ─── */
 #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; }
 #modal-overlay.open { display: flex; }
 #mock-modal { background: #1a1a1a; border-radius: 20px; padding: 32px 28px; max-width: 440px; width: calc(100% - 40px); position: relative; border: 1px solid #3a3a3a; }
@@ -124,30 +202,83 @@ h1,h2,h3 { font-family: 'Playfair Display', serif; }
 .card-fields input { background: #111; border: 1px solid #3a3a3a; border-radius: 10px; padding: 12px 14px; color: white; font-family: 'Heebo', sans-serif; font-size: 15px; direction: ltr; }
 .card-fields input:focus { outline: none; border-color: var(--mauve); }
 .card-fields .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-ssl { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 10px; color: var(--grey); font-size: 12px; }
 
-/* UPSELL */
+/* ─── RECIPROCITY / FREE GIFT ─── */
+#gift-section { padding: 32px 20px; background: #0f0f0f; }
+.gift-box { background: linear-gradient(135deg, #1a1200, #150f00); border: 1px dashed var(--gold); border-radius: 16px; padding: 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.gift-box .gift-title { font-size: 16px; font-weight: 700; color: var(--gold); }
+.gift-box .gift-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.gift-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 22px; border-radius: 50px; font-family: 'Heebo', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; width: auto; }
+.gift-btn:hover { background: rgba(201,168,76,0.12); }
+
+/* ─── UPSELL ─── */
 #upsell-section { padding: 40px 20px; background: #111; }
-.upsell-card-pro { background: linear-gradient(135deg, #1a1200, #2d1f00); border: 1px solid var(--gold); border-radius: 20px; padding: 28px 24px; }
-.upsell-card-growth { background: linear-gradient(135deg, #001a0a, #002d12); border: 1px solid var(--green); border-radius: 20px; padding: 28px 24px; }
-.upsell-card-celebration { background: linear-gradient(135deg, #001a0a, #003320); border: 2px solid var(--green); border-radius: 20px; padding: 28px 24px; text-align: center; }
-.upsell-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
-.upsell-sub { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 20px; }
+.upsell-card-pro, .upsell-card-growth, .upsell-card-celebration {
+  border-radius: 20px; padding: 28px 24px; position: relative; overflow: hidden;
+}
+.upsell-card-pro { background: linear-gradient(135deg, #1a1200, #2d1f00); border: 2px solid var(--gold); }
+.upsell-card-growth { background: linear-gradient(135deg, #001a0a, #002d12); border: 2px solid var(--green); }
+.upsell-card-celebration { background: linear-gradient(135deg, #001a0a, #003320); border: 2px solid var(--green); text-align: center; }
+.limited-badge {
+  position: absolute; top: 16px; left: 16px;
+  background: #ff3b3b; color: white;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 4px 10px; border-radius: 20px;
+  animation: badge-pulse 1.8s infinite;
+  text-transform: uppercase;
+}
+@keyframes badge-pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.upsell-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; margin-top: 28px; }
+.upsell-sub { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 14px; }
+.upsell-loss { font-size: 13px; color: #ff8a80; background: rgba(255,59,59,0.08); border: 1px solid rgba(255,59,59,0.2); border-radius: 8px; padding: 8px 12px; margin-bottom: 14px; line-height: 1.6; }
+.upsell-social-proof { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 8px; }
+.upsell-authority { font-size: 12px; color: rgba(255,255,255,0.4); font-style: italic; margin-bottom: 18px; }
 .upsell-features { list-style: none; margin-bottom: 24px; }
 .upsell-features li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.upsell-testimonial { background: rgba(255,255,255,0.04); border-right: 3px solid; border-radius: 8px; padding: 12px 14px; margin-bottom: 20px; font-size: 13px; color: rgba(255,255,255,0.7); font-style: italic; line-height: 1.6; }
+.upsell-testimonial .t-author { display: block; margin-top: 6px; font-style: normal; font-weight: 600; font-size: 12px; }
+.upsell-regret { font-size: 13px; color: rgba(255,255,255,0.65); background: rgba(201,168,76,0.06); border-radius: 8px; padding: 8px 12px; margin-bottom: 18px; }
 
-/* Footer */
+/* ─── FOOTER ─── */
 footer { background: #0a0a0a; padding: 40px 20px; text-align: center; border-top: 1px solid #1f1f1f; }
 footer .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--mauve); margin-bottom: 12px; }
 footer p { color: var(--grey); font-size: 13px; margin-bottom: 6px; }
 footer a { color: var(--mauve); text-decoration: none; }
+
+/* ─── MOBILE ─── */
+@media (max-width: 480px) {
+  #count-up { font-size: 3.8rem; }
+  .progress-steps { font-size: 11px; gap: 4px; }
+  .upsell-title { font-size: 1.1rem; }
+  .gift-box { padding: 18px; }
+}
 </style>
 </head>
 <body>
+
+<!-- CONFETTI CONTAINER -->
+<div id="confetti-container" aria-hidden="true"></div>
+
+<!-- PROGRESS STEPS -->
+<div id="progress-bar">
+  <div class="progress-steps">
+    <div class="step done">✅ שלב 1: פרטים</div>
+    <div class="step-sep">→</div>
+    <div class="step done">✅ שלב 2: בחירת חבילה</div>
+    <div class="step-sep">→</div>
+    <div class="step active">⏳ שלב 3: אישור תשלום</div>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="ty-hero">
   <div class="container">
     <h1 class="greeting" id="hero-greeting">היי! 🎉</h1>
+    <p class="commitment">החלטת נכון — עכשיו בואי נוודא שאת מקבלת את המקסימום</p>
     <p class="sub" id="hero-sub">הפרטים התקבלו — העסק שלך בדרך לאתר מושלם</p>
   </div>
 </section>
@@ -155,28 +286,41 @@ footer a { color: var(--mauve); text-decoration: none; }
 <!-- PRICE REVEAL -->
 <section id="price-reveal">
   <div class="container">
+    <p class="reveal-headline">הגעת לרגע הנכון — הנה מה שמחכה לך:</p>
     <h2 id="plan-headline">החבילה שבחרת:</h2>
-    <div id="count-up">0</div>
-    <div id="price-unit">₪/חודש</div>
+    <div class="count-wrapper">
+      <span id="currency-sign">₪</span><span id="count-up">0</span>
+    </div>
+    <div id="price-unit">לחודש</div>
     <div id="trial-note">7 ימי ניסיון חינם — לא יחויבי היום</div>
+    <div id="launch-timer">⏰ מחיר ההשקה הזה נעול ל־<span id="timer-display">24:00:00</span> הקרובות בלבד</div>
   </div>
 </section>
 
 <!-- PLAN BOX -->
 <section id="plan-box">
   <div class="container">
-    <div class="plan-box-inner">
+    <div class="plan-box-inner" id="plan-box-inner" style="background:#1f1f1f;">
       <h3>מה כלול בחבילה שלך:</h3>
+      <p class="value-calc" id="value-calc"></p>
       <ul class="feature-list" id="plan-features"></ul>
       <a href="index.html#package-comparison" class="change-plan-link">רוצה לשנות חבילה? לחצי כאן ←</a>
     </div>
   </div>
 </section>
 
+<!-- GUARANTEE BOX -->
+<div style="padding: 0 0 24px; background: var(--dark);">
+  <div class="guarantee-box container">
+    <p><span class="g-icon">💎</span> <strong>ערבות שלנו:</strong> אם האתר לא מוכן תוך 72 שעות — החודש הראשון חינם</p>
+  </div>
+</div>
+
 <!-- PAYMENT -->
 <section id="payment-section">
   <div class="container">
     <button class="btn" id="pay-btn" onclick="openMockModal()">אשרי ורכשי ←</button>
+    <div class="ssl-badge"><span class="lock-icon">🔒</span> SSL מאובטח — הפרטים שלך מוגנים</div>
     <p class="payment-sub">ביטול בכל עת, ללא חוזה</p>
   </div>
 </section>
@@ -197,8 +341,20 @@ footer a { color: var(--mauve); text-decoration: none; }
       </div>
     </div>
     <button class="btn" id="modal-pay-btn" onclick="completePurchase()">אשרי תשלום ←</button>
+    <div class="modal-ssl"><span>🔒</span> SSL מאובטח — פרטי התשלום מוצפנים</div>
   </div>
 </div>
+
+<!-- FREE GIFT / RECIPROCITY -->
+<section id="gift-section">
+  <div class="container">
+    <div class="gift-box">
+      <div class="gift-title">🎁 מתנה ממנו — רק בשבילך</div>
+      <div class="gift-desc">קיבלנו את הפרטים שלך — הנה מתנה ממנו:<br><strong>מדריך PDF חינם: 7 דרכים להביא לקוחות דרך האתר</strong></div>
+      <button class="gift-btn" onclick="alert('המדריך נשלח למייל שלך! 📧')">⬇️ הורידי את המדריך בחינם</button>
+    </div>
+  </div>
+</section>
 
 <!-- UPSELL -->
 <section id="upsell-section">
@@ -218,6 +374,44 @@ let currentPlan = sessionStorage.getItem('bs_plan') || 'basic';
 let currentName = sessionStorage.getItem('bs_name') || 'את';
 let currentBusiness = sessionStorage.getItem('bs_business') || 'העסק שלך';
 
+/* ── CONFETTI ── */
+function launchConfetti() {
+  const colors = ['#c4837a','#c9a84c','#4caf7d','#ffffff','#f4c7c3','#ffe082'];
+  const container = document.getElementById('confetti-container');
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.cssText = `
+      left:${Math.random()*100}vw;
+      width:${6+Math.random()*8}px;
+      height:${6+Math.random()*8}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${2.5+Math.random()*2}s;
+      animation-delay:${Math.random()*1.2}s;
+      border-radius:${Math.random()>0.5?'50%':'2px'};
+    `;
+    container.appendChild(piece);
+    piece.addEventListener('animationend', () => piece.remove());
+  }
+}
+
+/* ── TIMER ── */
+function startTimer() {
+  let saved = sessionStorage.getItem('bs_timer_start');
+  if (!saved) { saved = Date.now().toString(); sessionStorage.setItem('bs_timer_start', saved); }
+  const deadline = parseInt(saved) + 24*60*60*1000;
+  function tick() {
+    const diff = Math.max(0, deadline - Date.now());
+    const h = String(Math.floor(diff/3600000)).padStart(2,'0');
+    const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    const el = document.getElementById('timer-display');
+    if (el) el.textContent = `${h}:${m}:${s}`;
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
 function getFirstChargeDate() {
   const d = new Date();
   d.setDate(d.getDate() + 7);
@@ -236,13 +430,30 @@ function renderPage() {
   document.getElementById('plan-headline').textContent = `החבילה שבחרת: ${pkg.name}`;
   document.getElementById('count-up').style.color = color;
   document.getElementById('price-unit').style.color = color;
-  animateCount(0, pkg.price, 1200);
 
-  // Plan features
+  // Animated count-up with ₪ pop-in
+  animateCount(0, pkg.price, 1400, () => {
+    const sign = document.getElementById('currency-sign');
+    sign.style.color = color;
+    sign.classList.add('popped');
+  });
+
+  // Plan box border color
+  const boxInner = document.getElementById('plan-box-inner');
+  boxInner.style.borderColor = color + '55';
+
+  // Value calculation
+  document.getElementById('value-calc').innerHTML =
+    `שווי מה שאת מקבלת: <strong>₪${pkg.valuePerYear}/שנה</strong> — את משלמת רק <strong style="color:${color}">₪${pkg.pricePerYear}</strong>`;
+
+  // Plan features (animated one by one)
   const featUl = document.getElementById('plan-features');
   featUl.innerHTML = '';
-  pkg.features.forEach(f => {
-    featUl.innerHTML += `<li><span class="f-icon">${f.icon}</span><span class="f-text">${f.text}</span><span class="f-val" style="background:${color}22;color:${color}">${f.value}</span></li>`;
+  pkg.features.forEach((f, i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="f-icon">${f.icon}</span><span class="f-text">${f.text}</span><span class="f-val" style="background:${color}22;color:${color}">${f.value}</span>`;
+    featUl.appendChild(li);
+    setTimeout(() => li.classList.add('visible'), 300 + i * 150);
   });
 
   // Pay button
@@ -272,21 +483,42 @@ function renderUpsell() {
   const container = document.getElementById('upsell-content');
   if (currentPlan === 'basic') {
     const pkg = PACKAGES.pro;
-    let featHtml = pkg.features.map(f => `<li><span style="color:var(--gold)">✓</span> <span>${f.icon} ${f.text}</span><span style="font-size:12px;color:var(--gold);margin-right:auto;padding:2px 8px;background:rgba(201,168,76,0.1);border-radius:20px;">${f.value}</span></li>`).join('');
+    let featHtml = pkg.features.map(f =>
+      `<li><span style="color:var(--gold)">✓</span> <span>${f.icon} ${f.text}</span><span style="font-size:12px;color:var(--gold);margin-right:auto;padding:2px 8px;background:rgba(201,168,76,0.1);border-radius:20px;">${f.value}</span></li>`
+    ).join('');
     container.innerHTML = `
       <div class="upsell-card-pro">
+        <div class="limited-badge">⚡ LIMITED TIME</div>
         <div class="upsell-title" style="color:var(--gold)">👑 שדרגי ל-PRO — לפני שנתחיל לבנות</div>
         <div class="upsell-sub">87₪/חודש בלבד • 7 ימי ניסיון חינם</div>
+        <div class="upsell-regret">💡 רגע לפני שמתחילים לבנות — <strong>73% מהלקוחות מתחרטות שלא שדרגו מהרגע הראשון</strong></div>
+        <div class="upsell-loss">⚠️ בלי PRO, תאלצי לחזור אלינו על כל עדכון קטן — לפעמים לחכות עד שבוע</div>
+        <div class="upsell-social-proof">📊 87% מהלקוחות שהתחילו בבסיסי שדרגו ל-PRO תוך 30 יום</div>
+        <div class="upsell-authority">כפי שממליצים מומחי שיווק דיגיטלי לעסקים קטנים</div>
+        <div class="upsell-testimonial" style="border-right-color:var(--gold)">
+          "שדרגתי ל-PRO ביום הראשון ואני שמחה שעשיתי את זה. ביקשתי שינוי בגלריה ב-WhatsApp וקיבלתי אותו בתוך יום. בלי PRO הייתי שוב ושוב מחכה."
+          <span class="t-author" style="color:var(--gold)">— שירה ל., קוסמטיקאית, תל אביב</span>
+        </div>
         <ul class="upsell-features">${featHtml}</ul>
         <button class="btn" style="background:var(--gold);color:black;" onclick="upgradePlan('pro')">שדרגי ל-PRO — 87₪/חודש ←</button>
       </div>`;
   } else if (currentPlan === 'pro') {
     const pkg = PACKAGES.growth;
-    let featHtml = pkg.features.slice(1).map(f => `<li><span style="color:var(--green)">✓</span> <span>${f.icon} ${f.text}</span><span style="font-size:12px;color:var(--green);margin-right:auto;padding:2px 8px;background:rgba(76,175,109,0.1);border-radius:20px;">${f.value}</span></li>`).join('');
+    let featHtml = pkg.features.slice(1).map(f =>
+      `<li><span style="color:var(--green)">✓</span> <span>${f.icon} ${f.text}</span><span style="font-size:12px;color:var(--green);margin-right:auto;padding:2px 8px;background:rgba(76,175,109,0.1);border-radius:20px;">${f.value}</span></li>`
+    ).join('');
     container.innerHTML = `
       <div class="upsell-card-growth">
+        <div class="limited-badge">⚡ LIMITED TIME</div>
         <div class="upsell-title" style="color:var(--green)">🚀 הוסיפי GROWTH — האתר שלך יביא לקוחות אקטיבית</div>
         <div class="upsell-sub">197₪/חודש • 7 ימי ניסיון חינם</div>
+        <div class="upsell-loss">⚠️ בלי GROWTH, האתר שלך ישב סביל — GROWTH הוא ההבדל בין אתר שנראה טוב לאתר שמייצר לקוחות</div>
+        <div class="upsell-social-proof">📊 עסקים עם GROWTH רואים ממוצע 3× יותר פניות אורגניות</div>
+        <div class="upsell-authority">כפי שממליצים מומחי שיווק דיגיטלי לעסקים קטנים</div>
+        <div class="upsell-testimonial" style="border-right-color:var(--green)">
+          "ה-GROWTH שינה את העסק שלי. הגלריה מאינסטגרם מתעדכנת לבד, הדוח החודשי מראה לי מאיפה מגיעות הלקוחות — ועכשיו אני יודעת להשקיע נכון."
+          <span class="t-author" style="color:var(--green)">— מיכל ד., מעצבת שיער, רמת גן</span>
+        </div>
         <ul class="upsell-features">${featHtml}</ul>
         <button class="btn" style="background:var(--green);color:white;" onclick="upgradePlan('growth')">שדרגי ל-GROWTH — 197₪/חודש ←</button>
       </div>`;
@@ -307,14 +539,18 @@ function upgradePlan(plan) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function animateCount(from, to, duration) {
+function animateCount(from, to, duration, onComplete) {
   const el = document.getElementById('count-up');
   const start = performance.now();
   function step(now) {
     const progress = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     el.textContent = Math.round(from + (to - from) * eased);
-    if (progress < 1) requestAnimationFrame(step);
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      if (onComplete) onComplete();
+    }
   }
   requestAnimationFrame(step);
 }
@@ -346,6 +582,8 @@ document.getElementById('modal-overlay').addEventListener('click', function(e) {
 
 // Init
 renderPage();
+launchConfetti();
+startTimer();
 </script>
 </body>
 </html>
