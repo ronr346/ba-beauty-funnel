@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תודה! | BeautySite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+const POLAR_URLS = {
+  basic: 'REPLACE_WITH_POLAR_BASIC_URL',
+  pro: 'REPLACE_WITH_POLAR_PRO_URL',
+  growth: 'REPLACE_WITH_POLAR_GROWTH_URL'
+};
+
+const PACKAGES = {
+  basic: {
+    id: 'basic', name: 'בסיסי', price: 49, currency: '₪', period: 'חודש',
+    trialDays: 7, badge: null, color: '#c4837a',
+    features: [
+      { icon: '🌐', text: 'דומיין משלך', value: '₪200/שנה' },
+      { icon: '🖥', text: 'אתר פרימיום מותאם אישית', value: '₪3,000' },
+      { icon: '📱', text: 'מותאם למובייל 100%', value: 'כלול' },
+      { icon: '💬', text: 'כפתור וואטסאפ ישיר', value: 'כלול' },
+      { icon: '⚡️', text: 'אחסון מהיר ומאובטח', value: 'כלול' },
+      { icon: '🚀', text: 'מוכן תוך 48 שעות', value: 'בלעדי' }
+    ],
+    notIncluded: ['עדכוני תוכן שוטפים','סבבי עיצוב','כפתור הזמנת תורים','תמיכה בעדיפות','גיבויים שוטפים'],
+    cta: 'התחילי עם הבסיסי ←',
+    description: 'כל מה שצריך כדי להיראות מקצועית ברשת'
+  },
+  pro: {
+    id: 'pro', name: 'PRO', price: 87, currency: '₪', period: 'חודש',
+    trialDays: 7, badge: '👑 הכי פופולרי', badgeColor: '#c9a84c', color: '#c9a84c',
+    features: [
+      { icon: '✨', text: 'הכל שב-BASIC', value: 'כלול' },
+      { icon: '🛠', text: 'עדכוני תוכן שוטפים', value: 'תוך 48 שעות' },
+      { icon: '🔄', text: '3 סבבי עיצוב בשנה', value: 'גמישות מלאה' },
+      { icon: '📅', text: 'כפתור הזמנת תורים', value: 'Calendly מובנה' },
+      { icon: '⭐️', text: 'דף ביקורות גוגל', value: 'אוטומטי' },
+      { icon: '⚡️', text: 'תמיכה עדיפות וואטסאפ', value: 'תוך 24 שעות' },
+      { icon: '🔒', text: 'גיבויים שוטפים', value: 'הגנה מלאה' }
+    ],
+    anchor: '₪97/חודש', savings: 'חיסכון של ₪48/חודש לעומת מחיר מלא',
+    cta: 'שדרגי ל-PRO ←',
+    description: 'לעסקים שרוצים אתר שעובד בשבילן אקטיבית'
+  },
+  growth: {
+    id: 'growth', name: 'GROWTH', price: 197, currency: '₪', period: 'חודש',
+    trialDays: 7, badge: '🚀 לעסקים שצומחים', badgeColor: '#4caf7d', color: '#4caf7d',
+    features: [
+      { icon: '✨', text: 'הכל שב-PRO', value: 'כלול' },
+      { icon: '📲', text: 'חיבור מערכת תורים', value: 'Fresha / Booksy' },
+      { icon: '📖', text: 'דף "על העסק" עם סיפור מותג', value: 'כתיבה כלולה' },
+      { icon: '🖼', text: 'גלריה מאינסטגרם אוטומטית', value: 'מתעדכנת לבד' },
+      { icon: '💬', text: 'וואטסאפ עדיפות פרימיום', value: 'תגובה תוך 4 שעות' },
+      { icon: '📊', text: 'דוח ביצועים חודשי', value: 'כמה ביקורים, מאיפה' },
+      { icon: '🎨', text: 'ריענון עיצובי שנתי', value: 'אתר תמיד טרי' }
+    ],
+    anchor: '₪297/חודש', savings: 'חיסכון של ₪100/חודש לעומת מחיר מלא',
+    cta: 'אני רוצה GROWTH ←',
+    description: 'לעסקים שרוצים שהאתר יביא לקוחות אקטיבית'
+  }
+};
+function formatPrice(pkg) { return `${pkg.price}${pkg.currency}/${pkg.period}`; }
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --dark: #0d0d0d;
+  --charcoal: #1a1a1a;
+  --mauve: #c4837a;
+  --gold: #c9a84c;
+  --green: #4caf7d;
+  --grey: #6b6b6b;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Heebo', sans-serif; background: var(--dark); color: white; direction: rtl; text-align: right; line-height: 1.6; }
+h1,h2,h3 { font-family: 'Playfair Display', serif; }
+.container { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+.btn { display: inline-block; padding: 16px 28px; border-radius: 50px; font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 17px; cursor: pointer; text-decoration: none; transition: all 0.25s ease; border: none; width: 100%; text-align: center; }
+
+/* HERO */
+#ty-hero { padding: 80px 20px 40px; text-align: center; background: linear-gradient(180deg, #0d0d0d, #111); }
+#ty-hero .greeting { font-size: clamp(1.8rem, 5vw, 2.6rem); margin-bottom: 12px; }
+#ty-hero .sub { color: rgba(255,255,255,0.65); font-size: 18px; }
+
+/* PRICE REVEAL */
+#price-reveal { padding: 48px 20px; text-align: center; background: var(--charcoal); }
+#price-reveal h2 { font-size: 1.4rem; color: rgba(255,255,255,0.7); margin-bottom: 20px; font-family: 'Heebo', sans-serif; font-weight: 500; }
+#count-up { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; line-height: 1; transition: color 0.3s; }
+#price-unit { font-size: 20px; margin-top: 6px; opacity: 0.8; }
+#trial-note { margin-top: 16px; color: var(--grey); font-size: 15px; }
+
+/* PLAN BOX */
+#plan-box { padding: 32px 20px; background: var(--dark); }
+.plan-box-inner { background: #1f1f1f; border: 1px solid #3a3a3a; border-radius: 16px; padding: 20px 24px; }
+.plan-box-inner h3 { font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+.feature-list { list-style: none; }
+.feature-list li { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 15px; }
+.feature-list li:last-child { border-bottom: none; }
+.feature-list li .f-icon { font-size: 18px; flex-shrink: 0; }
+.feature-list li .f-text { flex: 1; }
+.feature-list li .f-val { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 20px; white-space: nowrap; }
+.change-plan-link { display: block; margin-top: 16px; color: var(--gold); font-size: 14px; text-decoration: none; }
+.change-plan-link:hover { text-decoration: underline; }
+
+/* PAYMENT */
+#payment-section { padding: 24px 20px; background: var(--dark); }
+#payment-section .payment-sub { text-align: center; color: var(--grey); font-size: 13px; margin-top: 12px; }
+
+/* MODAL */
+#modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; }
+#modal-overlay.open { display: flex; }
+#mock-modal { background: #1a1a1a; border-radius: 20px; padding: 32px 28px; max-width: 440px; width: calc(100% - 40px); position: relative; border: 1px solid #3a3a3a; }
+#mock-modal .modal-close { position: absolute; top: 16px; left: 16px; background: none; border: none; color: #888; font-size: 22px; cursor: pointer; }
+#modal-modal-header { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 20px; }
+.modal-features { list-style: none; margin-bottom: 20px; }
+.modal-features li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.8); border-bottom: 1px solid #2a2a2a; }
+.modal-trial { background: rgba(76,175,109,0.1); border: 1px solid rgba(76,175,109,0.3); color: var(--green); border-radius: 8px; padding: 10px 14px; font-size: 14px; margin-bottom: 20px; }
+.modal-charge-date { color: var(--grey); font-size: 13px; margin-bottom: 24px; }
+.card-fields { display: grid; gap: 12px; margin-bottom: 24px; }
+.card-fields input { background: #111; border: 1px solid #3a3a3a; border-radius: 10px; padding: 12px 14px; color: white; font-family: 'Heebo', sans-serif; font-size: 15px; direction: ltr; }
+.card-fields input:focus { outline: none; border-color: var(--mauve); }
+.card-fields .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* UPSELL */
+#upsell-section { padding: 40px 20px; background: #111; }
+.upsell-card-pro { background: linear-gradient(135deg, #1a1200, #2d1f00); border: 1px solid var(--gold); border-radius: 20px; padding: 28px 24px; }
+.upsell-card-growth { background: linear-gradient(135deg, #001a0a, #002d12); border: 1px solid var(--green); border-radius: 20px; padding: 28px 24px; }
+.upsell-card-celebration { background: linear-gradient(135deg, #001a0a, #003320); border: 2px solid var(--green); border-radius: 20px; padding: 28px 24px; text-align: center; }
+.upsell-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+.upsell-sub { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 20px; }
+.upsell-features { list-style: none; margin-bottom: 24px; }
+.upsell-features li { display: flex; align-items: center; gap: 8px; padding: 6px 0; font-size: 14px; color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+/* Footer */
+footer { background: #0a0a0a; padding: 40px 20px; text-align: center; border-top: 1px solid #1f1f1f; }
+footer .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--mauve); margin-bottom: 12px; }
+footer p { color: var(--grey); font-size: 13px; margin-bottom: 6px; }
+footer a { color: var(--mauve); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section id="ty-hero">
+  <div class="container">
+    <h1 class="greeting" id="hero-greeting">היי! 🎉</h1>
+    <p class="sub" id="hero-sub">הפרטים התקבלו — העסק שלך בדרך לאתר מושלם</p>
+  </div>
+</section>
+
+<!-- PRICE REVEAL -->
+<section id="price-reveal">
+  <div class="container">
+    <h2 id="plan-headline">החבילה שבחרת:</h2>
+    <div id="count-up">0</div>
+    <div id="price-unit">₪/חודש</div>
+    <div id="trial-note">7 ימי ניסיון חינם — לא יחויבי היום</div>
+  </div>
+</section>
+
+<!-- PLAN BOX -->
+<section id="plan-box">
+  <div class="container">
+    <div class="plan-box-inner">
+      <h3>מה כלול בחבילה שלך:</h3>
+      <ul class="feature-list" id="plan-features"></ul>
+      <a href="index.html#package-comparison" class="change-plan-link">רוצה לשנות חבילה? לחצי כאן ←</a>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment-section">
+  <div class="container">
+    <button class="btn" id="pay-btn" onclick="openMockModal()">אשרי ורכשי ←</button>
+    <p class="payment-sub">ביטול בכל עת, ללא חוזה</p>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal-overlay">
+  <div id="mock-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-modal-header">PRO — 87₪/חודש</div>
+    <ul class="modal-features" id="modal-features-list"></ul>
+    <div class="modal-trial">✅ 7 ימי ניסיון חינם — לא יחויבי היום</div>
+    <div class="modal-charge-date" id="modal-charge-date"></div>
+    <div class="card-fields">
+      <input type="text" placeholder="מספר כרטיס: 1234 5678 9012 3456" maxlength="19">
+      <div class="card-row">
+        <input type="text" placeholder="תוקף: MM/YY" maxlength="5">
+        <input type="text" placeholder="CVV: 123" maxlength="3">
+      </div>
+    </div>
+    <button class="btn" id="modal-pay-btn" onclick="completePurchase()">אשרי תשלום ←</button>
+  </div>
+</div>
+
+<!-- UPSELL -->
+<section id="upsell-section">
+  <div class="container" id="upsell-content"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">✨ BeautySite</div>
+  <p>אתרים מקצועיים לעסקי יופי</p>
+  <p>📧 <a href="mailto:hello@beautysite.co.il">hello@beautysite.co.il</a></p>
+  <p style="margin-top:12px;">© 2026 BeautySite. כל הזכויות שמורות.</p>
+</footer>
+
+<script>
+let currentPlan = sessionStorage.getItem('bs_plan') || 'basic';
+let currentName = sessionStorage.getItem('bs_name') || 'את';
+let currentBusiness = sessionStorage.getItem('bs_business') || 'העסק שלך';
+
+function getFirstChargeDate() {
+  const d = new Date();
+  d.setDate(d.getDate() + 7);
+  return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function renderPage() {
+  const pkg = PACKAGES[currentPlan];
+  const color = pkg.color;
+
+  // Hero
+  document.getElementById('hero-greeting').textContent = `היי ${currentName}! 🎉`;
+  document.getElementById('hero-sub').textContent = `הפרטים התקבלו — ${currentBusiness} בדרך לאתר מושלם`;
+
+  // Price reveal
+  document.getElementById('plan-headline').textContent = `החבילה שבחרת: ${pkg.name}`;
+  document.getElementById('count-up').style.color = color;
+  document.getElementById('price-unit').style.color = color;
+  animateCount(0, pkg.price, 1200);
+
+  // Plan features
+  const featUl = document.getElementById('plan-features');
+  featUl.innerHTML = '';
+  pkg.features.forEach(f => {
+    featUl.innerHTML += `<li><span class="f-icon">${f.icon}</span><span class="f-text">${f.text}</span><span class="f-val" style="background:${color}22;color:${color}">${f.value}</span></li>`;
+  });
+
+  // Pay button
+  const payBtn = document.getElementById('pay-btn');
+  payBtn.textContent = `אשרי ורכשי — ${formatPrice(pkg)} ←`;
+  payBtn.style.background = color;
+  payBtn.style.color = currentPlan === 'pro' ? 'black' : 'white';
+
+  // Modal
+  document.getElementById('modal-modal-header').textContent = `${pkg.name} — ${formatPrice(pkg)}`;
+  const modalFeat = document.getElementById('modal-features-list');
+  modalFeat.innerHTML = '';
+  pkg.features.slice(0, 3).forEach(f => {
+    modalFeat.innerHTML += `<li><span style="color:${color}">✓</span> <span>${f.icon} ${f.text}</span></li>`;
+  });
+  document.getElementById('modal-charge-date').textContent = `החיוב הראשון: ${getFirstChargeDate()}`;
+  const modalPayBtn = document.getElementById('modal-pay-btn');
+  modalPayBtn.textContent = `אשרי תשלום — ${formatPrice(pkg)} ←`;
+  modalPayBtn.style.background = color;
+  modalPayBtn.style.color = currentPlan === 'pro' ? 'black' : 'white';
+
+  // Upsell
+  renderUpsell();
+}
+
+function renderUpsell() {
+  const container = document.getElementById('upsell-content');
+  if (currentPlan === 'basic') {
+    const pkg = PACKAGES.pro;
+    let featHtml = pkg.features.map(f => `<li><span style="color:var(--gold)">✓</span> <span>${f.icon} ${f.text}</span><span style="font-size:12px;color:var(--gold);margin-right:auto;padding:2px 8px;background:rgba(201,168,76,0.1);border-radius:20px;">${f.value}</span></li>`).join('');
+    container.innerHTML = `
+      <div class="upsell-card-pro">
+        <div class="upsell-title" style="color:var(--gold)">👑 שדרגי ל-PRO — לפני שנתחיל לבנות</div>
+        <div class="upsell-sub">87₪/חודש בלבד • 7 ימי ניסיון חינם</div>
+        <ul class="upsell-features">${featHtml}</ul>
+        <button class="btn" style="background:var(--gold);color:black;" onclick="upgradePlan('pro')">שדרגי ל-PRO — 87₪/חודש ←</button>
+      </div>`;
+  } else if (currentPlan === 'pro') {
+    const pkg = PACKAGES.growth;
+    let featHtml = pkg.features.slice(1).map(f => `<li><span style="color:var(--green)">✓</span> <span>${f.icon} ${f.text}</span><span style="font-size:12px;color:var(--green);margin-right:auto;padding:2px 8px;background:rgba(76,175,109,0.1);border-radius:20px;">${f.value}</span></li>`).join('');
+    container.innerHTML = `
+      <div class="upsell-card-growth">
+        <div class="upsell-title" style="color:var(--green)">🚀 הוסיפי GROWTH — האתר שלך יביא לקוחות אקטיבית</div>
+        <div class="upsell-sub">197₪/חודש • 7 ימי ניסיון חינם</div>
+        <ul class="upsell-features">${featHtml}</ul>
+        <button class="btn" style="background:var(--green);color:white;" onclick="upgradePlan('growth')">שדרגי ל-GROWTH — 197₪/חודש ←</button>
+      </div>`;
+  } else {
+    container.innerHTML = `
+      <div class="upsell-card-celebration">
+        <div style="font-size:3rem;margin-bottom:16px;">🎉</div>
+        <div class="upsell-title" style="color:var(--green)">בחרת את החבילה המלאה ביותר שלנו!</div>
+        <p style="color:rgba(255,255,255,0.7);margin-top:8px;">האתר שלך הולך להיות מושלם. אנחנו לא יכולים להמתין לבנות אותו עבורך!</p>
+      </div>`;
+  }
+}
+
+function upgradePlan(plan) {
+  currentPlan = plan;
+  sessionStorage.setItem('bs_plan', plan);
+  renderPage();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function animateCount(from, to, duration) {
+  const el = document.getElementById('count-up');
+  const start = performance.now();
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(from + (to - from) * eased);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function openMockModal() {
+  /* TO ACTIVATE REAL PAYMENT: Replace this function call with:
+     window.location.href = POLAR_URLS[currentPlan]; */
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function completePurchase() {
+  /* POLAR INTEGRATION POINT */
+  sessionStorage.setItem('bs_payment_complete', 'true');
+  sessionStorage.setItem('bs_payment_timestamp', Date.now().toString());
+  sessionStorage.setItem('bs_plan', currentPlan);
+  window.location.href = 'purchase-success.html';
+}
+
+// Close modal on overlay click
+document.getElementById('modal-overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Init
+renderPage();
+</script>
+</body>
+</html>
