@@ -1,908 +1,701 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeautySite — אתר מקצועי לעסק היופי שלך</title>
-    <meta name="description" content="אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות. בנייה חינם, החל מ-49₪ לחודש.">
-
-    <!-- Google Analytics 4 placeholder -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-    </script> -->
-
-    <!-- Facebook Pixel placeholder -->
-    <!-- <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript> -->
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-
-    <style>
-        /* ═══════════════════════════════════════════
-           LANDING PAGE — BeautySite (Meta Ads)
-           Hyper-focused. One goal: conversion.
-           ═══════════════════════════════════════════ */
-
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg: #0d0d0d;
-            --bg-card: #1a1a1a;
-            --mauve: #c4837a;
-            --mauve-light: #d4a39a;
-            --mauve-dark: #a06a62;
-            --gold: #d4a853;
-            --gold-light: #e8c97a;
-            --text: #f5f0eb;
-            --text-muted: #8a8585;
-            --text-dim: #5a5555;
-            --red: #e05555;
-            --green: #5ec47a;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Heebo', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ══════════════════════════════════
-           HERO — Above the fold, must convert
-           ══════════════════════════════════ */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            padding: 40px 20px;
-        }
-
-        /* Animated gradient background */
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: -50%;
-            background: 
-                conic-gradient(from 0deg at 30% 40%, rgba(196, 131, 122, 0.2) 0deg, transparent 90deg, transparent 360deg),
-                conic-gradient(from 180deg at 70% 60%, rgba(212, 168, 83, 0.15) 0deg, transparent 90deg, transparent 360deg),
-                radial-gradient(ellipse at 50% 50%, rgba(196, 131, 122, 0.1) 0%, transparent 50%);
-            animation: heroRotate 20s linear infinite;
-        }
-
-        @keyframes heroRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Gradient overlay for depth */
-        .hero::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse 80% 60% at 50% 30%, rgba(196, 131, 122, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* CSS Floating particles */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-            animation: particleFloat linear infinite;
-        }
-
-        @keyframes particleFloat {
-            0% {
-                opacity: 0;
-                transform: translateY(100vh) scale(0);
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-20vh) scale(1);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 32px;
-                text-align: center;
-            }
-        }
-
-        .hero-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--text) 0%, var(--mauve-light) 60%, var(--gold-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-text .subhead {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-muted);
-            font-weight: 300;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-
-        .trust-line {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .trust-line { justify-content: center; }
-        }
-
-        .trust-stars {
-            letter-spacing: 2px;
-        }
-
-        /* ── HERO FORM ── */
-        .hero-form-card {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px;
-            padding: 36px 28px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--mauve), var(--gold), var(--mauve));
-            background-size: 200% 100%;
-            animation: gradientSlide 4s ease-in-out infinite;
-        }
-
-        @keyframes gradientSlide {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .form-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            color: var(--text);
-            font-family: 'Heebo', sans-serif;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: var(--mauve);
-            box-shadow: 0 0 0 3px rgba(196, 131, 122, 0.15);
-        }
-
-        .form-group input::placeholder {
-            color: var(--text-dim);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, var(--mauve), var(--mauve-light));
-            color: #fff;
-            border: none;
-            border-radius: 14px;
-            font-family: 'Heebo', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 700;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: btnPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes btnPulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(196, 131, 122, 0.3); }
-            50% { box-shadow: 0 8px 40px rgba(196, 131, 122, 0.5); }
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 2.5s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
-        }
-
-        .urgency-pill {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 16px;
-            padding: 8px 16px;
-            background: rgba(224, 85, 85, 0.1);
-            border: 1px solid rgba(224, 85, 85, 0.2);
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--red);
-            font-weight: 600;
-            animation: urgencyPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes urgencyPulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        /* ══════════════════════════════════
-           SOCIAL PROOF — Compact
-           ══════════════════════════════════ */
-        .social-proof {
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .testimonials-mini {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        .testimonial-mini {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .testimonial-mini:hover {
-            transform: translateY(-3px);
-        }
-
-        .testimonial-mini .stars {
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .testimonial-mini .quote {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 8px;
-            line-height: 1.5;
-        }
-
-        .testimonial-mini .name {
-            font-size: 0.8rem;
-            color: var(--mauve);
-            font-weight: 600;
-        }
-
-        /* Scrolling marquee */
-        .marquee-container {
-            overflow: hidden;
-            position: relative;
-            padding: 16px 0;
-        }
-
-        .marquee-container::before,
-        .marquee-container::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 80px;
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        .marquee-container::before {
-            right: 0;
-            background: linear-gradient(to left, var(--bg), transparent);
-        }
-
-        .marquee-container::after {
-            left: 0;
-            background: linear-gradient(to right, var(--bg), transparent);
-        }
-
-        .marquee {
-            display: flex;
-            gap: 32px;
-            animation: marqueeScroll 25s linear infinite;
-            width: max-content;
-        }
-
-        @keyframes marqueeScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .marquee-item {
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            white-space: nowrap;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .marquee-item::before {
-            content: '💅';
-            font-size: 0.75rem;
-        }
-
-        /* ══════════════════════════════════
-           WHAT YOU GET
-           ══════════════════════════════════ */
-        .features {
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 32px 24px;
-            text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(196, 131, 122, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
-
-        .feature-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .feature-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* ══════════════════════════════════
-           BEFORE / AFTER
-           ══════════════════════════════════ */
-        .before-after {
-            padding: 60px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .ba-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: 40px;
-        }
-
-        .ba-grid {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 24px;
-            align-items: center;
-        }
-
-        @media (max-width: 600px) {
-            .ba-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .ba-arrow { transform: rotate(90deg); }
-        }
-
-        .ba-card {
-            border-radius: 20px;
-            padding: 32px 24px;
-            text-align: center;
-            min-height: 240px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .ba-before {
-            background: #1a1a1a;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .ba-before .ba-emoji {
-            font-size: 3rem;
-            filter: grayscale(1);
-            opacity: 0.6;
-        }
-
-        .ba-before .ba-label {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-dim);
-        }
-
-        .ba-before .ba-items {
-            list-style: none;
-            padding: 0;
-        }
-
-        .ba-before .ba-items li {
-            font-size: 0.9rem;
-            color: var(--text-dim);
-            padding: 3px 0;
-        }
-
-        .ba-before .ba-items li::before {
-            content: '✕ ';
-            color: var(--red);
-            font-weight: 700;
-        }
-
-        .ba-arrow {
-            font-size: 2rem;
-            color: var(--mauve);
-            animation: arrowPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes arrowPulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 1; }
-        }
-
-        .ba-after {
-            background: linear-gradient(135deg, rgba(196, 131, 122, 0.1), rgba(212, 168, 83, 0.08));
-            border: 1px solid rgba(196, 131, 122, 0.2);
-        }
-
-        .ba-after .ba-emoji {
-            font-size: 3rem;
-        }
-
-        .ba-after .ba-label {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--mauve-light);
-        }
-
-        .ba-after .ba-items {
-            list-style: none;
-            padding: 0;
-        }
-
-        .ba-after .ba-items li {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            padding: 3px 0;
-        }
-
-        .ba-after .ba-items li::before {
-            content: '✓ ';
-            color: var(--green);
-            font-weight: 700;
-        }
-
-        /* ══════════════════════════════════
-           SECOND CTA
-           ══════════════════════════════════ */
-        .cta-bottom {
-            padding: 80px 20px 60px;
-            text-align: center;
-            position: relative;
-        }
-
-        .cta-bottom::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(196, 131, 122, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .cta-bottom h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            font-weight: 700;
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .cta-form-bottom {
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .cta-guarantee {
-            margin-top: 16px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            position: relative;
-        }
-
-        /* ══════════════════════════════════
-           SCROLL ANIMATIONS
-           ══════════════════════════════════ */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ══════════════════════════════════
-           RESPONSIVE POLISH
-           ══════════════════════════════════ */
-        @media (max-width: 480px) {
-            .hero { padding: 24px 16px; }
-            .hero-form-card { padding: 28px 20px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אתר מקצועי לעסק היופי שלך | BeautySite</title>
+<meta name="description" content="אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות. בנייה חינם. הצטרפי ל-500+ עסקי יופי מרוצים.">
+<meta property="og:title" content="אתר מקצועי לעסק היופי שלך | BeautySite">
+<meta property="og:description" content="אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות. בנייה חינם.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<!-- GA4 placeholder -->
+<!-- Facebook Pixel placeholder -->
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Heebo',sans-serif;background:#0a0a0a;color:#e8e0dc;direction:rtl;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+input{font-family:inherit}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress{position:fixed;top:0;right:0;height:3px;width:0%;background:linear-gradient(90deg,#c4837a,#c9a84c,#4caf7d);z-index:10000;transition:width 0.05s linear;pointer-events:none}
+
+/* ===== CURSOR GLOW (desktop) ===== */
+.cursor-glow{width:350px;height:350px;background:radial-gradient(circle,rgba(196,131,122,0.07),transparent 70%);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left 0.18s ease-out,top 0.18s ease-out;border-radius:50%;display:none}
+@media(min-width:769px){.cursor-glow{display:block}}
+
+/* ===== PARTICLES ===== */
+.particles-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden}
+.particle{position:absolute;border-radius:50%;opacity:0;animation:particleFloat linear infinite}
+.particle.diamond{border-radius:0;transform:rotate(45deg)}
+.particle.glow{box-shadow:0 0 6px currentColor}
+
+@keyframes particleFloat{
+  0%{transform:translate(0,0) rotate(0deg);opacity:0}
+  10%{opacity:var(--p-opacity,0.2)}
+  90%{opacity:var(--p-opacity,0.2)}
+  100%{transform:translate(var(--dx,100px),var(--dy,-800px)) rotate(360deg);opacity:0}
+}
+
+/* ===== GLASSMORPHISM UTILITY ===== */
+.glass{backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+
+/* ===== GRADIENT BORDER ===== */
+.gradient-border{position:relative;background:#0d0d0d;border-radius:20px;overflow:visible}
+.gradient-border::before{content:'';position:absolute;inset:-1px;border-radius:20px;padding:1px;background:linear-gradient(135deg,#c4837a,#c9a84c,#4caf7d,#c4837a);background-size:300% 300%;animation:gradientRotate 4s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes gradientRotate{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* ===== SECTION OVERLAYS FOR COLOR TRANSITIONS ===== */
+section{position:relative}
+.section-overlay{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 0.8s ease}
+
+/* ===== HERO SECTION ===== */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:40px 20px}
+#hero-video{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;transform:translate(-50%,-50%);object-fit:cover;z-index:0;filter:brightness(0.3) saturate(0.8)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.7),rgba(13,13,13,0.95));z-index:1}
+.hero-gradient-fallback{position:absolute;inset:0;background:linear-gradient(135deg,#0a0a0a 0%,#1a0f14 30%,#0d0d0d 60%,#0f1410 100%);z-index:0;animation:heroGradientShift 12s ease infinite}
+@keyframes heroGradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+.hero-content{position:relative;z-index:3;display:flex;align-items:center;gap:60px;max-width:1200px;width:100%;margin:0 auto}
+.hero-card{border-radius:24px;padding:48px 40px;max-width:700px;width:100%;text-align:center}
+.hero-side{flex-shrink:0;display:none}
+@media(min-width:1024px){.hero-side{display:block}}
+
+/* Pill badge */
+.pill{display:inline-block;padding:8px 20px;border-radius:50px;font-size:14px;font-weight:500;color:#c9a84c;border:1px solid rgba(201,168,76,0.3);background:rgba(201,168,76,0.08);margin-bottom:24px;letter-spacing:0.5px}
+
+/* Hero headline - word reveal */
+.hero-headline{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.4;margin-bottom:20px;color:#fff;direction:rtl}
+.hero-headline .word{display:inline-block;opacity:0;transform:translateY(30px);transition:opacity 0.6s cubic-bezier(0.16,1,0.3,1),transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+.hero-headline .word.visible{opacity:1;transform:translateY(0)}
+.hero-headline .word.highlight{position:relative}
+.hero-headline .word.highlight::after{content:'';position:absolute;bottom:-2px;right:0;width:0;height:2px;background:linear-gradient(90deg,#c9a84c,#c4837a);transition:width 0.8s cubic-bezier(0.16,1,0.3,1) 0.3s}
+.hero-headline .word.highlight.underlined::after{width:100%}
+
+.hero-subtext{font-size:clamp(16px,2.5vw,20px);color:rgba(232,224,220,0.7);margin-bottom:32px;line-height:1.7;font-weight:300}
+
+/* Inline form */
+.hero-form{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
+.hero-form .glass-input{flex:1;min-width:140px;max-width:220px;padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);backdrop-filter:blur(10px);color:#fff;font-size:15px;outline:none;transition:border-color 0.3s,box-shadow 0.3s}
+.hero-form .glass-input::placeholder{color:rgba(255,255,255,0.35)}
+.hero-form .glass-input:focus{border-color:rgba(196,131,122,0.5);box-shadow:0 0 20px rgba(196,131,122,0.1)}
+
+/* Magnetic / Shimmer CTA Button */
+.cta-btn{position:relative;padding:16px 36px;border-radius:14px;border:none;background:linear-gradient(135deg,#c4837a,#b06e65);color:#fff;font-size:17px;font-weight:600;cursor:pointer;overflow:hidden;transition:transform 0.2s ease,box-shadow 0.3s ease;flex-shrink:0}
+.cta-btn:hover{box-shadow:0 8px 40px rgba(196,131,122,0.4);transform:scale(1.03)}
+.cta-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:none;animation:shimmer 3s infinite}
+@keyframes shimmer{0%{left:-100%}100%{left:200%}}
+
+.urgency{font-size:14px;color:#c9a84c;margin-bottom:8px;font-weight:500}
+.trust-line{font-size:14px;color:rgba(232,224,220,0.5);margin-bottom:0}
+
+/* CSS Phone Mockup */
+.phone-mockup{width:260px;height:520px;border-radius:36px;border:3px solid rgba(255,255,255,0.1);background:linear-gradient(160deg,#1a1216,#0d0d0d);box-shadow:0 20px 60px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05);position:relative;overflow:hidden;animation:phoneFloat 6s ease-in-out infinite}
+.phone-mockup::before{content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);width:80px;height:6px;border-radius:3px;background:rgba(255,255,255,0.1)}
+.phone-mockup .screen{position:absolute;inset:20px 10px;border-radius:20px;background:linear-gradient(180deg,#c4837a33,#c9a84c22,#4caf7d22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px}
+.phone-mockup .screen .mock-line{width:70%;height:8px;border-radius:4px;background:rgba(255,255,255,0.12)}
+.phone-mockup .screen .mock-line.short{width:45%}
+.phone-mockup .screen .mock-circle{width:50px;height:50px;border-radius:50%;background:rgba(196,131,122,0.2);border:1px solid rgba(196,131,122,0.3)}
+.phone-mockup .screen .mock-btn{width:60%;height:28px;border-radius:8px;background:linear-gradient(135deg,#c4837a55,#c9a84c33)}
+@keyframes phoneFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-15px) rotate(0deg)}}
+
+/* ===== MARQUEE SECTION ===== */
+#marquee-section{padding:30px 0;overflow:hidden;position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.03)}
+.marquee-track{display:flex;gap:40px;animation:marqueeScroll 30s linear infinite;width:max-content}
+.marquee-item{white-space:nowrap;font-size:15px;color:rgba(232,224,220,0.4);display:flex;align-items:center;gap:8px}
+.marquee-item .stars{color:#c9a84c;font-size:12px}
+.marquee-fade{position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none}
+.marquee-fade.right{right:0;background:linear-gradient(to right,transparent,#0a0a0a)}
+.marquee-fade.left{left:0;background:linear-gradient(to left,transparent,#0a0a0a)}
+@keyframes marqueeScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== SOCIAL PROOF ===== */
+#social-proof{padding:100px 20px;position:relative;z-index:2}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:700;text-align:center;margin-bottom:60px}
+.section-title .gradient-text{background:linear-gradient(135deg,#c4837a,#c9a84c,#4caf7d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1000px;margin:0 auto}
+.testimonial-card{border-radius:20px;padding:32px;text-align:right;opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.testimonial-card.visible{opacity:1;transform:translateY(0)}
+.testimonial-card .quote{font-size:16px;line-height:1.8;color:rgba(232,224,220,0.8);margin-bottom:20px;font-weight:300}
+.testimonial-card .author{display:flex;align-items:center;gap:12px;direction:rtl}
+.testimonial-card .author-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#c4837a,#c9a84c);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:#fff}
+.testimonial-card .author-info .name{font-weight:600;font-size:15px}
+.testimonial-card .author-info .role{font-size:13px;color:rgba(232,224,220,0.4)}
+.testimonial-card .stars-row{color:#c9a84c;font-size:14px;margin-bottom:12px}
+
+/* ===== ANIMATED STATS ===== */
+#stats{padding:80px 20px;position:relative;z-index:2}
+.stats-grid{display:flex;justify-content:center;gap:60px;flex-wrap:wrap;max-width:900px;margin:0 auto}
+.stat-item{text-align:center;position:relative}
+.stat-number{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,56px);font-weight:900;color:#fff;line-height:1;margin-bottom:8px;position:relative;z-index:1}
+.stat-number.mauve{text-shadow:0 0 40px rgba(196,131,122,0.4)}
+.stat-number.gold{text-shadow:0 0 40px rgba(201,168,76,0.4)}
+.stat-number.green{text-shadow:0 0 40px rgba(76,175,125,0.4)}
+.stat-glow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:120px;height:60px;border-radius:50%;filter:blur(30px);opacity:0.3}
+.stat-glow.mauve{background:#c4837a}
+.stat-glow.gold{background:#c9a84c}
+.stat-glow.green{background:#4caf7d}
+.stat-label{font-size:15px;color:rgba(232,224,220,0.5);font-weight:300}
+.stat-item{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.stat-item.visible{opacity:1;transform:translateY(0)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.stat-number.counting{animation:pulse 1.5s ease infinite}
+
+/* ===== FEATURES ===== */
+#features{padding:100px 20px;position:relative;z-index:2}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:950px;margin:0 auto}
+.feature-card{border-radius:20px;padding:36px 28px;text-align:center;transition:transform 0.3s ease,box-shadow 0.3s ease;opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease,box-shadow 0.3s ease}
+.feature-card.visible{opacity:1;transform:translateY(0)}
+.feature-card:hover{box-shadow:0 12px 48px rgba(196,131,122,0.15);transform:translateY(-4px) !important}
+.feature-icon{font-size:48px;margin-bottom:20px;display:block}
+.feature-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:12px;color:#fff}
+.feature-desc{font-size:15px;color:rgba(232,224,220,0.6);line-height:1.7;font-weight:300}
+
+/* ===== BEFORE / AFTER ===== */
+#before-after{padding:100px 20px;position:relative;z-index:2}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:900px;margin:0 auto}
+@media(max-width:700px){.ba-grid{grid-template-columns:1fr;gap:24px}}
+.ba-panel{border-radius:24px;padding:40px 28px;text-align:center;position:relative;overflow:hidden;transition:transform 0.4s ease}
+.ba-panel:hover{transform:scale(1.02)}
+.ba-panel.without{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04)}
+.ba-panel.without .ba-phone{filter:grayscale(1) brightness(0.5);opacity:0.5}
+.ba-panel.with{background:linear-gradient(135deg,rgba(196,131,122,0.08),rgba(201,168,76,0.06),rgba(76,175,125,0.06));border:1px solid rgba(196,131,122,0.15);box-shadow:0 8px 40px rgba(196,131,122,0.1)}
+.ba-label{font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:24px;color:rgba(232,224,220,0.4)}
+.ba-panel.with .ba-label{color:#c4837a}
+.ba-phone{width:160px;height:300px;border-radius:24px;border:2px solid rgba(255,255,255,0.08);margin:0 auto 20px;background:#111;position:relative;overflow:hidden}
+.ba-phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:50px;height:4px;border-radius:2px;background:rgba(255,255,255,0.08)}
+.ba-phone .screen-content{position:absolute;inset:16px 8px;border-radius:14px;display:flex;flex-direction:column;gap:8px;padding:16px;align-items:center;justify-content:center}
+.ba-panel.without .screen-content{background:rgba(255,255,255,0.02)}
+.ba-panel.with .screen-content{background:linear-gradient(180deg,rgba(196,131,122,0.15),rgba(201,168,76,0.1))}
+.ba-phone .mock-el{width:70%;height:6px;border-radius:3px;background:rgba(255,255,255,0.08)}
+.ba-panel.with .mock-el{background:rgba(255,255,255,0.15)}
+.ba-phone .mock-el.short{width:45%}
+.ba-items{list-style:none;text-align:right;font-size:14px;color:rgba(232,224,220,0.5);line-height:2.2}
+.ba-panel.with .ba-items{color:rgba(232,224,220,0.8)}
+.ba-items li::before{content:'✗';margin-left:8px;color:#c4837a55}
+.ba-panel.with .ba-items li::before{content:'✓';color:#4caf7d}
+
+/* ===== SECOND CTA ===== */
+#cta-section{padding:100px 20px;position:relative;z-index:2}
+.cta-inner{max-width:650px;margin:0 auto;text-align:center}
+.cta-headline{font-family:'Playfair Display',serif;font-size:clamp(28px,4.5vw,44px);font-weight:900;color:#fff;margin-bottom:12px}
+.cta-sub{font-size:16px;color:rgba(232,224,220,0.5);margin-bottom:32px}
+.cta-form{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:20px}
+.cta-form .glass-input{flex:1;min-width:140px;max-width:220px;padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);backdrop-filter:blur(10px);color:#fff;font-size:15px;outline:none;transition:border-color 0.3s,box-shadow 0.3s}
+.cta-form .glass-input::placeholder{color:rgba(255,255,255,0.35)}
+.cta-form .glass-input:focus{border-color:rgba(196,131,122,0.5);box-shadow:0 0 20px rgba(196,131,122,0.1)}
+.viewers-line{font-size:14px;color:rgba(232,224,220,0.4);margin-bottom:8px}
+.guarantee-line{font-size:13px;color:rgba(232,224,220,0.3)}
+
+/* ===== WHATSAPP FLOAT ===== */
+.whatsapp-float{position:fixed;bottom:24px;left:24px;z-index:9997;width:60px;height:60px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;animation:waBounce 3s ease infinite}
+.whatsapp-float:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(37,211,102,0.6)}
+.whatsapp-float svg{width:32px;height:32px;fill:#fff}
+@keyframes waBounce{0%,100%{transform:translateY(0)}15%{transform:translateY(-8px)}30%{transform:translateY(0)}}
+
+/* ===== FOOTER ===== */
+footer{text-align:center;padding:40px 20px;font-size:13px;color:rgba(232,224,220,0.2);position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.03)}
+
+/* ===== REVEAL ON SCROLL (base) ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero-content{flex-direction:column;gap:20px}
+  .hero-card{padding:32px 20px}
+  .hero-form{flex-direction:column;align-items:stretch}
+  .hero-form .glass-input{max-width:100%}
+  .cta-form{flex-direction:column;align-items:stretch}
+  .cta-form .glass-input{max-width:100%}
+  .stats-grid{gap:30px}
+  .phone-mockup{display:none}
+  .particles-container{display:none}
+}
+
+/* ===== FORM VALIDATION ===== */
+.glass-input.error{border-color:rgba(255,80,80,0.6) !important;box-shadow:0 0 15px rgba(255,80,80,0.1) !important}
+.glass-input.error::placeholder{color:rgba(255,80,80,0.5)}
+</style>
 </head>
 <body>
 
-<script>
-    // ═══ Packages (same as index.html) ═══
-    const PACKAGES = {
-        basic: { name: 'בסיסי', price: 49, period: 'חודש' },
-        growth: { name: 'GROWTH', price: 99, period: 'חודש' },
-        pro: { name: 'PRO', price: 179, period: 'חודש' }
-    };
+<!-- Scroll Progress Bar -->
+<div id="scroll-progress"></div>
 
-    // ═══ UTM Parameter Reading ═══
-    const urlParams = new URLSearchParams(window.location.search);
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(k => {
-        const v = urlParams.get(k);
-        if (v) sessionStorage.setItem(k, v);
+<!-- Cursor Glow -->
+<div class="cursor-glow" id="cursor-glow"></div>
+
+<!-- Floating Particles -->
+<div class="particles-container" id="particles"></div>
+
+<!-- ==================== HERO ==================== -->
+<section id="hero">
+  <!-- Video Background -->
+  <video autoplay muted loop playsinline id="hero-video" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E">
+    <source src="https://videos.pexels.com/video-files/3997/3997-uhd_2560_1440_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="hero-gradient-fallback"></div>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-card glass">
+      <span class="pill">✨ אתרים לעסקי יופי</span>
+      <h1 class="hero-headline" id="hero-headline"></h1>
+      <p class="hero-subtext">אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות. בנייה חינם.</p>
+      
+      <form class="hero-form" id="hero-form" autocomplete="off">
+        <input type="text" class="glass-input" name="name" placeholder="שם פרטי" required>
+        <input type="text" class="glass-input" name="business" placeholder="שם העסק" required>
+        <button type="submit" class="cta-btn magnetic-btn">קבלי הצעה חינם ←</button>
+      </form>
+
+      <p class="urgency">⏰ נותרו 3 מקומות לחודש מרץ</p>
+      <p class="trust-line">⭐⭐⭐⭐⭐ 500+ עסקי יופי מרוצים</p>
+    </div>
+
+    <div class="hero-side">
+      <div class="phone-mockup" data-parallax="0.3">
+        <div class="screen">
+          <div class="mock-circle"></div>
+          <div class="mock-line"></div>
+          <div class="mock-line short"></div>
+          <div class="mock-line"></div>
+          <div class="mock-btn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MARQUEE ==================== -->
+<section id="marquee-section">
+  <div class="marquee-fade left"></div>
+  <div style="overflow:hidden">
+    <div class="marquee-track" id="marquee-track"></div>
+  </div>
+  <div class="marquee-fade right"></div>
+</section>
+
+<!-- ==================== SOCIAL PROOF ==================== -->
+<section id="social-proof">
+  <div class="section-overlay" style="background:rgba(196,131,122,0.03)"></div>
+  <h2 class="section-title reveal"><span class="gradient-text">מה אומרות עלינו</span></h2>
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card glass gradient-border" data-delay="0">
+      <div class="stars-row">⭐⭐⭐⭐⭐</div>
+      <p class="quote">"תוך יומיים קיבלתי אתר שנראה כאילו שילמתי עליו 15,000 שקל. הלקוחות לא מפסיקות להתקשר מאז."</p>
+      <div class="author">
+        <div class="author-avatar">מ</div>
+        <div class="author-info">
+          <div class="name">מיכל כהן</div>
+          <div class="role">מכון יופי, תל אביב</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card glass gradient-border" data-delay="150">
+      <div class="stars-row">⭐⭐⭐⭐⭐</div>
+      <p class="quote">"הייתי סקפטית, אבל זה שינה לי את העסק. 11 לקוחות חדשות בחודש הראשון. מטורף."</p>
+      <div class="author">
+        <div class="author-avatar">ר</div>
+        <div class="author-info">
+          <div class="name">ריקי לוי</div>
+          <div class="role">מעצבת ציפורניים, חיפה</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card glass gradient-border" data-delay="300">
+      <div class="stars-row">⭐⭐⭐⭐⭐</div>
+      <p class="quote">"הכי שווה השקעה שעשיתי בעסק. האתר עובד בשבילי 24/7 ומביא לקוחות גם בלילה."</p>
+      <div class="author">
+        <div class="author-avatar">ש</div>
+        <div class="author-info">
+          <div class="name">שירה אברהם</div>
+          <div class="role">סטודיו לאיפור כלות, ירושלים</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== STATS ==================== -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item" data-delay="0">
+      <div class="stat-glow mauve"></div>
+      <div class="stat-number mauve" data-target="2847" data-prefix="₪">₪0</div>
+      <div class="stat-label">הכנסה חודשית נוספת בממוצע</div>
+    </div>
+    <div class="stat-item" data-delay="200">
+      <div class="stat-glow gold"></div>
+      <div class="stat-number gold" data-target="11" data-prefix="">0</div>
+      <div class="stat-label">לקוחות חדשות בחודש הראשון</div>
+    </div>
+    <div class="stat-item" data-delay="400">
+      <div class="stat-glow green"></div>
+      <div class="stat-number green" data-target="4.9" data-prefix="" data-decimal="true">0</div>
+      <div class="stat-label">דירוג ממוצע מלקוחות</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FEATURES ==================== -->
+<section id="features">
+  <div class="section-overlay" style="background:rgba(201,168,76,0.02)"></div>
+  <h2 class="section-title reveal"><span class="gradient-text">למה BeautySite?</span></h2>
+  <div class="features-grid">
+
+    <div class="feature-card glass gradient-border" data-delay="0">
+      <span class="feature-icon">🌐</span>
+      <h3 class="feature-title">אתר מקצועי מותאם אישית</h3>
+      <p class="feature-desc">עיצוב ייחודי שמדבר בשפה של העסק שלך. כל פיקסל מותאם למותג, לקהל היעד ולסגנון שלך.</p>
+    </div>
+
+    <div class="feature-card glass gradient-border" data-delay="150">
+      <span class="feature-icon">⚡</span>
+      <h3 class="feature-title">מוכן תוך 48 שעות</h3>
+      <p class="feature-desc">לא שבועות, לא חודשים. תוך יומיים את מקבלת אתר שלם ופעיל שמביא לקוחות.</p>
+    </div>
+
+    <div class="feature-card glass gradient-border" data-delay="300">
+      <span class="feature-icon">💰</span>
+      <h3 class="feature-title">החל מ-49₪ לחודש</h3>
+      <p class="feature-desc">בנייה חינם לגמרי. רק דמי אחזקה חודשיים שמחזירים את עצמם מהלקוחה הראשונה.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== BEFORE / AFTER ==================== -->
+<section id="before-after">
+  <h2 class="section-title reveal"><span class="gradient-text">ההבדל שאתר עושה לעסק שלך</span></h2>
+  <div class="ba-grid">
+
+    <div class="ba-panel without reveal">
+      <div class="ba-label">בלי אתר ✗</div>
+      <div class="ba-phone">
+        <div class="screen-content">
+          <div class="mock-el"></div>
+          <div class="mock-el short"></div>
+          <div class="mock-el"></div>
+          <div class="mock-el short"></div>
+        </div>
+      </div>
+      <ul class="ba-items">
+        <li>לקוחות לא מוצאות אותך בגוגל</li>
+        <li>אין נוכחות דיגיטלית מקצועית</li>
+        <li>מפספסת הזמנות כל יום</li>
+        <li>נראית פחות אמינה מהמתחרות</li>
+      </ul>
+    </div>
+
+    <div class="ba-panel with reveal">
+      <div class="ba-label">עם BeautySite ✓</div>
+      <div class="ba-phone">
+        <div class="screen-content">
+          <div class="mock-el"></div>
+          <div class="mock-el short"></div>
+          <div class="mock-el"></div>
+          <div class="mock-el short"></div>
+          <div class="mock-el"></div>
+        </div>
+      </div>
+      <ul class="ba-items">
+        <li>מופיעה ראשונה בחיפושים</li>
+        <li>אתר שנראה יוקרתי ומקצועי</li>
+        <li>לקוחות מזמינות 24/7 אוטומטית</li>
+        <li>מותג חזק שמוכר את עצמו</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== SECOND CTA ==================== -->
+<section id="cta-section">
+  <div class="section-overlay" style="background:rgba(196,131,122,0.03)"></div>
+  <div class="cta-inner">
+    <h2 class="cta-headline reveal">?מה מחכים</h2>
+    <p class="cta-sub reveal">הלקוחה הבאה שלך כבר מחפשת. תני לה למצוא אותך.</p>
+    <form class="cta-form" id="cta-form" autocomplete="off">
+      <input type="text" class="glass-input" name="name" placeholder="שם פרטי" required>
+      <input type="text" class="glass-input" name="business" placeholder="שם העסק" required>
+      <button type="submit" class="cta-btn magnetic-btn">קבלי הצעה חינם ←</button>
+    </form>
+    <p class="viewers-line" id="viewers-line">👀 <span id="viewer-count">14</span> אנשים צופים בדף הזה עכשיו</p>
+    <p class="guarantee-line">ביטול בכל עת · ללא חוזה · ללא סיכון</p>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <p>© 2025 BeautySite — כל הזכויות שמורות</p>
+</footer>
+
+<!-- ==================== WHATSAPP FLOAT ==================== -->
+<a class="whatsapp-float" href="https://wa.me/972544354411?text=%D7%94%D7%99%D7%99%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%90%D7%AA%D7%A8%20%D7%9C%D7%A2%D7%A1%D7%A7%20%D7%94%D7%99%D7%95%D7%A4%D7%99%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ===== CONFIG ===== */
+const PACKAGES = {
+  basic: { name: 'בסיסי', price: 49 },
+  pro: { name: 'מקצועי', price: 99 },
+  premium: { name: 'פרימיום', price: 179 }
+};
+function formatPrice(p) { return '₪' + p.toLocaleString('he-IL'); }
+
+/* ===== UTM CAPTURE ===== */
+const urlParams = new URLSearchParams(window.location.search);
+['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach(function(k) {
+  var v = urlParams.get(k);
+  if (v) sessionStorage.setItem('bs_' + k, v);
+});
+
+/* ===== SCROLL PROGRESS ===== */
+var progressBar = document.getElementById('scroll-progress');
+function updateProgress() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  var p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  progressBar.style.width = p + '%';
+}
+
+/* ===== CURSOR GLOW ===== */
+var cursorGlow = document.getElementById('cursor-glow');
+var mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', function(e) {
+  mouseX = e.clientX; mouseY = e.clientY;
+});
+function animateCursor() {
+  cursorGlow.style.left = mouseX + 'px';
+  cursorGlow.style.top = mouseY + 'px';
+  requestAnimationFrame(animateCursor);
+}
+if (window.innerWidth > 768) animateCursor();
+
+/* ===== PARTICLES ===== */
+(function createParticles() {
+  var container = document.getElementById('particles');
+  if (!container) return;
+  var count = 50;
+  for (var i = 0; i < count; i++) {
+    var el = document.createElement('div');
+    el.className = 'particle' + (Math.random() > 0.7 ? ' diamond' : '') + (Math.random() > 0.8 ? ' glow' : '');
+    var size = 2 + Math.random() * 3;
+    var opacity = 0.08 + Math.random() * 0.22;
+    var dur = 15 + Math.random() * 30;
+    var delay = Math.random() * dur;
+    var startX = Math.random() * 100;
+    var startY = Math.random() * 100;
+    var dx = -150 + Math.random() * 300;
+    var dy = -400 - Math.random() * 600;
+    var colors = ['rgba(196,131,122,','rgba(201,168,76,','rgba(76,175,125,','rgba(255,255,255,'];
+    var color = colors[Math.floor(Math.random() * colors.length)] + opacity + ')';
+    el.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+startX+'%;top:'+startY+'%;background:'+color+';color:'+color+';--p-opacity:'+opacity+';--dx:'+dx+'px;--dy:'+dy+'px;animation-duration:'+dur+'s;animation-delay:-'+delay+'s;';
+    container.appendChild(el);
+  }
+})();
+
+/* ===== HERO HEADLINE WORD REVEAL ===== */
+(function() {
+  var headline = document.getElementById('hero-headline');
+  var text = 'הלקוחה הבאה שלך מחפשת אותך עכשיו.';
+  var words = text.split(' ');
+  var highlightWords = ['הלקוחה', 'מחפשת', 'עכשיו.'];
+  words.forEach(function(w, i) {
+    var span = document.createElement('span');
+    span.className = 'word' + (highlightWords.indexOf(w) !== -1 ? ' highlight' : '');
+    span.textContent = w + ' ';
+    span.style.transitionDelay = (i * 0.15) + 's';
+    headline.appendChild(span);
+  });
+  setTimeout(function() {
+    var allWords = headline.querySelectorAll('.word');
+    allWords.forEach(function(w) { w.classList.add('visible'); });
+    setTimeout(function() {
+      headline.querySelectorAll('.highlight').forEach(function(w) { w.classList.add('underlined'); });
+    }, allWords.length * 150 + 400);
+  }, 300);
+})();
+
+/* ===== MARQUEE ===== */
+(function() {
+  var businesses = [
+    'סטודיו מיכל ★★★★★', 'Beauty by ריקי ★★★★★', 'נייל ארט שירה ★★★★★',
+    'מכון היופי של דנה ★★★★★', 'Lashes by נועה ★★★★★', 'סטודיו גלית ★★★★★',
+    'ספא אורלי ★★★★★', 'עיצוב גבות טלי ★★★★★', 'מיכל קוסמטיקס ★★★★★',
+    'ביוטי בר רונית ★★★★★', 'הסטודיו של ליאת ★★★★★', 'נויה ביוטי ★★★★★'
+  ];
+  var track = document.getElementById('marquee-track');
+  var html = '';
+  for (var r = 0; r < 3; r++) {
+    businesses.forEach(function(b) {
+      html += '<div class="marquee-item"><span class="stars">★★★★★</span> ' + b.replace(/★/g,'') + '</div>';
     });
-</script>
+  }
+  track.innerHTML = html;
+})();
 
-<!-- ═══════ CSS PARTICLES (generated via JS) ═══════ -->
-<div id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;"></div>
-
-<!-- ═══════ HERO ═══════ -->
-<section class="hero">
-    <div class="hero-content">
-        <!-- Text side -->
-        <div class="hero-text">
-            <h1>הלקוחה הבאה שלך מחפשת אותך עכשיו.</h1>
-            <p class="subhead">אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות, בנייה חינם</p>
-            <div class="trust-line">
-                <span class="trust-stars">⭐️⭐️⭐️⭐️⭐️</span>
-                <span>500+ עסקי יופי מרוצים</span>
-            </div>
-        </div>
-
-        <!-- Form side -->
-        <div class="hero-form-card">
-            <div class="form-title">קבלי הצעה חינם ✨</div>
-            <form id="heroForm" onsubmit="return handleSubmit(event, 'hero')">
-                <div class="form-group">
-                    <label for="hero-name">שם פרטי</label>
-                    <input type="text" id="hero-name" name="name" placeholder="השם שלך" required autocomplete="given-name">
-                </div>
-                <div class="form-group">
-                    <label for="hero-business">שם העסק</label>
-                    <input type="text" id="hero-business" name="business" placeholder="איך קוראים לעסק?" required>
-                </div>
-                <button type="submit" class="submit-btn">קבלי הצעה חינם ←</button>
-            </form>
-            <div class="urgency-pill">
-                <span>⏰</span>
-                <span>נותרו 3 מקומות לחודש מרץ</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════ SOCIAL PROOF ═══════ -->
-<section class="social-proof fade-up">
-    <div class="testimonials-mini">
-        <div class="testimonial-mini">
-            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
-            <div class="quote">״תוך יומיים היה לי אתר שנראה כמו של מותג יוקרה. מדהים.״</div>
-            <div class="name">מאיה ל. — סטודיו לעיצוב שיער, ת"א</div>
-        </div>
-        <div class="testimonial-mini">
-            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
-            <div class="quote">״הלקוחות שלי מגיעות מגוגל עכשיו, בלי שאני משקיעה שקל על פרסום.״</div>
-            <div class="name">שירה כ. — ביוטי בר, חיפה</div>
-        </div>
-        <div class="testimonial-mini">
-            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
-            <div class="quote">״פשוט, מהיר, ויפה. מה עוד צריך?״</div>
-            <div class="name">נועה מ. — נייל ארט, רמת גן</div>
-        </div>
-    </div>
-
-    <!-- Marquee -->
-    <div class="marquee-container">
-        <div class="marquee">
-            <span class="marquee-item">סטודיו מאיה, ת"א</span>
-            <span class="marquee-item">ביוטי בר, חיפה</span>
-            <span class="marquee-item">נייל ארט, רמת גן</span>
-            <span class="marquee-item">ספא סנסיטיב, נתניה</span>
-            <span class="marquee-item">לאשר ביוטי, באר שבע</span>
-            <span class="marquee-item">סטודיו רוז, הרצליה</span>
-            <span class="marquee-item">גלאם, ראשון לציון</span>
-            <span class="marquee-item">ביוטי לאב, פ"ת</span>
-            <span class="marquee-item">קליניק דרמה, ירושלים</span>
-            <span class="marquee-item">נויה ספא, אילת</span>
-            <!-- duplicate for seamless loop -->
-            <span class="marquee-item">סטודיו מאיה, ת"א</span>
-            <span class="marquee-item">ביוטי בר, חיפה</span>
-            <span class="marquee-item">נייל ארט, רמת גן</span>
-            <span class="marquee-item">ספא סנסיטיב, נתניה</span>
-            <span class="marquee-item">לאשר ביוטי, באר שבע</span>
-            <span class="marquee-item">סטודיו רוז, הרצליה</span>
-            <span class="marquee-item">גלאם, ראשון לציון</span>
-            <span class="marquee-item">ביוטי לאב, פ"ת</span>
-            <span class="marquee-item">קליניק דרמה, ירושלים</span>
-            <span class="marquee-item">נויה ספא, אילת</span>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════ WHAT YOU GET ═══════ -->
-<section class="features fade-up">
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">🌐</div>
-            <div class="feature-title">אתר מקצועי מותאם אישית</div>
-            <div class="feature-desc">עיצוב ייחודי שמייצג את העסק שלך בדיוק כמו שדמיינת</div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <div class="feature-title">מוכן תוך 48 שעות</div>
-            <div class="feature-desc">לא שבועות, לא חודשים. יומיים ויש לך אתר פעיל</div>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">💰</div>
-            <div class="feature-title">החל מ-49₪/חודש בלבד</div>
-            <div class="feature-desc">בלי עלויות נסתרות. בלי הפתעות. מחיר אחד ברור</div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════ BEFORE / AFTER ═══════ -->
-<section class="before-after fade-up">
-    <h2 class="ba-title">תראי את ההבדל 👇</h2>
-    <div class="ba-grid">
-        <div class="ba-card ba-before">
-            <div class="ba-emoji">😔</div>
-            <div class="ba-label">בלי אתר</div>
-            <ul class="ba-items">
-                <li>לקוחות לא מוצאות אותך</li>
-                <li>נראית לא מקצועית</li>
-                <li>תלויה רק באינסטגרם</li>
-                <li>מפספסת הזמנות</li>
-            </ul>
-        </div>
-
-        <div class="ba-arrow">→</div>
-
-        <div class="ba-card ba-after">
-            <div class="ba-emoji">🤩</div>
-            <div class="ba-label">עם BeautySite</div>
-            <ul class="ba-items">
-                <li>נמצאת בגוגל במקום ראשון</li>
-                <li>נראית כמו מותג יוקרה</li>
-                <li>לקוחות מזמינות 24/7</li>
-                <li>העסק צומח לבד</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════ SECOND CTA ═══════ -->
-<section class="cta-bottom fade-up">
-    <h2>מה מחכים? 🚀</h2>
-
-    <div class="cta-form-bottom">
-        <form id="bottomForm" onsubmit="return handleSubmit(event, 'bottom')">
-            <div class="form-group">
-                <label for="bottom-name">שם פרטי</label>
-                <input type="text" id="bottom-name" name="name" placeholder="השם שלך" required autocomplete="given-name">
-            </div>
-            <div class="form-group">
-                <label for="bottom-business">שם העסק</label>
-                <input type="text" id="bottom-business" name="business" placeholder="איך קוראים לעסק?" required>
-            </div>
-            <button type="submit" class="submit-btn">קבלי הצעה חינם ←</button>
-        </form>
-        <p class="cta-guarantee">ביטול בכל עת · ללא חוזה · ללא סיכון</p>
-    </div>
-</section>
-
-<script>
-    // ═══ Form submission ═══
-    function handleSubmit(e, source) {
-        e.preventDefault();
-        const form = e.target;
-        const nameInput = form.querySelector('input[name="name"]');
-        const businessInput = form.querySelector('input[name="business"]');
-
-        const name = nameInput.value.trim();
-        const business = businessInput.value.trim();
-
-        if (!name || !business) return false;
-
-        // Save to localStorage
-        localStorage.setItem('bs_name', name);
-        localStorage.setItem('bs_business', business);
-        localStorage.setItem('bs_plan', 'basic');
-        localStorage.setItem('bs_source', 'landing_' + source);
-
-        // Save UTM data from session
-        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(k => {
-            const v = sessionStorage.getItem(k);
-            if (v) localStorage.setItem(k, v);
-        });
-
-        // Track conversion (Facebook Pixel placeholder)
-        // fbq('track', 'Lead', { content_name: business });
-
-        // Track conversion (GA4 placeholder)
-        // gtag('event', 'generate_lead', { event_category: 'landing', event_label: source });
-
-        // Redirect
-        window.location.href = 'thank-you.html';
-        return false;
+/* ===== INTERSECTION OBSERVER FOR REVEALS ===== */
+var revealObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var el = entry.target;
+      var delay = parseInt(el.getAttribute('data-delay') || '0');
+      setTimeout(function() { el.classList.add('visible'); }, delay);
+      revealObserver.unobserve(el);
     }
+  });
+}, { threshold: 0.15 });
 
-    // ═══ Scroll animation observer ═══
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal, .testimonial-card, .feature-card, .stat-item').forEach(function(el) {
+  revealObserver.observe(el);
+});
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // ═══ CSS Particles generator ═══
-    (function generateParticles() {
-        const container = document.getElementById('particles');
-        const colors = ['rgba(196,131,122,0.4)', 'rgba(212,168,83,0.3)', 'rgba(196,131,122,0.2)', 'rgba(232,201,122,0.25)'];
-        
-        for (let i = 0; i < 20; i++) {
-            const p = document.createElement('div');
-            p.className = 'particle';
-            const size = Math.random() * 4 + 2;
-            p.style.cssText = `
-                width: ${size}px;
-                height: ${size}px;
-                background: ${colors[Math.floor(Math.random() * colors.length)]};
-                left: ${Math.random() * 100}%;
-                animation-duration: ${Math.random() * 10 + 10}s;
-                animation-delay: ${Math.random() * 10}s;
-            `;
-            container.appendChild(p);
+/* ===== COUNTING ANIMATION ===== */
+var statsObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var el = entry.target;
+      var target = parseFloat(el.getAttribute('data-target'));
+      var prefix = el.getAttribute('data-prefix') || '';
+      var isDecimal = el.getAttribute('data-decimal') === 'true';
+      var duration = 2000;
+      var start = performance.now();
+      el.classList.add('counting');
+      function animate(now) {
+        var progress = Math.min((now - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = eased * target;
+        if (isDecimal) {
+          el.textContent = prefix + current.toFixed(1);
+        } else {
+          el.textContent = prefix + Math.floor(current).toLocaleString('he-IL');
         }
-    })();
-</script>
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          el.classList.remove('counting');
+        }
+      }
+      requestAnimationFrame(animate);
+      statsObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
 
+document.querySelectorAll('.stat-number[data-target]').forEach(function(el) {
+  statsObserver.observe(el);
+});
+
+/* ===== SECTION OVERLAY SCROLL COLOR ===== */
+var overlays = document.querySelectorAll('.section-overlay');
+var overlayObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    entry.target.style.opacity = entry.isIntersecting ? '1' : '0';
+  });
+}, { threshold: 0.3 });
+overlays.forEach(function(o) { overlayObserver.observe(o.parentElement); });
+
+/* ===== PARALLAX ===== */
+var parallaxEls = document.querySelectorAll('[data-parallax]');
+var ticking = false;
+function onScroll() {
+  if (!ticking) {
+    requestAnimationFrame(function() {
+      updateProgress();
+      var scrollY = window.scrollY;
+      parallaxEls.forEach(function(el) {
+        var speed = parseFloat(el.getAttribute('data-parallax'));
+        var rect = el.getBoundingClientRect();
+        var offset = (scrollY - el.offsetTop) * speed;
+        el.style.transform = 'translateY(' + offset + 'px) rotate(-2deg)';
+      });
+      ticking = false;
+    });
+    ticking = true;
+  }
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ===== MAGNETIC BUTTONS ===== */
+document.querySelectorAll('.magnetic-btn').forEach(function(btn) {
+  btn.addEventListener('mousemove', function(e) {
+    var rect = btn.getBoundingClientRect();
+    var x = e.clientX - rect.left - rect.width / 2;
+    var y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = 'translate(' + (x * 0.15) + 'px,' + (y * 0.15) + 'px) scale(1.03)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    btn.style.transform = 'translate(0,0) scale(1)';
+  });
+});
+
+/* ===== VIEWER COUNT ===== */
+var viewerEl = document.getElementById('viewer-count');
+if (viewerEl) {
+  var base = 12 + Math.floor(Math.random() * 8);
+  viewerEl.textContent = base;
+  setInterval(function() {
+    base += Math.random() > 0.5 ? 1 : -1;
+    if (base < 9) base = 10;
+    if (base > 28) base = 25;
+    viewerEl.textContent = base;
+  }, 4000);
+}
+
+/* ===== FORM HANDLING ===== */
+function handleForm(e) {
+  e.preventDefault();
+  var form = e.target;
+  var nameInput = form.querySelector('input[name="name"]');
+  var bizInput = form.querySelector('input[name="business"]');
+  var valid = true;
+
+  [nameInput, bizInput].forEach(function(inp) {
+    inp.classList.remove('error');
+    if (!inp.value.trim()) {
+      inp.classList.add('error');
+      valid = false;
+    }
+  });
+
+  if (!valid) return;
+
+  sessionStorage.setItem('bs_name', nameInput.value.trim());
+  sessionStorage.setItem('bs_business', bizInput.value.trim());
+  sessionStorage.setItem('bs_plan', 'basic');
+  sessionStorage.setItem('bs_lead_timestamp', new Date().toISOString());
+  if (!sessionStorage.getItem('bs_countdown_start')) {
+    sessionStorage.setItem('bs_countdown_start', Date.now().toString());
+  }
+
+  window.location.href = 'thank-you.html';
+}
+
+document.getElementById('hero-form').addEventListener('submit', handleForm);
+document.getElementById('cta-form').addEventListener('submit', handleForm);
+
+/* ===== CLEAR ERROR ON INPUT ===== */
+document.querySelectorAll('.glass-input').forEach(function(inp) {
+  inp.addEventListener('input', function() { inp.classList.remove('error'); });
+});
+
+/* ===== INITIAL SCROLL UPDATE ===== */
+updateProgress();
+</script>
 </body>
 </html>
