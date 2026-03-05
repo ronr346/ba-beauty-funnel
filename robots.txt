@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /dashboard.html
+Disallow: /sop.html
+Disallow: /contract.html
+Disallow: /ads.html
+Disallow: /whatsapp.html
+
+Sitemap: https://ronr346.github.io/ba-beauty-funnel/sitemap.xml

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💬 תסריטי וואטסאפ — BeautySite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #e8e0da;
+      font-family: 'Heebo', sans-serif;
+      direction: rtl;
+      min-height: 100vh;
+      padding: 0 0 60px 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0d1a12 0%, #0d0d0d 100%);
+      border-bottom: 1px solid #1c2a1e;
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+
+    header .logo {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c4837a;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    header h1 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #9e8a84;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 48px 0 24px;
+    }
+
+    .section-title .icon {
+      width: 42px;
+      height: 42px;
+      background: #c4837a22;
+      border: 1px solid #c4837a44;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .section-title p {
+      font-size: 13px;
+      color: #9e8a84;
+      margin-top: 2px;
+    }
+
+    /* Message cards */
+    .messages-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .msg-card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .msg-card:hover {
+      border-color: #c4837a44;
+    }
+
+    .msg-card-header {
+      background: #161616;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .msg-trigger {
+      font-size: 13px;
+      font-weight: 700;
+      color: #c4837a;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .msg-timing {
+      font-size: 11px;
+      color: #6e5e5a;
+      background: #1e1816;
+      border: 1px solid #2e1e1c;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .msg-card-body {
+      padding: 20px;
+    }
+
+    /* WhatsApp bubble */
+    .wa-bubble-wrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .wa-bubble {
+      background: #005c4b;
+      border-radius: 12px 2px 12px 12px;
+      padding: 14px 16px;
+      max-width: 85%;
+      position: relative;
+      line-height: 1.7;
+      font-size: 15px;
+      color: #e9fbe5;
+      white-space: pre-line;
+      box-shadow: 0 2px 8px #0005;
+    }
+
+    .wa-bubble::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -8px;
+      border-width: 0 8px 8px 0;
+      border-style: solid;
+      border-color: transparent #005c4b transparent transparent;
+    }
+
+    .wa-bubble .placeholder {
+      background: #00796b;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 13px;
+      color: #b2dfdb;
+      font-style: italic;
+    }
+
+    .wa-time {
+      text-align: left;
+      font-size: 11px;
+      color: #7ec8ba;
+      margin-top: 5px;
+      padding-left: 4px;
+    }
+
+    /* Copy button */
+    .copy-hint {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .copy-hint span {
+      font-size: 12px;
+      color: #6e5e5a;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* FAQ Flow */
+    .faq-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: grid;
+      grid-template-columns: auto 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover {
+      border-color: #c4837a33;
+    }
+
+    @media (max-width: 640px) {
+      .faq-item { grid-template-columns: 1fr; }
+      .arrow { display: none; }
+    }
+
+    .faq-question {
+      background: #1e1414;
+      border: 1px solid #2e1e1c;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: #e8d0cc;
+      font-weight: 500;
+    }
+
+    .arrow {
+      color: #c4837a;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .faq-answer {
+      background: #0d1a0f;
+      border: 1px solid #1e2e1c;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #a8d5b0;
+      line-height: 1.5;
+    }
+
+    /* KPIs */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 14px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .kpi-card:hover {
+      border-color: #c4837a44;
+      transform: translateY(-2px);
+    }
+
+    .kpi-icon {
+      font-size: 24px;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      color: #9e8a84;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .kpi-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: #c4837a;
+    }
+
+    .kpi-desc {
+      font-size: 12px;
+      color: #6e5e5a;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: #4a3a36;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BeautySite · WhatsApp Automation</div>
+  <h1>💬 תסריטי וואטסאפ</h1>
+  <p>הודעות מוכנות לכל שלב במסע הלקוחה — העתיקי ושלחי</p>
+</header>
+
+<div class="container">
+
+  <!-- SECTION 1: Automated Messages -->
+  <div class="section-title">
+    <div class="icon">🤖</div>
+    <div>
+      <h2>הודעות אוטומטיות</h2>
+      <p>לשלוח מיד בכל טריגר — ניתן לחבר ל-Zapier / Make / WhatsApp Business API</p>
+    </div>
+  </div>
+
+  <div class="messages-grid">
+
+    <!-- AFTER FORM SUBMIT -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">📋 After Form Submit</div>
+        <div class="msg-timing">⚡ מיידי — תוך דקה מהגשה</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">היי <span class="placeholder">[שם]</span>! 👋
+קיבלנו את הפרטים שלך ל-<span class="placeholder">[שם העסק]</span>.
+אני <span class="placeholder">[שם נציגה]</span> מ-BeautySite.
+
+תוך 24 שעות נשלח לך שאלון עיצוב קצר (5 דקות) — ואז מתחילים לבנות!
+
+בינתיים, יש שאלות? אני כאן 😊</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+        <div class="copy-hint"><span>💡 החלפי את <span class="placeholder" style="background:#1e1814;color:#c4837a;border-radius:3px;padding:1px 5px;font-size:11px;">[שם]</span> עם שדות דינמיים מהמערכת</span></div>
+      </div>
+    </div>
+
+    <!-- AFTER PAYMENT -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">💳 After Payment</div>
+        <div class="msg-timing">⚡ מיידי — אחרי אישור תשלום</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">🎉 <span class="placeholder">[שם]</span>, ברוכה הבאה!
+התשלום התקבל — חבילת <span class="placeholder">[חבילה]</span> פעילה.
+שלחתי לך גם שאלון עיצוב — 5 דקות ומתחילים.
+<span class="placeholder">[קישור לשאלון]</span>
+האתר שלך יהיה מוכן תוך 48 שעות! 🚀</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONNAIRE REMINDER -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">⏰ Questionnaire Reminder</div>
+        <div class="msg-timing">🕐 24 שעות אחרי תשלום — אם אין תגובה</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">היי <span class="placeholder">[שם]</span> 😊
+רק תזכורת קטנה — שאלון העיצוב ממתין לך!
+<span class="placeholder">[קישור]</span>
+לוקח 5 דקות ובלעדיו לא נוכל להתחיל לבנות.</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEBSITE READY -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">🎨 Website Ready</div>
+        <div class="msg-timing">📬 כשהאתר מוכן — שלחי לפני שמעלים לאוויר</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">🎨 <span class="placeholder">[שם]</span>, האתר שלך מוכן!
+הנה הלינק לתצוגה מקדימה: <span class="placeholder">[לינק]</span>
+בדקי ותגידי מה את חושבת — יש לך 48 שעות לבקש שינויים לפני שעולים לאוויר.</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MONTHLY CHECK-IN -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">☀️ Monthly Check-In</div>
+        <div class="msg-timing">📅 תחילת כל חודש — לקוחות PRO / GROWTH בלבד</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">היי <span class="placeholder">[שם]</span>! ☀️
+חודש חדש — יש משהו שתרצי לעדכן באתר?
+תמונות חדשות, שינוי מחירון, מבצע עונתי?
+זה כלול בחבילה שלך, אז תנצלי! 😊</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPSELL -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">👑 Upsell — Basic → PRO</div>
+        <div class="msg-timing">📅 30 יום אחרי הצטרפות לחבילת Basic</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">היי <span class="placeholder">[שם]</span>! 👑
+שמנו לב שהאתר שלך עובד יפה — מעולה!
+רצינו לשאול: ידעת שב-PRO (38₪ יותר בחודש) את מקבלת עדכוני תוכן שוטפים + כפתור הזמנת תורים?
+87% מהלקוחות שלנו עוברות תוך החודש הראשון.
+רוצה לשמוע עוד?</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHURN PREVENTION -->
+    <div class="msg-card">
+      <div class="msg-card-header">
+        <div class="msg-trigger">🤍 Churn Prevention</div>
+        <div class="msg-timing">⚠️ מיידי — כשחיוב נכשל</div>
+      </div>
+      <div class="msg-card-body">
+        <div class="wa-bubble-wrapper">
+          <div>
+            <div class="wa-bubble">היי <span class="placeholder">[שם]</span>, שמנו לב שהחיוב החודשי נכשל.
+האתר שלך יישאר פעיל עוד 3 ימים.
+לעדכון פרטי תשלום: <span class="placeholder">[קישור]</span>
+שאלות? אני כאן! 🤍</div>
+            <div class="wa-time">✓✓</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: FAQ Flow -->
+  <div class="section-title">
+    <div class="icon">💬</div>
+    <div>
+      <h2>Flow — תגובות לשאלות נפוצות</h2>
+      <p>תסריטים ידניים לשאלות שחוזרות — שמרי אצלך בטלפון</p>
+    </div>
+  </div>
+
+  <div class="faq-grid">
+
+    <div class="faq-item">
+      <div class="faq-question">כמה זה עולה?</div>
+      <div class="arrow">→</div>
+      <div class="faq-answer">הכוון לדף המחירים — "49₪ לחודש, 7 ימי ניסיון חינם. אין חיוב עד שלא מרוצה!" + לינק לדף</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">אני לא טכנית</div>
+      <div class="arrow">→</div>
+      <div class="faq-answer">את לא צריכה להיות — אנחנו מטפלים בהכל. את רק עונה על 5 שאלות ואנחנו בונות.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">יש לי כבר אתר</div>
+      <div class="arrow">→</div>
+      <div class="faq-answer">נשמח לשפר — כמה עולה לך האתר הנוכחי? נשווה ביצועים + מחיר 😊</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">אני צריכה לחשוב</div>
+      <div class="arrow">→</div>
+      <div class="faq-answer">בטח! 7 ימי ניסיון חינם אז אין סיכון. מה מעכב אותך? אשמח לעזור.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">רוצה לראות דוגמאות</div>
+      <div class="arrow">→</div>
+      <div class="faq-answer">שלחי 3 לינקים לאתרים לדוגמה — <span style="color:#c4837a;">[TO BE FILLED]</span> · עדכני עם הלינקים האמיתיים</div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 3: KPIs -->
+  <div class="section-title">
+    <div class="icon">📊</div>
+    <div>
+      <h2>KPIs לעקוב</h2>
+      <p>מדדי הצלחה חודשיים — בדקי כל שבוע</p>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon">⚡</div>
+      <div class="kpi-label">Response Time</div>
+      <div class="kpi-value">&lt; 2h</div>
+      <div class="kpi-desc">מתחת ל-2 שעות לכל הודעה נכנסת</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-label">Lead → Payment</div>
+      <div class="kpi-value">15%</div>
+      <div class="kpi-desc">יעד המרה מליד לתשלום בחודש הראשון</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">👑</div>
+      <div class="kpi-label">Upsell Rate</div>
+      <div class="kpi-value">30%</div>
+      <div class="kpi-desc">יעד שדרוג Basic → PRO תוך 60 יום</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon">🔒</div>
+      <div class="kpi-label">Churn Rate</div>
+      <div class="kpi-value">&lt; 5%</div>
+      <div class="kpi-desc">יעד נטישה מקסימלי לחודש — שמרי על זה!</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  BeautySite · מסמך פנימי לשימוש הצוות · עודכן 2026
+</footer>
+
+</body>
+</html>

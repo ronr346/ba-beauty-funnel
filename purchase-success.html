@@ -4,143 +4,410 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ברוכה הבאה! — BA Beauty</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Heebo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:#0d0d0d;color:#fff;font-family:'Heebo',sans-serif;direction:rtl;text-align:right;min-height:100vh;overflow-x:hidden}
-.container{max-width:660px;margin:0 auto;padding:40px 20px 60px}
-h1,h2,h3{font-family:'Playfair Display',serif}
+  :root {
+    --plan-color: #c4837a;
+    --bg: #0d0d0d;
+    --card: #1a1a1a;
+    --card2: #222;
+    --text: #f5f0eb;
+    --muted: #888;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    direction: rtl;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+  #confetti-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
 
-/* ── Confetti ─────────────────────────────────────── */
-#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+  /* PLAN BADGE */
+  .plan-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1.5px solid var(--plan-color);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--plan-color);
+  }
+  .plan-badge.basic { background: #f5f0eb; color: #c4837a; border-color: #c4837a; }
+  .plan-badge.pro   { background: #1a1200; color: #c9a84c; border-color: #c9a84c; }
+  .plan-badge.growth{ background: #001a0a; color: #4caf7d; border-color: #4caf7d; }
 
-/* ── Celebration Emoji ────────────────────────────── */
-.celebration-emoji{text-align:center;font-size:72px;animation:celebBounce 1.2s ease infinite alternate;display:block;margin-bottom:12px}
-@keyframes celebBounce{
-  0%{transform:scale(1) translateY(0)}
-  60%{transform:scale(1.18) translateY(-14px)}
-  100%{transform:scale(1.05) translateY(-4px)}
-}
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 40px 20px 32px;
+  }
+  .bounce-emoji {
+    font-size: 64px;
+    display: inline-block;
+    animation: bounce 1.2s infinite;
+    margin-bottom: 16px;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 6vw, 36px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--plan-color); }
+  .hero p {
+    font-size: 16px;
+    color: var(--muted);
+    font-weight: 300;
+  }
 
-/* ── Plan Badge ───────────────────────────────────── */
-.plan-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:50px;border:2px solid;font-weight:700;font-size:15px;margin-bottom:20px}
-.plan-badge.basic{background:#f5f0eb;border-color:#c4837a;color:#c4837a}
-.plan-badge.pro{background:#1a1200;border-color:#c9a84c;color:#c9a84c}
-.plan-badge.growth{background:#001a0a;border-color:#4caf7d;color:#4caf7d}
+  /* SECTION TITLES */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  section { margin-bottom: 36px; }
 
-/* ── Hero ─────────────────────────────────────────── */
-.hero{text-align:center;padding:32px 0 16px}
-.hero h1{font-size:clamp(26px,6vw,44px);margin-bottom:10px;line-height:1.25}
-.hero p{color:#aaa;font-size:16px;margin-bottom:6px}
+  /* REASONS CARDS */
+  .reasons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .reason-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1px solid #2a2a2a;
+  }
+  .reason-icon { font-size: 28px; flex-shrink: 0; }
+  .reason-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .reason-card p  { font-size: 13px; color: var(--muted); }
 
-/* ── Validation Section ───────────────────────────── */
-.validation{background:linear-gradient(135deg,#0f1a0f,#152315);border:1px solid #4caf7d55;border-radius:20px;padding:28px 24px;margin:24px 0}
-.validation h2{color:#4caf7d;font-size:20px;margin-bottom:20px;font-family:'Heebo',sans-serif;font-weight:700}
-.validation-reason{display:flex;align-items:flex-start;gap:14px;margin-bottom:16px}
-.validation-reason:last-child{margin-bottom:0}
-.validation-icon{font-size:26px;flex-shrink:0;line-height:1}
-.validation-text h4{font-size:15px;font-weight:700;margin-bottom:3px;color:#fff}
-.validation-text p{font-size:13px;color:#aaa;line-height:1.5}
+  /* RECEIPT */
+  .receipt {
+    background: #f9f5f0;
+    color: #2a1f1a;
+    border-radius: 14px;
+    padding: 24px 20px;
+    font-family: 'Heebo', monospace;
+    position: relative;
+  }
+  .receipt::before, .receipt::after {
+    content: '';
+    display: block;
+    border-top: 2px dashed #c4837a55;
+    margin: 14px 0;
+  }
+  .receipt-header {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .receipt-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #2a1f1a;
+  }
+  .receipt-num {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #e8e0d8;
+  }
+  .receipt-row:last-of-type { border-bottom: none; }
+  .receipt-row .label { color: #666; }
+  .receipt-row .value { font-weight: 600; color: #2a1f1a; }
+  .receipt-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #2a1f1a;
+    border-top: 2px solid #c4837a44;
+    margin-top: 8px;
+  }
+  .receipt-note {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    margin-top: 10px;
+  }
+  .btn-add-contact {
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    background: #2a1f1a;
+    color: #f9f5f0;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    transition: opacity .2s;
+  }
+  .btn-add-contact:hover { opacity: .85; }
 
-/* ── Receipt ──────────────────────────────────────── */
-.receipt-wrapper{position:relative;margin:24px 0}
-.receipt-tape{height:14px;background:repeating-linear-gradient(90deg,#f5f0eb 0,#f5f0eb 14px,transparent 14px,transparent 22px);border-radius:4px 4px 0 0;opacity:.35}
-.receipt{background:#f9f5f0;color:#1a1a1a;border-radius:0 0 12px 12px;padding:28px 24px;border:2px dashed #d9cfc8;border-top:none}
-.receipt-header{text-align:center;border-bottom:2px dashed #d9cfc8;padding-bottom:16px;margin-bottom:16px}
-.receipt-header h3{font-size:18px;color:#1a1a1a;font-family:'Playfair Display',serif;margin-bottom:4px}
-.receipt-header p{font-size:12px;color:#888;direction:ltr;text-align:center}
-.receipt-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed #d9cfc8;font-size:14px}
-.receipt-row:last-child{border-bottom:none}
-.receipt-row .label{color:#666}
-.receipt-row .value{font-weight:700;color:#1a1a1a}
-.receipt-total{font-size:17px;margin-top:8px;padding-top:14px!important;border-top:2px dashed #d9cfc8!important;border-bottom:none!important}
-.receipt-total .value{font-size:21px}
-.receipt-footer{text-align:center;margin-top:18px;padding-top:14px;border-top:1px dashed #d9cfc8;font-size:12px;color:#888}
-.receipt-footer strong{display:block;margin-bottom:10px;color:#555;font-size:13px}
-.btn-contact{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:#25d366;color:#fff;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-family:'Heebo',sans-serif;transition:opacity .2s}
-.btn-contact:hover{opacity:.88}
+  /* FEATURES */
+  .features-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .features-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card);
+    border-radius: 10px;
+    padding: 12px 16px;
+    border: 1px solid #2a2a2a;
+  }
+  .features-list .fi { font-size: 22px; flex-shrink: 0; }
+  .features-list .ft { flex: 1; font-size: 14px; font-weight: 500; }
+  .features-list .fv { font-size: 12px; color: var(--plan-color); font-weight: 600; }
 
-/* ── Countdown ────────────────────────────────────── */
-.countdown-box{border-radius:20px;padding:28px 24px;text-align:center;margin:24px 0;border:2px solid}
-.countdown-box h3{font-size:18px;font-family:'Heebo',sans-serif;font-weight:700;margin-bottom:8px}
-.countdown-sub{color:#aaa;font-size:13px;margin-bottom:20px}
-.flip-clock{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px 0 16px}
-.flip-unit{display:flex;flex-direction:column;align-items:center;gap:4px}
-.flip-digit{font-family:'Playfair Display',serif;font-size:clamp(36px,9vw,58px);font-weight:700;min-width:64px;text-align:center;background:rgba(0,0,0,.25);border-radius:12px;padding:8px 12px;line-height:1;position:relative;overflow:hidden}
-.flip-digit::after{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(0,0,0,.3)}
-.flip-label{font-size:11px;color:#aaa;font-weight:600;letter-spacing:1px;text-transform:uppercase}
-.flip-sep{font-family:'Playfair Display',serif;font-size:clamp(30px,7vw,48px);font-weight:700;opacity:.7;margin-bottom:16px;align-self:flex-start;padding-top:10px}
-.progress-wrap{background:rgba(0,0,0,.2);border-radius:50px;height:10px;margin:12px 0 10px;overflow:hidden}
-.progress-bar{height:100%;border-radius:50px;transition:width 1s linear}
-.progress-text{font-size:12px;color:#aaa;margin-top:4px}
+  /* COUNTDOWN */
+  .countdown-box {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1px solid #2a2a2a;
+  }
+  .countdown-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .countdown-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .countdown-digits {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .cd-unit { text-align: center; }
+  .cd-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--plan-color);
+    line-height: 1;
+    min-width: 60px;
+    display: block;
+  }
+  .cd-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .cd-sep { font-size: 40px; color: var(--plan-color); align-self: center; padding-bottom: 14px; }
+  .progress-track {
+    background: #2a2a2a;
+    border-radius: 50px;
+    height: 10px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--plan-color);
+    border-radius: 50px;
+    transition: width 1s linear;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    text-align: left;
+  }
 
-/* ── Timeline ─────────────────────────────────────── */
-.timeline{margin:32px 0}
-.timeline h2{font-size:22px;margin-bottom:24px;color:#fff}
-.timeline-track{position:relative;padding-right:20px}
-.timeline-track::before{content:'';position:absolute;right:11px;top:0;bottom:0;width:2px;background:linear-gradient(#2a2a2a,#2a2a2a 60%,transparent)}
-.tl-step{display:flex;align-items:flex-start;gap:20px;margin-bottom:28px;position:relative}
-.tl-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px;z-index:1;position:relative}
-.tl-icon.done{background:#4caf7d;box-shadow:0 0 0 4px #4caf7d33}
-.tl-icon.active{background:#c9a84c;box-shadow:0 0 0 4px #c9a84c33;animation:pulse 1.8s ease infinite}
-.tl-icon.pending{background:#2a2a2a;border:2px solid #3a3a3a}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 4px #c9a84c33}50%{box-shadow:0 0 0 10px #c9a84c11}}
-.tl-body{flex:1}
-.tl-body h4{font-size:15px;font-weight:700;margin-bottom:3px}
-.tl-body p{font-size:13px;color:#888;line-height:1.5}
-.tl-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:5px;font-weight:600}
-.tl-badge.done{background:#4caf7d22;color:#4caf7d}
-.tl-badge.active{background:#c9a84c22;color:#c9a84c}
-.tl-badge.pending{background:#2a2a2a;color:#666}
+  /* TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .tl-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    padding-bottom: 24px;
+  }
+  .tl-step:last-child { padding-bottom: 0; }
+  .tl-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .tl-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    border: 2px solid #2a2a2a;
+    background: var(--card);
+    position: relative;
+    z-index: 1;
+  }
+  .tl-icon-wrap.done   { border-color: #4caf7d; background: #001a0a; }
+  .tl-icon-wrap.active { border-color: var(--plan-color); background: var(--card2); animation: pulse-border 1.5s infinite; }
+  .tl-icon-wrap.pending{ border-color: #333; background: #111; opacity: .6; }
+  @keyframes pulse-border {
+    0%,100% { box-shadow: 0 0 0 0 var(--plan-color)44; }
+    50% { box-shadow: 0 0 0 8px transparent; }
+  }
+  .tl-line {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+    background: #2a2a2a;
+    margin: 4px 0;
+  }
+  .tl-content { padding-top: 8px; }
+  .tl-content h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+  .tl-content .tl-time { font-size: 12px; color: var(--plan-color); font-weight: 600; margin-bottom: 3px; }
+  .tl-content p { font-size: 13px; color: var(--muted); }
 
-/* ── Features ─────────────────────────────────────── */
-.features-box{background:#1f1f1f;border:1px solid #3a3a3a;border-radius:16px;padding:20px 24px;margin:20px 0}
-.features-box h3{color:#fff;font-size:16px;margin-bottom:16px;font-family:'Heebo',sans-serif;font-weight:700}
-.feature-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #2a2a2a}
-.feature-item:last-child{border-bottom:none}
-.feature-icon{font-size:20px;flex-shrink:0}
-.feature-text{flex:1;font-size:14px;color:#ddd}
-.feature-value{background:#2a2a2a;color:#888;font-size:11px;padding:3px 8px;border-radius:20px;white-space:nowrap}
+  /* UPSELL */
+  .upsell-card {
+    border-radius: 16px;
+    padding: 24px 20px;
+    border: 2px solid var(--plan-color);
+    background: var(--card);
+    position: relative;
+    overflow: hidden;
+  }
+  .upsell-scarcity {
+    display: inline-block;
+    background: #ff4444;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 50px;
+    margin-bottom: 12px;
+    letter-spacing: .5px;
+  }
+  .upsell-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .upsell-sub { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .upsell-features { list-style: none; margin-bottom: 20px; }
+  .upsell-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px solid #2a2a2a;
+  }
+  .upsell-features li:last-child { border-bottom: none; }
+  .btn-upgrade {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: var(--plan-color);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    transition: opacity .2s, transform .1s;
+  }
+  .btn-upgrade:hover { opacity: .9; transform: scale(1.01); }
+  .upsell-celebrate {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #001a0a, #002a10);
+    border-radius: 16px;
+    border: 2px solid #4caf7d;
+  }
+  .upsell-celebrate .cel-emoji { font-size: 56px; margin-bottom: 12px; }
+  .upsell-celebrate h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #4caf7d;
+    margin-bottom: 8px;
+  }
+  .upsell-celebrate p { font-size: 14px; color: #aaa; }
 
-/* ── Upsell ───────────────────────────────────────── */
-.upsell-card{border-radius:20px;padding:28px 24px;margin:24px 0;position:relative;overflow:hidden}
-.upsell-card::before{content:'⚡ הצעה אחרונה לפני הבנייה';position:absolute;top:0;right:0;background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:5px 14px;border-radius:0 0 0 12px;letter-spacing:.5px}
-.upsell-card.pro-upsell{background:linear-gradient(160deg,#1a1200,#2a1f00);border:2px solid #c9a84c}
-.upsell-card.growth-upsell{background:linear-gradient(160deg,#001a0a,#002a12);border:2px solid #4caf7d}
-.upsell-card.celebration{background:linear-gradient(160deg,#001a0a,#002a12);border:2px solid #4caf7d;text-align:center}
-.upsell-card.celebration::before{display:none}
-.upsell-title{font-size:20px;font-weight:700;margin-bottom:8px;margin-top:18px}
-.upsell-title.gold{color:#c9a84c}
-.upsell-title.green{color:#4caf7d}
-.scarcity-note{font-size:13px;color:#e74c3c;margin:6px 0 14px;font-weight:600}
-.value-stack{background:rgba(0,0,0,.25);border-radius:12px;padding:14px 16px;margin:14px 0}
-.value-stack-title{font-size:12px;color:#aaa;margin-bottom:10px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
-.value-stack-item{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:#ddd}
-.value-stack-total{display:flex;justify-content:space-between;font-size:15px;font-weight:700;border-top:1px solid #444;margin-top:8px;padding-top:8px}
-.upsell-btn{width:100%;padding:16px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-top:16px;font-family:'Heebo',sans-serif;transition:all .2s;letter-spacing:.3px}
-.upsell-btn.gold{background:linear-gradient(135deg,#c9a84c,#e8c97a);color:#000}
-.upsell-btn.green{background:linear-gradient(135deg,#4caf7d,#6ec99a);color:#fff}
-.upsell-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  /* SHARE */
+  .share-box {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    border: 1px solid #2a2a2a;
+  }
+  .share-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .share-box p  { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .btn-whatsapp:hover { opacity: .9; }
 
-/* ── Refer ────────────────────────────────────────── */
-.refer-box{background:linear-gradient(135deg,#1a0d1a,#250d25);border:1px solid #9b59b655;border-radius:20px;padding:26px 24px;margin:24px 0;text-align:center}
-.refer-box h3{color:#c39bd3;font-size:19px;font-weight:700;margin-bottom:8px;font-family:'Heebo',sans-serif}
-.refer-box p{color:#aaa;font-size:14px;margin-bottom:18px;line-height:1.6}
-.btn-whatsapp{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;background:#25d366;color:#fff;border-radius:50px;font-size:15px;font-weight:700;text-decoration:none;transition:all .2s;font-family:'Heebo',sans-serif}
-.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.4)}
-.btn-whatsapp svg{width:22px;height:22px;fill:#fff;flex-shrink:0}
-
-/* ── Footer ───────────────────────────────────────── */
-footer{text-align:center;padding:40px 20px;border-top:1px solid #2a2a2a;margin-top:40px;color:#666;font-size:13px}
-.btn-back{display:inline-block;margin-top:16px;color:#c4837a;text-decoration:none;font-size:14px}
-
-/* ── Mobile ───────────────────────────────────────── */
-@media(max-width:480px){
-  .flip-digit{font-size:36px;min-width:52px;padding:6px 8px}
-  .flip-sep{font-size:30px}
-  .container{padding:24px 16px 60px}
-}
+  /* DIVIDER */
+  .divider { height: 1px; background: #222; margin: 32px 0; }
 </style>
 </head>
 <body>
@@ -149,182 +416,208 @@ footer{text-align:center;padding:40px 20px;border-top:1px solid #2a2a2a;margin-t
 
 <div class="container">
 
+  <!-- PLAN BADGE -->
+  <div style="text-align:center; padding-top:24px;">
+    <div id="plan-badge" class="plan-badge">...</div>
+  </div>
+
   <!-- HERO -->
   <div class="hero">
-    <div id="plan-badge-container"></div>
-    <span class="celebration-emoji">🎉</span>
+    <div class="bounce-emoji">🎉</div>
     <h1 id="hero-title">ברוכה הבאה למשפחה! 🎊</h1>
-    <p id="hero-sub"></p>
+    <p id="hero-sub">טוען פרטים...</p>
   </div>
 
-  <!-- VALIDATION: why this was the right decision -->
-  <div class="validation">
-    <h2>✅ עשית את הבחירה הנכונה</h2>
-    <div class="validation-reason">
-      <span class="validation-icon">💼</span>
-      <div class="validation-text">
-        <h4>אתר מקצועי = עוד לקוחות בדלת</h4>
-        <p>עסקים עם אתר מקצועי מקבלים עד 3× יותר פניות — לקוחות מחפשות אתכן, ועכשיו הן ימצאו.</p>
+  <div class="divider"></div>
+
+  <!-- REASONS -->
+  <section>
+    <h2 class="section-title">✅ עשית את הבחירה הנכונה</h2>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="reason-icon">💼</div>
+        <div>
+          <h3>אתר מקצועי = עוד לקוחות</h3>
+          <p>עסקים עם אתר מקבלים עד 3× יותר פניות מלקוחות חדשים</p>
+        </div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">⏱</div>
+        <div>
+          <h3>אתר תוך 48 שעות — לא תמצאי מהיר יותר</h3>
+          <p>אנחנו בונות מהר, בונות טוב, ובונות בשבילך</p>
+        </div>
+      </div>
+      <div class="reason-card">
+        <div class="reason-icon">💰</div>
+        <div>
+          <h3>תמורה אמיתית על כל שקל</h3>
+          <p>החזר ROI תוך שבועות — כי לקוחה חדשה אחת מכסה הכל</p>
+        </div>
       </div>
     </div>
-    <div class="validation-reason">
-      <span class="validation-icon">⏱️</span>
-      <div class="validation-text">
-        <h4>אתר תוך 48 שעות — לא תמצאי מהיר יותר</h4>
-        <p>המתחרות שלך ממשיכות לחכות. את כבר בדרך — האתר שלך יהיה חי עוד לפני סוף השבוע.</p>
-      </div>
-    </div>
-    <div class="validation-reason">
-      <span class="validation-icon">💸</span>
-      <div class="validation-text">
-        <h4>תמורה אמיתית על כל שקל</h4>
-        <p>אתר כזה אצל מעצב פרטי? 5,000–15,000₪ חד-פעמי. את משלמת פחות ממחיר קפה ביום — וגם עם 7 ימי ניסיון חינם.</p>
-      </div>
-    </div>
-  </div>
+  </section>
 
   <!-- RECEIPT -->
-  <div class="receipt-wrapper">
-    <div class="receipt-tape"></div>
-    <div class="receipt" id="receipt">
+  <section>
+    <h2 class="section-title">🧾 אישור הזמנה</h2>
+    <div class="receipt">
       <div class="receipt-header">
-        <h3>🧾 אישור הזמנה — BA Beauty</h3>
-        <p id="r-confnum" style="margin-top:6px;font-weight:700;color:#555;font-size:14px"></p>
+        <h3>BA Beauty — אישור הזמנה 🧾</h3>
       </div>
+      <div class="receipt-num" id="conf-num">מס׳ אישור: טוען...</div>
+
       <div class="receipt-row">
         <span class="label">חבילה</span>
-        <span class="value" id="r-plan"></span>
+        <span class="value" id="r-plan">—</span>
       </div>
       <div class="receipt-row">
         <span class="label">עסק</span>
-        <span class="value" id="r-business"></span>
+        <span class="value" id="r-business">—</span>
       </div>
       <div class="receipt-row">
         <span class="label">תשלום חודשי</span>
-        <span class="value" id="r-monthly"></span>
+        <span class="value" id="r-monthly">—</span>
       </div>
       <div class="receipt-row">
         <span class="label">סוף תקופת ניסיון</span>
-        <span class="value" id="r-trial-end"></span>
+        <span class="value" id="r-trial-end">—</span>
       </div>
-      <div class="receipt-row receipt-total">
-        <span class="label" style="font-weight:700">סה"כ היום</span>
-        <span class="value" id="r-total" style="color:#27ae60">0₪ ✓</span>
+      <div class="receipt-total">
+        <span>סה״כ היום</span>
+        <span>0₪ 🎁</span>
       </div>
-      <div class="receipt-footer">
-        <strong>📌 שמרי את הדף הזה לעיון עתידי</strong>
-        <a class="btn-contact" id="btn-add-contact" href="#" onclick="addContact(event)">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.417A9.952 9.952 0 0011.999 22C17.522 22 22 17.523 22 12S17.522 2 11.999 2z"/></svg>
-          הוסיפי לאנשי הקשר
-        </a>
-      </div>
+      <p class="receipt-note">שמרי את הדף הזה לעיון עתידי</p>
+      <button class="btn-add-contact" onclick="addToContacts()">📲 הוסיפי לאנשי הקשר</button>
     </div>
-  </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section>
+    <h2 class="section-title" id="features-title">מה כלול בחבילה שלך:</h2>
+    <ul class="features-list" id="features-list"></ul>
+  </section>
 
   <!-- COUNTDOWN -->
-  <div class="countdown-box" id="countdown-box">
-    <h3>🔨 האתר שלך בבנייה</h3>
-    <p class="countdown-sub">כל שעה שעוברת — האתר שלך קרוב יותר ל-100% מוכן</p>
-    <div class="flip-clock">
-      <div class="flip-unit">
-        <div class="flip-digit" id="cd-h">48</div>
-        <div class="flip-label">שעות</div>
+  <section>
+    <div class="countdown-box">
+      <div class="countdown-title">האתר שלך בבנייה 🔨</div>
+      <div class="countdown-sub">כל שעה שעוברת — האתר שלך קרוב יותר ל-100% מוכן</div>
+      <div class="countdown-digits">
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-h">48</span>
+          <div class="cd-label">שעות</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-m">00</span>
+          <div class="cd-label">דקות</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <span class="cd-num" id="cd-s">00</span>
+          <div class="cd-label">שניות</div>
+        </div>
       </div>
-      <div class="flip-sep">:</div>
-      <div class="flip-unit">
-        <div class="flip-digit" id="cd-m">00</div>
-        <div class="flip-label">דקות</div>
+      <div class="progress-track">
+        <div class="progress-bar" id="cd-progress" style="width:0%"></div>
       </div>
-      <div class="flip-sep">:</div>
-      <div class="flip-unit">
-        <div class="flip-digit" id="cd-s">00</div>
-        <div class="flip-label">שניות</div>
-      </div>
+      <div class="progress-label" id="cd-pct">0% הושלם</div>
     </div>
-    <div class="progress-wrap">
-      <div class="progress-bar" id="progress-bar" style="width:0%"></div>
-    </div>
-    <p class="progress-text" id="progress-text">0% הושלם</p>
-  </div>
-
-  <!-- FEATURES -->
-  <div class="features-box" id="features-box">
-    <h3 id="features-title">מה כלול בחבילה שלך:</h3>
-    <div id="features-list"></div>
-  </div>
-
-  <!-- UPSELL -->
-  <div id="upsell-section"></div>
+  </section>
 
   <!-- TIMELINE -->
-  <div class="timeline">
-    <h2>מה קורה עכשיו? 📍</h2>
-    <div class="timeline-track">
-
+  <section>
+    <h2 class="section-title">🗺️ מה קורה עכשיו?</h2>
+    <div class="timeline">
       <div class="tl-step">
-        <div class="tl-icon done">✅</div>
-        <div class="tl-body">
+        <div class="tl-left">
+          <div class="tl-icon-wrap done">✅</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time">הושלם</div>
           <h4>שלחת פרטים</h4>
-          <p>הרשמה הושלמה בהצלחה — הפרטים שלך אצלנו</p>
-          <span class="tl-badge done">הושלם ✓</span>
+          <p>קיבלנו את כל מה שצריך כדי להתחיל</p>
         </div>
       </div>
-
       <div class="tl-step">
-        <div class="tl-icon active">📞</div>
-        <div class="tl-body">
-          <h4>נציגה יוצרת קשר תוך 24 שעות</h4>
-          <p>נשמע על העסק שלך, נתאים את הכיוון, ונתחיל לבנות</p>
-          <span class="tl-badge active">⏳ בתהליך — עד 24 שעות</span>
+        <div class="tl-left">
+          <div class="tl-icon-wrap active">🔄</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time">תוך 24 שעות</div>
+          <h4>נציגה תיצור קשר</h4>
+          <p>נדבר על הסגנון, הצבעים, והתוכן שאת רוצה</p>
         </div>
       </div>
-
       <div class="tl-step">
-        <div class="tl-icon pending">📋</div>
-        <div class="tl-body">
+        <div class="tl-left">
+          <div class="tl-icon-wrap pending">⏳</div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time">שלב 3</div>
           <h4>שאלון עיצוב קצר</h4>
-          <p>צבעים, לוגו, תמונות — 5 דקות וזהו. בנוחות מהנייד</p>
-          <span class="tl-badge pending">ממתין</span>
+          <p>5 דקות בלבד — כדי שהאתר ייראה בדיוק כמוך</p>
         </div>
       </div>
-
       <div class="tl-step">
-        <div class="tl-icon pending">🚀</div>
-        <div class="tl-body">
-          <h4>האתר שלך עולה לאוויר!</h4>
-          <p>תקבלי לינק לאישור לפני ההשקה. ה-48 שעות מתחילות עכשיו</p>
-          <span class="tl-badge pending">עוד ~48 שעות</span>
+        <div class="tl-left">
+          <div class="tl-icon-wrap pending">🚀</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-time">תוך 48 שעות</div>
+          <h4>האתר עולה לאוויר</h4>
+          <p>האתר שלך חי, מחובר, ומוכן לקבל לקוחות</p>
         </div>
       </div>
-
     </div>
-  </div>
+  </section>
 
-  <!-- REFER -->
-  <div class="refer-box">
-    <h3>💜 שתפי חברה — ותרוויחי חודש חינם!</h3>
-    <p>הכירי חברה שצריכה אתר לעסק שלה?<br>שלחי לה את הקישור — ואם היא תצטרף, תקבלי <strong style="color:#c39bd3">חודש שלם חינם</strong> 🎁</p>
-    <a class="btn-whatsapp" id="btn-whatsapp-share" href="#" onclick="shareWhatsApp(event)">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.998-1.417A9.952 9.952 0 0011.999 22C17.522 22 22 17.523 22 12S17.522 2 11.999 2z"/></svg>
-      שלחי לחברה בוואטסאפ
-    </a>
-  </div>
+  <!-- QUESTIONNAIRE CTA -->
+  <section>
+    <div style="background: linear-gradient(135deg, #1a1520, #1e1228); border: 2px solid var(--plan-color); border-radius: 16px; padding: 28px 20px; text-align: center;">
+      <div style="font-size: 48px; margin-bottom: 12px;">📋</div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-bottom: 8px;">מלאי את שאלון העיצוב — ונתחיל לבנות!</h3>
+      <p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">5 דקות קצרות כדי שנבנה לך אתר שנראה בדיוק כמוך</p>
+      <a href="questionnaire.html" style="display: inline-block; background: var(--plan-color); color: #fff; padding: 14px 32px; border-radius: 12px; font-family: 'Heebo', sans-serif; font-size: 16px; font-weight: 700; text-decoration: none; transition: opacity 0.2s;">📋 למילוי השאלון ←</a>
+    </div>
+  </section>
 
-  <div style="text-align:center">
-    <a href="index.html" class="btn-back">← חזרה לדף הבית</a>
-  </div>
-</div>
+  <!-- UPSELL -->
+  <section id="upsell-section">
+    <!-- rendered by JS -->
+  </section>
 
-<footer>
-  <p>© 2026 BA Beauty — כל הזכויות שמורות</p>
-  <p style="margin-top:8px">שאלות? <a href="https://wa.me/972501234567" style="color:#c4837a">וואטסאפ</a></p>
+  <!-- SHARE / REFER -->
+  <section>
+    <div class="share-box">
+      <h3>🎁 שתפי — ותקבלי חודש חינם!</h3>
+      <p>יש לך חברה שצריכה אתר לעסק שלה? שלחי לה את הלינק — ואנחנו נזכה אותך בחודש מנוי במתנה 🤍</p>
+      <a id="wa-share-btn" href="#" class="btn-whatsapp" target="_blank" rel="noopener">
+        <span>💬</span> שתפי בוואטסאפ
+      </a>
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer style="background: #111; border-top: 1px solid #2a2a2a; padding: 24px 20px; text-align: center; margin-top: 40px;">
+  <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 12px;">
+    <a href="index.html" style="color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s;">🏠 דף הבית</a>
+    <a href="terms.html" style="color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s;">📄 תנאי שימוש</a>
+    <a href="privacy.html" style="color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s;">🔒 מדיניות פרטיות</a>
+  </div>
+  <p style="color: #555; font-size: 12px;">© 2026 BA Beauty. כל הזכויות שמורות.</p>
 </footer>
 
 <script>
-/* ─── DATA ───────────────────────────────────────── */
+// ─── PACKAGES ───────────────────────────────────────────────
 const PACKAGES = {
-  basic:{
-    id:'basic',name:'בסיסי',price:49,currency:'₪',period:'חודש',trialDays:7,color:'#c4837a',colorRgb:'196,131,122',
+  basic: { id:'basic', name:'בסיסי', price:49, currency:'₪', period:'חודש', trialDays:7, color:'#c4837a',
     features:[
       {icon:'🌐',text:'דומיין משלך',value:'₪200/שנה'},
       {icon:'🖥',text:'אתר פרימיום מותאם אישית',value:'₪3,000'},
@@ -332,17 +625,9 @@ const PACKAGES = {
       {icon:'💬',text:'כפתור וואטסאפ ישיר',value:'כלול'},
       {icon:'⚡️',text:'אחסון מהיר ומאובטח',value:'כלול'},
       {icon:'🚀',text:'מוכן תוך 48 שעות',value:'בלעדי'}
-    ],
-    upsellTarget:'pro',upsellDiff:38,upsellItems:[
-      {label:'עדכוני תוכן שוטפים',val:'₪1,200'},
-      {label:'3 סבבי עיצוב בשנה',val:'₪900'},
-      {label:'כפתור הזמנת תורים',val:'₪600'},
-      {label:'דף ביקורות גוגל',val:'₪300'},
-      {label:'תמיכה עדיפות וואטסאפ',val:'₪500'}
     ]
   },
-  pro:{
-    id:'pro',name:'PRO',price:87,currency:'₪',period:'חודש',trialDays:7,color:'#c9a84c',colorRgb:'201,168,76',
+  pro: { id:'pro', name:'PRO', price:87, currency:'₪', period:'חודש', trialDays:7, color:'#c9a84c',
     features:[
       {icon:'✨',text:'הכל שב-BASIC',value:'כלול'},
       {icon:'🛠',text:'עדכוני תוכן שוטפים',value:'תוך 48 שעות'},
@@ -351,18 +636,9 @@ const PACKAGES = {
       {icon:'⭐️',text:'דף ביקורות גוגל',value:'אוטומטי'},
       {icon:'⚡️',text:'תמיכה עדיפות וואטסאפ',value:'תוך 24 שעות'},
       {icon:'🔒',text:'גיבויים שוטפים',value:'הגנה מלאה'}
-    ],
-    upsellTarget:'growth',upsellDiff:110,upsellItems:[
-      {label:'חיבור Fresha / Booksy',val:'₪2,000'},
-      {label:'דף "על העסק" עם סיפור מותג',val:'₪800'},
-      {label:'גלריה אינסטגרם אוטומטית',val:'₪600'},
-      {label:'תמיכה פרימיום 4 שעות',val:'₪1,200'},
-      {label:'דוח ביצועים חודשי',val:'₪500'},
-      {label:'ריענון עיצובי שנתי',val:'₪1,500'}
     ]
   },
-  growth:{
-    id:'growth',name:'GROWTH',price:197,currency:'₪',period:'חודש',trialDays:7,color:'#4caf7d',colorRgb:'76,175,125',
+  growth: { id:'growth', name:'GROWTH', price:197, currency:'₪', period:'חודש', trialDays:7, color:'#4caf7d',
     features:[
       {icon:'✨',text:'הכל שב-PRO',value:'כלול'},
       {icon:'📲',text:'חיבור מערכת תורים',value:'Fresha / Booksy'},
@@ -371,204 +647,206 @@ const PACKAGES = {
       {icon:'💬',text:'וואטסאפ עדיפות פרימיום',value:'תגובה תוך 4 שעות'},
       {icon:'📊',text:'דוח ביצועים חודשי',value:'כמה ביקורים, מאיפה'},
       {icon:'🎨',text:'ריענון עיצובי שנתי',value:'אתר תמיד טרי'}
-    ],
-    upsellTarget:null
+    ]
   }
 };
+function formatPrice(pkg){ return `${pkg.price}${pkg.currency}/${pkg.period}`; }
 
-/* ─── SESSION / URL PARAMS ───────────────────────── */
+// ─── URL PARAMS & SESSION ────────────────────────────────────
 const urlParams = new URLSearchParams(window.location.search);
 const planFromUrl = urlParams.get('plan');
 const nameFromUrl = urlParams.get('name');
 if(planFromUrl) sessionStorage.setItem('bs_plan', planFromUrl);
 if(nameFromUrl) sessionStorage.setItem('bs_name', nameFromUrl);
-
+// Guard
 if(sessionStorage.getItem('bs_payment_complete') !== 'true' && !planFromUrl){
   window.location.href = 'thank-you.html';
 }
+// Set countdown start if missing
+if(!sessionStorage.getItem('bs_countdown_start')){
+  sessionStorage.setItem('bs_countdown_start', Date.now().toString());
+}
 
-const name     = sessionStorage.getItem('bs_name') || 'את';
+const name     = sessionStorage.getItem('bs_name')     || 'את';
 const business = sessionStorage.getItem('bs_business') || 'העסק שלך';
-const plan     = sessionStorage.getItem('bs_plan') || 'basic';
-const pkg      = PACKAGES[plan] || PACKAGES.basic;
+const planId   = (sessionStorage.getItem('bs_plan')    || 'basic').toLowerCase();
+const pkg      = PACKAGES[planId] || PACKAGES.basic;
 
-/* ─── CONFETTI ────────────────────────────────────── */
-(function launchConfetti(){
-  const canvas = document.getElementById('confetti-canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const colors = ['#c4837a','#c9a84c','#4caf7d','#fff','#f0c0b0','#9b59b6','#3498db','#e74c3c'];
-  const pieces = [];
-  const COUNT = 140;
-  for(let i=0;i<COUNT;i++){
-    pieces.push({
-      x: Math.random()*canvas.width,
-      y: Math.random()*-canvas.height,
-      w: 6+Math.random()*10,
-      h: 4+Math.random()*6,
-      r: Math.random()*Math.PI*2,
-      dr: (Math.random()-.5)*.2,
-      dx: (Math.random()-.5)*3,
-      dy: 2+Math.random()*4,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      circle: Math.random()>.5
-    });
+// ─── APPLY PLAN COLOR ────────────────────────────────────────
+document.documentElement.style.setProperty('--plan-color', pkg.color);
+
+// ─── PLAN BADGE ──────────────────────────────────────────────
+const badge = document.getElementById('plan-badge');
+badge.className = 'plan-badge ' + planId;
+const badgeTexts = {
+  basic:  '✓ חבילה בסיסית — 49₪/חודש',
+  pro:    '👑 חבילת PRO — 87₪/חודש',
+  growth: '🚀 חבילת GROWTH — 197₪/חודש'
+};
+badge.textContent = badgeTexts[planId] || badgeTexts.basic;
+
+// ─── HERO ────────────────────────────────────────────────────
+document.getElementById('hero-title').innerHTML =
+  `ברוכה הבאה למשפחה, <span>${name}</span>! 🎊`;
+document.getElementById('hero-sub').textContent =
+  `${business} — הצטרפת רשמית לחבילת ${pkg.name}`;
+
+// ─── RECEIPT ─────────────────────────────────────────────────
+const confNum = Math.floor(100000 + Math.random() * 900000);
+document.getElementById('conf-num').textContent = `מס׳ אישור: #${confNum}`;
+document.getElementById('r-plan').textContent     = `חבילת ${pkg.name}`;
+document.getElementById('r-business').textContent = business;
+document.getElementById('r-monthly').textContent  = formatPrice(pkg);
+const trialEnd = new Date();
+trialEnd.setDate(trialEnd.getDate() + 7);
+document.getElementById('r-trial-end').textContent =
+  trialEnd.toLocaleDateString('he-IL', {day:'numeric', month:'long', year:'numeric'});
+
+// ─── FEATURES LIST ───────────────────────────────────────────
+document.getElementById('features-title').textContent = `מה כלול בחבילת ${pkg.name} שלך:`;
+const fl = document.getElementById('features-list');
+pkg.features.forEach(f => {
+  const li = document.createElement('li');
+  li.innerHTML = `<span class="fi">${f.icon}</span><span class="ft">${f.text}</span><span class="fv">${f.value}</span>`;
+  fl.appendChild(li);
+});
+
+// ─── ADD TO CONTACTS ─────────────────────────────────────────
+function addToContacts(){
+  const vcard =
+    'BEGIN:VCARD\nVERSION:3.0\nFN:BA Beauty\nTEL;TYPE=CELL:+972000000000\nEMAIL:hello@ba-beauty.co.il\nURL:https://ba-beauty.co.il\nEND:VCARD';
+  const blob = new Blob([vcard], { type:'text/vcard' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'BA-Beauty.vcf'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ─── COUNTDOWN ───────────────────────────────────────────────
+const TOTAL_MS = 48 * 60 * 60 * 1000;
+const startTs  = parseInt(sessionStorage.getItem('bs_countdown_start') || Date.now());
+
+function updateCountdown(){
+  const elapsed = Date.now() - startTs;
+  const remaining = Math.max(0, TOTAL_MS - elapsed);
+  const pct = Math.min(100, (elapsed / TOTAL_MS) * 100);
+
+  const h = Math.floor(remaining / 3600000);
+  const m = Math.floor((remaining % 3600000) / 60000);
+  const s = Math.floor((remaining % 60000) / 1000);
+
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  document.getElementById('cd-progress').style.width = pct.toFixed(1) + '%';
+  document.getElementById('cd-pct').textContent = pct.toFixed(0) + '% הושלם';
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ─── UPSELL ──────────────────────────────────────────────────
+function upgradePlan(newPlan){
+  sessionStorage.setItem('bs_plan', newPlan);
+  window.location.reload();
+}
+
+function renderUpsell(){
+  const sec = document.getElementById('upsell-section');
+  if(planId === 'basic'){
+    const upkg = PACKAGES.pro;
+    sec.innerHTML = `
+      <h2 class="section-title" style="color:#c9a84c">⚡️ הצעה אחרונה לפני שנתחיל לבנות</h2>
+      <div class="upsell-card" style="border-color:#c9a84c">
+        <span class="upsell-scarcity">⏰ תפוג ברגע שנתחיל לבנות!</span>
+        <div class="upsell-title" style="color:#c9a84c">שדרגי ל-PRO — ${upkg.price}${upkg.currency}/${upkg.period}</div>
+        <div class="upsell-sub">קבלי עוד כלים שיגדילו את העסק שלך:</div>
+        <ul class="upsell-features">
+          ${upkg.features.map(f=>`<li><span>${f.icon}</span><span>${f.text}</span><span style="margin-right:auto;color:#c9a84c;font-weight:600;font-size:12px">${f.value}</span></li>`).join('')}
+        </ul>
+        <button class="btn-upgrade" style="background:#c9a84c;color:#1a1200" onclick="upgradePlan('pro')">
+          👑 כן! שדרגי אותי ל-PRO עכשיו
+        </button>
+      </div>`;
+  } else if(planId === 'pro'){
+    const upkg = PACKAGES.growth;
+    sec.innerHTML = `
+      <h2 class="section-title" style="color:#4caf7d">🚀 הצעה אחרונה לפני שנתחיל לבנות</h2>
+      <div class="upsell-card" style="border-color:#4caf7d">
+        <span class="upsell-scarcity">⏰ תפוג ברגע שנתחיל לבנות!</span>
+        <div class="upsell-title" style="color:#4caf7d">שדרגי ל-GROWTH — ${upkg.price}${upkg.currency}/${upkg.period}</div>
+        <div class="upsell-sub">הכל שב-PRO + כלים שמביאים לקוחות על אוטומט:</div>
+        <ul class="upsell-features">
+          ${upkg.features.map(f=>`<li><span>${f.icon}</span><span>${f.text}</span><span style="margin-right:auto;color:#4caf7d;font-weight:600;font-size:12px">${f.value}</span></li>`).join('')}
+        </ul>
+        <button class="btn-upgrade" style="background:#4caf7d;color:#001a0a" onclick="upgradePlan('growth')">
+          🚀 כן! שדרגי אותי ל-GROWTH עכשיו
+        </button>
+      </div>`;
+  } else {
+    sec.innerHTML = `
+      <div class="upsell-celebrate">
+        <div class="cel-emoji">🎉</div>
+        <h3>בחרת את החבילה המלאה!</h3>
+        <p>יש לך הכל. אנחנו נביא את האתר הכי מרשים שראית — ומהר.</p>
+      </div>`;
   }
-  let start = null;
-  const DURATION = 4000;
-  function draw(ts){
-    if(!start) start = ts;
-    const elapsed = ts - start;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const alpha = Math.max(0, 1 - (elapsed - 2500)/1500);
-    ctx.globalAlpha = alpha;
-    pieces.forEach(p=>{
-      p.y += p.dy;
-      p.x += p.dx;
-      p.r += p.dr;
+}
+renderUpsell();
+
+// ─── WHATSAPP SHARE ──────────────────────────────────────────
+const shareMsg = encodeURIComponent(
+  `היי! 🌸 הצטרפתי לשירות הבניית אתרים של BA Beauty ואני ממליצה בחום!\n` +
+  `הן בונות אתר מקצועי תוך 48 שעות בלבד 🚀\n` +
+  `קבלי 7 ימים חינם בלי כרטיס אשראי ☺️\n` +
+  `https://ba-beauty.co.il/funnel`
+);
+document.getElementById('wa-share-btn').href = `https://wa.me/?text=${shareMsg}`;
+
+// ─── CONFETTI ─────────────────────────────────────────────────
+(function confetti(){
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx    = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', ()=>{
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const colors = ['#c4837a','#c9a84c','#4caf7d','#f5c2c2','#fff','#e8c87a','#a8e6cf'];
+  const pieces = Array.from({length:100}, ()=>({
+    x:   Math.random() * canvas.width,
+    y:   Math.random() * canvas.height - canvas.height,
+    w:   6 + Math.random() * 8,
+    h:   10 + Math.random() * 8,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    r:   Math.random() * Math.PI * 2,
+    dr:  (Math.random() - 0.5) * 0.15,
+    dy:  3 + Math.random() * 4,
+    dx:  (Math.random() - 0.5) * 2
+  }));
+
+  const endTime = Date.now() + 4000;
+
+  function draw(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate(p.r);
       ctx.fillStyle = p.color;
-      if(p.circle){ctx.beginPath();ctx.arc(0,0,p.w/2,0,Math.PI*2);ctx.fill();}
-      else{ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);}
+      ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
       ctx.restore();
+      p.x += p.dx;
+      p.y += p.dy;
+      p.r += p.dr;
+      if(p.y > canvas.height + 20){ p.y = -20; p.x = Math.random() * canvas.width; }
     });
-    if(elapsed < DURATION) requestAnimationFrame(draw);
-    else{ctx.clearRect(0,0,canvas.width,canvas.height);}
+    if(Date.now() < endTime) requestAnimationFrame(draw);
+    else { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.style.display='none'; }
   }
-  requestAnimationFrame(draw);
-  window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+  draw();
 })();
-
-/* ─── PLAN BADGE ─────────────────────────────────── */
-const badgeTexts = {basic:'✓ חבילה בסיסית — 49₪/חודש', pro:'👑 חבילת PRO — 87₪/חודש', growth:'🚀 חבילת GROWTH — 197₪/חודש'};
-document.getElementById('plan-badge-container').innerHTML =
-  `<div class="plan-badge ${plan}">${badgeTexts[plan]}</div>`;
-
-/* ─── HERO ───────────────────────────────────────── */
-document.getElementById('hero-title').innerHTML = `ברוכה הבאה למשפחה, ${name}! 🎊`;
-document.getElementById('hero-sub').textContent = `${business} — הצטרפת רשמית לחבילת ${pkg.name}`;
-
-/* ─── RECEIPT ────────────────────────────────────── */
-const confNum = String(100000 + Math.floor(Math.random()*900000));
-document.getElementById('r-confnum').textContent = `מספר אישור: #${confNum}`;
-document.getElementById('r-plan').textContent = pkg.name;
-document.getElementById('r-business').textContent = business;
-document.getElementById('r-monthly').textContent = `${pkg.price}${pkg.currency}/${pkg.period}`;
-const trialEnd = new Date(); trialEnd.setDate(trialEnd.getDate()+7);
-document.getElementById('r-trial-end').textContent = trialEnd.toLocaleDateString('he-IL');
-
-/* ─── FEATURES ───────────────────────────────────── */
-document.getElementById('features-title').textContent = `מה כלול בחבילת ${pkg.name} שלך:`;
-document.getElementById('features-list').innerHTML = pkg.features.map(f=>`
-  <div class="feature-item">
-    <span class="feature-icon">${f.icon}</span>
-    <span class="feature-text">${f.text}</span>
-    <span class="feature-value">${f.value}</span>
-  </div>`).join('');
-
-/* ─── COUNTDOWN (flip-clock style) ──────────────────*/
-(function startCountdown(){
-  const KEY = 'bs_countdown_start';
-  if(!sessionStorage.getItem(KEY)) sessionStorage.setItem(KEY, Date.now());
-  const startTs = parseInt(sessionStorage.getItem(KEY));
-  const TOTAL = 48*3600*1000;
-  const target = startTs + TOTAL;
-
-  // Apply plan color
-  const box = document.getElementById('countdown-box');
-  box.style.background = `linear-gradient(135deg, rgba(${pkg.colorRgb},.08), rgba(${pkg.colorRgb},.18))`;
-  box.style.borderColor = pkg.color + '88';
-  document.getElementById('countdown-box').querySelector('h3').style.color = pkg.color;
-  document.querySelectorAll('.flip-digit').forEach(d=>d.style.color = pkg.color);
-  document.getElementById('progress-bar').style.background = `linear-gradient(90deg, ${pkg.color}88, ${pkg.color})`;
-
-  function tick(){
-    const now = Date.now();
-    const rem = Math.max(0, target - now);
-    const elapsed = now - startTs;
-    const pct = Math.min(100, (elapsed/TOTAL*100)).toFixed(1);
-
-    const h = Math.floor(rem/3600000);
-    const m = Math.floor((rem%3600000)/60000);
-    const s = Math.floor((rem%60000)/1000);
-
-    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
-    document.getElementById('progress-bar').style.width = pct + '%';
-    document.getElementById('progress-text').textContent = `${pct}% הושלם`;
-
-    if(rem > 0) setTimeout(tick, 1000);
-  }
-  tick();
-})();
-
-/* ─── UPSELL ─────────────────────────────────────── */
-const upsell = document.getElementById('upsell-section');
-if(plan === 'basic'){
-  const up = pkg.upsellItems;
-  const total = '₪3,500';
-  upsell.innerHTML = `
-    <div class="upsell-card pro-upsell">
-      <p class="upsell-title gold">👑 שדרגי ל-PRO — לפני שנתחיל לבנות</p>
-      <p class="scarcity-note">⚠️ הצעה זו תפוג ברגע שנתחיל לבנות את האתר שלך</p>
-      <p style="color:#aaa;font-size:14px">הוסיפי רק 38₪/חודש וקבלי ערך עצום:</p>
-      <div class="value-stack">
-        <div class="value-stack-title">ערך כולל שמקבלים</div>
-        ${up.map(i=>`<div class="value-stack-item"><span>${i.label}</span><span style="color:#c9a84c;font-weight:700">${i.val}</span></div>`).join('')}
-        <div class="value-stack-total"><span>ערך שנתי כולל</span><span style="color:#c9a84c">${total}+</span></div>
-      </div>
-      <button class="upsell-btn gold" onclick="upgradePlan('pro')">✨ שדרגי ל-PRO — 87₪/חודש בלבד ←</button>
-    </div>`;
-} else if(plan === 'pro'){
-  const up = pkg.upsellItems;
-  const total = '₪6,600';
-  upsell.innerHTML = `
-    <div class="upsell-card growth-upsell">
-      <p class="upsell-title green">🚀 שדרגי ל-GROWTH — האתר שלך יביא לקוחות אקטיבית</p>
-      <p class="scarcity-note">⚠️ הצעה זו תפוג ברגע שנתחיל לבנות את האתר שלך</p>
-      <p style="color:#aaa;font-size:14px">הוסיפי רק 110₪/חודש וקבלי:</p>
-      <div class="value-stack">
-        <div class="value-stack-title">ערך כולל שמקבלים</div>
-        ${up.map(i=>`<div class="value-stack-item"><span>${i.label}</span><span style="color:#4caf7d;font-weight:700">${i.val}</span></div>`).join('')}
-        <div class="value-stack-total"><span>ערך שנתי כולל</span><span style="color:#4caf7d">${total}+</span></div>
-      </div>
-      <button class="upsell-btn green" onclick="upgradePlan('growth')">🚀 שדרגי ל-GROWTH — 197₪/חודש ←</button>
-    </div>`;
-} else {
-  upsell.innerHTML = `
-    <div class="upsell-card celebration" style="text-align:center;padding:32px">
-      <div style="font-size:54px;margin-bottom:16px">👑</div>
-      <p style="color:#4caf7d;font-size:22px;font-weight:700;margin-bottom:8px">בחרת את החבילה המלאה ביותר שלנו!</p>
-      <p style="color:#aaa;font-size:15px">האתר שלך הולך להיות מושלם — ממש ברמה הגבוהה ביותר שיש.</p>
-    </div>`;
-}
-
-function upgradePlan(newPlan){
-  sessionStorage.setItem('bs_plan', newPlan);
-  location.reload();
-}
-
-/* ─── ADD CONTACT (vCard) ────────────────────────── */
-function addContact(e){
-  e.preventDefault();
-  const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:BA Beauty\nTEL;TYPE=CELL:+972501234567\nEMAIL:hello@babeauty.co.il\nURL:https://babeauty.co.il\nEND:VCARD`;
-  const blob = new Blob([vcard],{type:'text/vcard'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'BA-Beauty.vcf';
-  a.click();
-}
-
-/* ─── WHATSAPP SHARE ─────────────────────────────── */
-function shareWhatsApp(e){
-  e.preventDefault();
-  const msg = encodeURIComponent(`היי! 🌸 הרגע נרשמתי ל-BA Beauty — בונים לי אתר לעסק תוך 48 שעות, מחיר ממש שווה ויש גם ניסיון חינם! אם גם את צריכה אתר לעסק, הנה הקישור: https://babeauty.co.il`);
-  window.open(`https://wa.me/?text=${msg}`, '_blank');
-}
 </script>
 </body>
 </html>

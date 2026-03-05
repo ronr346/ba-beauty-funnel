@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שאלון עיצוב — BeautySite</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #181818;
+    --surface2: #222222;
+    --border: #2a2a2a;
+    --mauve: #c4837a;
+    --mauve-light: #d4998f;
+    --mauve-dark: #a06b63;
+    --text: #f0ece8;
+    --text-muted: #888;
+    --green: #6fcf97;
+    --radius: 14px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    min-height: 100vh;
+    padding: 0;
+    direction: rtl;
+  }
+
+  /* ─── Header ─── */
+  .header {
+    background: linear-gradient(135deg, #1a1015 0%, #120d10 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 20px 0;
+    text-align: center;
+  }
+
+  .header-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--mauve);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.8;
+  }
+
+  .header h1 {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  /* ─── Step Indicators ─── */
+  .step-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 20px 0;
+  }
+
+  .step-dot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: default;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+
+  .step-dot.visited { opacity: 0.7; cursor: pointer; }
+  .step-dot.active { opacity: 1; }
+
+  .step-dot .dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .step-dot.active .dot {
+    background: var(--mauve);
+    border-color: var(--mauve);
+    color: #fff;
+  }
+
+  .step-dot.visited .dot {
+    background: var(--mauve-dark);
+    border-color: var(--mauve-dark);
+    color: #fff;
+  }
+
+  .step-dot .dot-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: none;
+  }
+
+  @media (min-width: 500px) {
+    .step-dot .dot-label { display: block; }
+  }
+
+  /* ─── Progress Bar ─── */
+  .progress-wrap {
+    padding: 16px 20px 0;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--mauve-dark), var(--mauve-light));
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+
+  /* ─── Main Content ─── */
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  /* ─── Step ─── */
+  .step {
+    display: none;
+    animation: fadeSlide 0.4s ease forwards;
+  }
+
+  .step.active { display: block; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    color: var(--mauve-light);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── Form Elements ─── */
+  .field {
+    margin-bottom: 24px;
+  }
+
+  .field label, .field-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .field label span.required {
+    color: var(--mauve);
+    margin-right: 4px;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    direction: rtl;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--mauve);
+    box-shadow: 0 0 0 3px rgba(196,131,122,0.15);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  textarea { resize: vertical; min-height: 100px; }
+
+  select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 14px center;
+  }
+
+  /* ─── Radio / Checkbox ─── */
+  .radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .radio-option, .checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .radio-option:hover, .checkbox-option:hover {
+    border-color: var(--mauve-dark);
+    background: #1e1618;
+  }
+
+  .radio-option input[type="radio"],
+  .checkbox-option input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--mauve);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .radio-option.selected, .checkbox-option.selected {
+    border-color: var(--mauve);
+    background: #1e1618;
+  }
+
+  /* ─── Style Cards ─── */
+  .style-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .style-card {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .style-card:hover { border-color: var(--mauve-dark); }
+  .style-card.selected { border-color: var(--mauve); background: #1e1618; }
+
+  .style-card .swatch {
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .style-card .card-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .style-card .card-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .style-card input[type="radio"] { display: none; }
+
+  /* ─── Color Pickers ─── */
+  .color-pickers {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .color-picker-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .color-picker-wrap label {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  input[type="color"] {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    padding: 2px;
+    cursor: pointer;
+    background: none;
+    transition: border-color 0.2s;
+  }
+
+  input[type="color"]:hover { border-color: var(--mauve); }
+
+  /* ─── Char Counter ─── */
+  .char-counter {
+    text-align: left;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ─── Domain Input (conditional) ─── */
+  #domain-input-wrap {
+    margin-top: 12px;
+    display: none;
+  }
+
+  /* ─── Navigation Buttons ─── */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 36px;
+    gap: 12px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--mauve-dark), var(--mauve-light));
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(196,131,122,0.4);
+  }
+
+  .btn-secondary {
+    background: var(--surface2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+    padding: 18px;
+    font-size: 17px;
+    background: linear-gradient(135deg, var(--mauve-dark), var(--mauve-light));
+    color: #fff;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(196,131,122,0.5);
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* ─── Error Message ─── */
+  .error-msg {
+    color: #e07070;
+    font-size: 13px;
+    margin-top: 8px;
+    display: none;
+  }
+
+  .field.has-error input,
+  .field.has-error textarea,
+  .field.has-error select {
+    border-color: #e07070;
+  }
+
+  /* ─── Success Screen ─── */
+  #success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeSlide 0.5s ease forwards;
+  }
+
+  .success-icon {
+    font-size: 72px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--mauve-light);
+    margin-bottom: 16px;
+  }
+
+  .success-sub {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-whatsapp:hover {
+    background: #1ebe5c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+  }
+
+  /* ─── Validation Error Banner ─── */
+  .error-banner {
+    background: rgba(224,112,112,0.12);
+    border: 1px solid rgba(224,112,112,0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: #e07070;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  /* ─── Checkbox Grid ─── */
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media (max-width: 400px) {
+    .checkbox-grid { grid-template-columns: 1fr; }
+    .style-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── Header ─── -->
+<div class="header">
+  <div class="header-logo">✦ BeautySite ✦</div>
+  <h1>שאלון עיצוב — 5 דקות ואנחנו מתחילים לבנות 🎨</h1>
+  <div class="header-sub">ענו על השאלות הקצרות האלה ונבנה לכם אתר מדויק לעסק</div>
+
+  <div class="step-indicators">
+    <div class="step-dot active" data-step="1" onclick="goToStep(1)">
+      <div class="dot">1</div>
+      <span class="dot-label">על העסק</span>
+    </div>
+    <div class="step-dot" data-step="2" onclick="goToStep(2)">
+      <div class="dot">2</div>
+      <span class="dot-label">עיצוב</span>
+    </div>
+    <div class="step-dot" data-step="3" onclick="goToStep(3)">
+      <div class="dot">3</div>
+      <span class="dot-label">תוכן</span>
+    </div>
+    <div class="step-dot" data-step="4" onclick="goToStep(4)">
+      <div class="dot">4</div>
+      <span class="dot-label">טכני</span>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="step-label">שלב 1 מתוך 4</span>
+      <span id="step-pct">25%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:25%"></div></div>
+  </div>
+</div>
+
+<!-- ─── Container ─── -->
+<div class="container">
+
+  <div id="error-banner" class="error-banner">נא למלא את כל השדות הנדרשים לפני המשך</div>
+
+  <!-- ══ STEP 1 ══ -->
+  <div class="step active" id="step-1">
+    <h2 class="step-title">על העסק שלך 💼</h2>
+
+    <div class="field" id="field-business-name">
+      <label>שם העסק <span class="required">*</span></label>
+      <input type="text" id="business-name" placeholder="למשל: Studio Nails & Beauty" />
+      <div class="error-msg">שדה זה הוא חובה</div>
+    </div>
+
+    <div class="field" id="field-business-type">
+      <label>סוג העסק <span class="required">*</span></label>
+      <div class="radio-group" id="business-type-group">
+        <label class="radio-option"><input type="radio" name="business-type" value="מספרה/סלון שיער"> מספרה / סלון שיער</label>
+        <label class="radio-option"><input type="radio" name="business-type" value="ציפורניים"> ציפורניים</label>
+        <label class="radio-option"><input type="radio" name="business-type" value="אסתטיקה"> אסתטיקה</label>
+        <label class="radio-option"><input type="radio" name="business-type" value="עיסוי"> עיסוי</label>
+        <label class="radio-option"><input type="radio" name="business-type" value="קוסמטיקה"> קוסמטיקה</label>
+        <label class="radio-option"><input type="radio" name="business-type" value="אחר"> אחר</label>
+      </div>
+      <div class="error-msg">נא לבחור סוג עסק</div>
+    </div>
+
+    <div class="field" id="field-city">
+      <label>עיר <span class="required">*</span></label>
+      <input type="text" id="city" placeholder="תל אביב" />
+      <div class="error-msg">שדה זה הוא חובה</div>
+    </div>
+
+    <div class="field" id="field-phone">
+      <label>מספר טלפון לוואטסאפ <span class="required">*</span></label>
+      <input type="tel" id="phone" placeholder="050-0000000" />
+      <div class="error-msg">שדה זה הוא חובה</div>
+    </div>
+
+    <div class="nav-buttons">
+      <div></div>
+      <button class="btn btn-primary" onclick="nextStep(1)">הבא ←</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2 ══ -->
+  <div class="step" id="step-2">
+    <h2 class="step-title">עיצוב ומראה 🎨</h2>
+
+    <div class="field">
+      <div class="field-label">איזה סגנון אתר את רוצה? <span style="color:var(--mauve)">*</span></div>
+      <div class="style-cards" id="style-cards">
+        <div class="style-card" data-value="מינימליסטי ונקי" onclick="selectStyle(this)">
+          <input type="radio" name="style" value="מינימליסטי ונקי">
+          <div class="swatch" style="background: linear-gradient(135deg, #f5f0eb, #e8e0d8)"></div>
+          <div class="card-name">מינימליסטי ונקי</div>
+          <div class="card-desc">לבן / קרם</div>
+        </div>
+        <div class="style-card" data-value="כהה ולוקשרי" onclick="selectStyle(this)">
+          <input type="radio" name="style" value="כהה ולוקשרי">
+          <div class="swatch" style="background: linear-gradient(135deg, #1a1a1a, #c9a84c)"></div>
+          <div class="card-name">כהה ולוקשרי</div>
+          <div class="card-desc">כהה / זהב</div>
+        </div>
+        <div class="style-card" data-value="צבעוני ועליז" onclick="selectStyle(this)">
+          <input type="radio" name="style" value="צבעוני ועליז">
+          <div class="swatch" style="background: linear-gradient(135deg, #ff6eb4, #a855f7)"></div>
+          <div class="card-name">צבעוני ועליז</div>
+          <div class="card-desc">ורוד / סגול</div>
+        </div>
+        <div class="style-card" data-value="טבעי ואורגני" onclick="selectStyle(this)">
+          <input type="radio" name="style" value="טבעי ואורגני">
+          <div class="swatch" style="background: linear-gradient(135deg, #4a7c59, #d4b896)"></div>
+          <div class="card-name">טבעי ואורגני</div>
+          <div class="card-desc">ירוק / בז'</div>
+        </div>
+      </div>
+      <div class="error-msg" id="style-error">נא לבחור סגנון</div>
+    </div>
+
+    <div class="field" id="field-logo">
+      <label>יש לך לוגו? <span class="required">*</span></label>
+      <div class="radio-group" id="logo-group">
+        <label class="radio-option"><input type="radio" name="has-logo" value="כן"> כן</label>
+        <label class="radio-option"><input type="radio" name="has-logo" value="לא"> לא, לא נורא — נכין</label>
+      </div>
+      <div class="error-msg">נא לבחור אפשרות</div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">מה הצבעים של העסק שלך?</div>
+      <div class="color-pickers">
+        <div class="color-picker-wrap">
+          <label>צבע ראשי</label>
+          <input type="color" id="color1" value="#c4837a">
+        </div>
+        <div class="color-picker-wrap">
+          <label>צבע משני</label>
+          <input type="color" id="color2" value="#0d0d0d">
+        </div>
+      </div>
+    </div>
+
+    <div class="field" id="field-photos">
+      <label>יש תמונות שתרצי להשתמש? <span class="required">*</span></label>
+      <div class="radio-group" id="photos-group">
+        <label class="radio-option"><input type="radio" name="has-photos" value="כן אעלה"> כן אעלה</label>
+        <label class="radio-option"><input type="radio" name="has-photos" value="לא, השתמשו בתמונות מקצועיות"> לא, השתמשו בתמונות מקצועיות</label>
+      </div>
+      <div class="error-msg">נא לבחור אפשרות</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(2)">→ חזרה</button>
+      <button class="btn btn-primary" onclick="nextStep(2)">הבא ←</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3 ══ -->
+  <div class="step" id="step-3">
+    <h2 class="step-title">תוכן האתר ✍️</h2>
+
+    <div class="field" id="field-headline">
+      <label>מה הכותרת הראשית שתרצי? <span class="required">*</span></label>
+      <input type="text" id="headline" placeholder="מניקור מקצועי בתל אביב" />
+      <div class="error-msg">שדה זה הוא חובה</div>
+    </div>
+
+    <div class="field" id="field-desc">
+      <label>תיאור קצר של העסק</label>
+      <textarea id="business-desc" maxlength="200" placeholder="ספרי לנו קצת על העסק שלך..."></textarea>
+      <div class="char-counter"><span id="desc-count">0</span> / 200 תווים</div>
+    </div>
+
+    <div class="field" id="field-services">
+      <label>אילו שירותים תרצי להציג? <span class="required">*</span></label>
+      <div class="checkbox-grid" id="services-group">
+        <label class="checkbox-option"><input type="checkbox" name="services" value="תספורת"> תספורת</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="צביעה"> צביעה</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="טיפולי פנים"> טיפולי פנים</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="מניקור"> מניקור</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="פדיקור"> פדיקור</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="עיסוי"> עיסוי</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="הרמת ריסים"> הרמת ריסים</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="הסרת שיער"> הסרת שיער</label>
+        <label class="checkbox-option"><input type="checkbox" name="services" value="אחר"> אחר</label>
+      </div>
+      <div class="error-msg" id="services-error">נא לבחור לפחות שירות אחד</div>
+    </div>
+
+    <div class="field" id="field-pricing">
+      <label>יש לך מחירון שתרצי להציג? <span class="required">*</span></label>
+      <div class="radio-group" id="pricing-group">
+        <label class="radio-option"><input type="radio" name="has-pricing" value="כן"> כן</label>
+        <label class="radio-option"><input type="radio" name="has-pricing" value="לא"> לא</label>
+      </div>
+      <div class="error-msg">נא לבחור אפשרות</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(3)">→ חזרה</button>
+      <button class="btn btn-primary" onclick="nextStep(3)">הבא ←</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4 ══ -->
+  <div class="step" id="step-4">
+    <h2 class="step-title">פרטים טכניים ⚙️</h2>
+
+    <div class="field" id="field-domain">
+      <label>יש לך דומיין קיים? <span class="required">*</span></label>
+      <div class="radio-group" id="domain-group">
+        <label class="radio-option"><input type="radio" name="has-domain" value="כן" onchange="toggleDomainInput(this)"> כן</label>
+        <label class="radio-option"><input type="radio" name="has-domain" value="לא, רכשו לי" onchange="toggleDomainInput(this)"> לא, רכשו לי</label>
+      </div>
+      <div id="domain-input-wrap">
+        <input type="url" id="domain-url" placeholder="https://www.my-salon.co.il" style="margin-top:12px">
+      </div>
+      <div class="error-msg">נא לבחור אפשרות</div>
+    </div>
+
+    <div class="field" id="field-google-biz">
+      <label>יש לך חשבון גוגל עסקי? <span class="required">*</span></label>
+      <div class="radio-group" id="google-biz-group">
+        <label class="radio-option"><input type="radio" name="google-biz" value="כן"> כן</label>
+        <label class="radio-option"><input type="radio" name="google-biz" value="לא"> לא</label>
+        <label class="radio-option"><input type="radio" name="google-biz" value="לא יודעת מה זה"> לא יודעת מה זה</label>
+      </div>
+      <div class="error-msg">נא לבחור אפשרות</div>
+    </div>
+
+    <div class="field" id="field-years">
+      <label>כמה זמן את כבר בעסק? <span class="required">*</span></label>
+      <select id="years-in-business">
+        <option value="">— בחרי —</option>
+        <option value="פחות משנה">פחות משנה</option>
+        <option value="1-3 שנים">1-3 שנים</option>
+        <option value="3-5 שנים">3-5 שנים</option>
+        <option value="יותר מ-5 שנים">יותר מ-5 שנים</option>
+      </select>
+      <div class="error-msg">נא לבחור תקופה</div>
+    </div>
+
+    <div class="field" id="field-goal">
+      <label>מה המטרה העיקרית של האתר? <span class="required">*</span></label>
+      <div class="radio-group" id="goal-group">
+        <label class="radio-option"><input type="radio" name="goal" value="לקוחות חדשות"> לקוחות חדשות</label>
+        <label class="radio-option"><input type="radio" name="goal" value="הזמנת תורים"> הזמנת תורים</label>
+        <label class="radio-option"><input type="radio" name="goal" value="להיראות מקצועית"> להיראות מקצועית</label>
+        <label class="radio-option"><input type="radio" name="goal" value="כולם"> כולם ✨</label>
+      </div>
+      <div class="error-msg">נא לבחור מטרה</div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="prevStep(4)">→ חזרה</button>
+      <div></div>
+    </div>
+
+    <div style="margin-top: 28px;">
+      <button class="btn btn-submit" onclick="submitForm()">שלחי שאלון — נתחיל לבנות מיד 🚀</button>
+    </div>
+  </div>
+
+  <!-- ══ SUCCESS ══ -->
+  <div id="success-screen">
+    <span class="success-icon">🎉</span>
+    <h2 class="success-title">קיבלנו!</h2>
+    <p class="success-sub">נציגה שלנו תיצור קשר תוך 24 שעות עם תצוגה מקדימה ראשונית של האתר שלך</p>
+    <a href="https://wa.me/972000000000" target="_blank" class="btn-whatsapp">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      שלחי לנו גם בוואטסאפ
+    </a>
+  </div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer style="background: #111; border-top: 1px solid var(--border); padding: 24px 20px; text-align: center; margin-top: 0;">
+  <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 12px;">
+    <a href="index.html" style="color: #888; text-decoration: none; font-size: 14px;">🏠 דף הבית</a>
+    <a href="terms.html" style="color: #888; text-decoration: none; font-size: 14px;">📄 תנאי שימוש</a>
+    <a href="privacy.html" style="color: #888; text-decoration: none; font-size: 14px;">🔒 מדיניות פרטיות</a>
+  </div>
+  <p style="color: #555; font-size: 12px;">© 2026 BA Beauty. כל הזכויות שמורות.</p>
+</footer>
+
+<script>
+  let currentStep = 1;
+  const totalSteps = 4;
+  const visitedSteps = new Set([1]);
+
+  // ─── Progress ───
+  function updateProgress(step) {
+    const pct = Math.round((step / totalSteps) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('step-label').textContent = 'שלב ' + step + ' מתוך ' + totalSteps;
+    document.getElementById('step-pct').textContent = pct + '%';
+
+    document.querySelectorAll('.step-dot').forEach((dot, i) => {
+      const s = i + 1;
+      dot.classList.remove('active', 'visited');
+      if (s === step) dot.classList.add('active');
+      else if (visitedSteps.has(s)) dot.classList.add('visited');
+    });
+  }
+
+  // ─── Go To Step ───
+  function goToStep(step) {
+    if (!visitedSteps.has(step) && step !== 1) return;
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    currentStep = step;
+    document.getElementById('step-' + currentStep).classList.add('active');
+    document.getElementById('error-banner').style.display = 'none';
+    updateProgress(step);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── Validation ───
+  function validateStep(step) {
+    let valid = true;
+
+    if (step === 1) {
+      const name = document.getElementById('business-name').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const type = document.querySelector('input[name="business-type"]:checked');
+
+      setFieldError('field-business-name', !name);
+      setFieldError('field-city', !city);
+      setFieldError('field-phone', !phone);
+      setFieldError('field-business-type', !type);
+      if (!name || !city || !phone || !type) valid = false;
+    }
+
+    if (step === 2) {
+      const style = document.querySelector('input[name="style"]:checked');
+      const logo = document.querySelector('input[name="has-logo"]:checked');
+      const photos = document.querySelector('input[name="has-photos"]:checked');
+
+      document.getElementById('style-error').style.display = style ? 'none' : 'block';
+      setFieldError('field-logo', !logo);
+      setFieldError('field-photos', !photos);
+      if (!style || !logo || !photos) valid = false;
+    }
+
+    if (step === 3) {
+      const headline = document.getElementById('headline').value.trim();
+      const services = document.querySelectorAll('input[name="services"]:checked');
+      const pricing = document.querySelector('input[name="has-pricing"]:checked');
+
+      setFieldError('field-headline', !headline);
+      document.getElementById('services-error').style.display = services.length === 0 ? 'block' : 'none';
+      setFieldError('field-pricing', !pricing);
+      if (!headline || services.length === 0 || !pricing) valid = false;
+    }
+
+    if (step === 4) {
+      const domain = document.querySelector('input[name="has-domain"]:checked');
+      const google = document.querySelector('input[name="google-biz"]:checked');
+      const years = document.getElementById('years-in-business').value;
+      const goal = document.querySelector('input[name="goal"]:checked');
+
+      setFieldError('field-domain', !domain);
+      setFieldError('field-google-biz', !google);
+      setFieldError('field-years', !years);
+      setFieldError('field-goal', !goal);
+      if (!domain || !google || !years || !goal) valid = false;
+    }
+
+    return valid;
+  }
+
+  function setFieldError(fieldId, hasError) {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+    const msg = field.querySelector('.error-msg');
+    if (msg) msg.style.display = hasError ? 'block' : 'none';
+    if (hasError) field.classList.add('has-error');
+    else field.classList.remove('has-error');
+  }
+
+  // ─── Navigation ───
+  function nextStep(step) {
+    if (!validateStep(step)) {
+      document.getElementById('error-banner').style.display = 'block';
+      return;
+    }
+    document.getElementById('error-banner').style.display = 'none';
+    visitedSteps.add(step + 1);
+    goToStep(step + 1);
+  }
+
+  function prevStep(step) {
+    goToStep(step - 1);
+  }
+
+  // ─── Style Cards ───
+  function selectStyle(card) {
+    document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input[type="radio"]').checked = true;
+    document.getElementById('style-error').style.display = 'none';
+  }
+
+  // ─── Radio Highlight ───
+  document.addEventListener('change', function(e) {
+    if (e.target.type === 'radio') {
+      const group = e.target.closest('.radio-group');
+      if (group) {
+        group.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+        e.target.closest('.radio-option').classList.add('selected');
+      }
+    }
+    if (e.target.type === 'checkbox') {
+      e.target.closest('.checkbox-option').classList.toggle('selected', e.target.checked);
+    }
+  });
+
+  // ─── Domain Toggle ───
+  function toggleDomainInput(radio) {
+    const wrap = document.getElementById('domain-input-wrap');
+    wrap.style.display = radio.value === 'כן' ? 'block' : 'none';
+  }
+
+  // ─── Char Counter ───
+  document.getElementById('business-desc').addEventListener('input', function() {
+    document.getElementById('desc-count').textContent = this.value.length;
+  });
+
+  // ─── Submit ───
+  function submitForm() {
+    if (!validateStep(4)) {
+      document.getElementById('error-banner').style.display = 'block';
+      return;
+    }
+
+    const data = {
+      businessName: document.getElementById('business-name').value,
+      businessType: document.querySelector('input[name="business-type"]:checked')?.value,
+      city: document.getElementById('city').value,
+      phone: document.getElementById('phone').value,
+      style: document.querySelector('input[name="style"]:checked')?.value,
+      hasLogo: document.querySelector('input[name="has-logo"]:checked')?.value,
+      color1: document.getElementById('color1').value,
+      color2: document.getElementById('color2').value,
+      hasPhotos: document.querySelector('input[name="has-photos"]:checked')?.value,
+      headline: document.getElementById('headline').value,
+      desc: document.getElementById('business-desc').value,
+      services: [...document.querySelectorAll('input[name="services"]:checked')].map(c => c.value),
+      hasPricing: document.querySelector('input[name="has-pricing"]:checked')?.value,
+      hasDomain: document.querySelector('input[name="has-domain"]:checked')?.value,
+      domainUrl: document.getElementById('domain-url').value,
+      googleBiz: document.querySelector('input[name="google-biz"]:checked')?.value,
+      yearsInBusiness: document.getElementById('years-in-business').value,
+      goal: document.querySelector('input[name="goal"]:checked')?.value,
+      submittedAt: new Date().toISOString()
+    };
+
+    sessionStorage.setItem('beautysite_questionnaire', JSON.stringify(data));
+
+    // Show success
+    document.querySelector('.header').style.display = 'none';
+    for (let i = 1; i <= 4; i++) {
+      const s = document.getElementById('step-' + i);
+      if (s) s.style.display = 'none';
+    }
+    document.getElementById('error-banner').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

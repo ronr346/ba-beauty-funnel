@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 חומרי פרסום מוכנים — Meta Ads | BeautySite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d0d;
+      color: #e8e0da;
+      font-family: 'Heebo', sans-serif;
+      direction: rtl;
+      min-height: 100vh;
+      padding: 0 0 60px 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1014 0%, #0d0d0d 100%);
+      border-bottom: 1px solid #2a1f1c;
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+
+    header .logo {
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #c4837a;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    header h1 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #9e8a84;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Section headers */
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 48px 0 24px;
+    }
+
+    .section-title .icon {
+      width: 42px;
+      height: 42px;
+      background: #c4837a22;
+      border: 1px solid #c4837a44;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .section-title h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .section-title p {
+      font-size: 13px;
+      color: #9e8a84;
+      margin-top: 2px;
+    }
+
+    /* Audience card */
+    .audience-card {
+      background: #141010;
+      border: 1px solid #2a1f1c;
+      border-radius: 16px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .audience-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .audience-item .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #c4837a;
+      font-weight: 600;
+    }
+
+    .audience-item .value {
+      font-size: 15px;
+      color: #e8e0da;
+      line-height: 1.5;
+    }
+
+    .budget-badge {
+      grid-column: 1 / -1;
+      background: #c4837a18;
+      border: 1px solid #c4837a44;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .budget-badge .amount {
+      font-size: 20px;
+      font-weight: 700;
+      color: #c4837a;
+    }
+
+    .budget-badge .desc {
+      font-size: 14px;
+      color: #9e8a84;
+    }
+
+    /* Ad cards */
+    .ads-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ad-card {
+      background: #141010;
+      border: 1px solid #2a1f1c;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .ad-card:hover {
+      border-color: #c4837a55;
+    }
+
+    .ad-card-header {
+      background: #1c1415;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #2a1f1c;
+    }
+
+    .ad-number {
+      font-size: 12px;
+      font-weight: 700;
+      color: #c4837a;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ad-type-badge {
+      background: #c4837a22;
+      border: 1px solid #c4837a44;
+      color: #c4837a;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .ad-card-body {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .ad-card-body { grid-template-columns: 1fr; }
+    }
+
+    .ad-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ad-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .field-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #c4837a;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .char-limit {
+      font-size: 10px;
+      color: #6e5e5a;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .field-value {
+      background: #0d0d0d;
+      border: 1px solid #2a1f1c;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 15px;
+      color: #e8e0da;
+      line-height: 1.6;
+      font-family: 'Heebo', sans-serif;
+    }
+
+    .field-value.headline {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #c4837a;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 8px 20px;
+      border-radius: 8px;
+      width: fit-content;
+    }
+
+    .image-tip {
+      background: #0d0d0d;
+      border: 1px dashed #2a1f1c;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: #9e8a84;
+      line-height: 1.6;
+    }
+
+    .image-tip::before {
+      content: '📸 ';
+    }
+
+    /* Tips section */
+    .tips-card {
+      background: #141010;
+      border: 1px solid #2a1f1c;
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .tip-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #1e1615;
+    }
+
+    .tip-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .tip-item:first-child {
+      padding-top: 0;
+    }
+
+    .tip-icon {
+      width: 36px;
+      height: 36px;
+      background: #c4837a18;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .tip-text strong {
+      display: block;
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .tip-text span {
+      font-size: 13px;
+      color: #9e8a84;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(to left, transparent, #2a1f1c, transparent);
+      margin: 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: #4a3a36;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">BeautySite · Meta Ads</div>
+  <h1>🎯 חומרי פרסום מוכנים</h1>
+  <p>העתיקי, הדביקי, פרסמי — הכל מוכן לך כאן</p>
+</header>
+
+<div class="container">
+
+  <!-- SECTION 1: Audience -->
+  <div class="section-title">
+    <div class="icon">👥</div>
+    <div>
+      <h2>מדריך הגדרות קהל</h2>
+      <p>Audience Settings — Facebook & Instagram Ads Manager</p>
+    </div>
+  </div>
+
+  <div class="audience-card">
+    <div class="audience-item">
+      <div class="label">מין</div>
+      <div class="value">נשים בלבד</div>
+    </div>
+    <div class="audience-item">
+      <div class="label">גיל</div>
+      <div class="value">25 – 50</div>
+    </div>
+    <div class="audience-item">
+      <div class="label">מיקום</div>
+      <div class="value">ישראל 🇮🇱</div>
+    </div>
+    <div class="audience-item">
+      <div class="label">תחומי עניין</div>
+      <div class="value">Beauty, Salon, Nail Art, עסקים קטנים, יזמות נשית</div>
+    </div>
+    <div class="audience-item">
+      <div class="label">Behaviors</div>
+      <div class="value">Small Business Owners · Facebook Page Admins</div>
+    </div>
+    <div class="audience-item">
+      <div class="label">קהל מותאם אישית</div>
+      <div class="value">נסי Lookalike מרשימת לקוחות (אם יש) — 1% לישראל</div>
+    </div>
+    <div class="budget-badge">
+      <div class="amount">30–50₪</div>
+      <div class="desc">תקציב יומי מומלץ לתחילה · הגדילי לפי תוצאות</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Ads -->
+  <div class="section-title">
+    <div class="icon">📣</div>
+    <div>
+      <h2>5 מודעות מוכנות לפרסום</h2>
+      <p>העתיקי ישירות לתוך Ads Manager</p>
+    </div>
+  </div>
+
+  <div class="ads-grid">
+
+    <!-- AD 1 -->
+    <div class="ad-card">
+      <div class="ad-card-header">
+        <div class="ad-number">מודעה 01</div>
+        <div class="ad-type-badge">💔 Pain Point</div>
+      </div>
+      <div class="ad-card-body">
+        <div class="ad-field full-width">
+          <div class="field-label">Headline — כותרת ראשית <span class="char-limit">עד 40 תווים</span></div>
+          <div class="field-value headline">הלקוחה הבאה שלך מחפשת אותך עכשיו</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">Primary Text — טקסט ראשי <span class="char-limit">עד 125 תווים</span></div>
+          <div class="field-value">בלי אתר — היא מוצאת את המתחרה שלך. בנינו אתרים ל-500+ עסקי יופי. מוכן תוך 48 שעות.</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">Description — תיאור <span class="char-limit">עד 30 תווים</span></div>
+          <div class="field-value">7 ימי ניסיון חינם</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">כפתור CTA</div>
+          <div class="cta-btn">למידע נוסף ←</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">המלצה לתמונה</div>
+          <div class="image-tip">Before/After — שמאל: סלון בלי אתר, ימין: אתר BeautySite יפה ומקצועי. טקסט על התמונה: "עוד לקוחה מצאה אותנו אתמול"</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD 2 -->
+    <div class="ad-card">
+      <div class="ad-card-header">
+        <div class="ad-number">מודעה 02</div>
+        <div class="ad-type-badge">⭐ Social Proof</div>
+      </div>
+      <div class="ad-card-body">
+        <div class="ad-field full-width">
+          <div class="field-label">Headline — כותרת ראשית <span class="char-limit">עד 40 תווים</span></div>
+          <div class="field-value headline">500 בעלות סלון כבר הצטרפו</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">Primary Text — טקסט ראשי <span class="char-limit">עד 125 תווים</span></div>
+          <div class="field-value">"בחודש הראשון הרווחתי את עלות השנה מלקוחה אחת שמצאה אותי באתר" — ריקי ל., תל אביב</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">Description — תיאור <span class="char-limit">עד 30 תווים</span></div>
+          <div class="field-value">קראי איך</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">כפתור CTA</div>
+          <div class="cta-btn">למידע נוסף ←</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">המלצה לתמונה</div>
+          <div class="image-tip">תמונה של ריקי בסלון שלה עם חיוך, או screenshot של הודעת WhatsApp עם ציטוט (מטושטש/מעוצב). וידאו testimonial קצר — 15 שניות.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD 3 -->
+    <div class="ad-card">
+      <div class="ad-card-header">
+        <div class="ad-number">מודעה 03</div>
+        <div class="ad-type-badge">💰 Price</div>
+      </div>
+      <div class="ad-card-body">
+        <div class="ad-field full-width">
+          <div class="field-label">Headline — כותרת ראשית <span class="char-limit">עד 40 תווים</span></div>
+          <div class="field-value headline">אתר מקצועי ב-49₪ לחודש</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">Primary Text — טקסט ראשי <span class="char-limit">עד 125 תווים</span></div>
+          <div class="field-value">בנייה חינם. דומיין כלול. מותאם מובייל. מוכן תוך 48 שעות. ביטול בכל עת.</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">Description — תיאור <span class="char-limit">עד 30 תווים</span></div>
+          <div class="field-value">פחות מקפה בשבוע</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">כפתור CTA</div>
+          <div class="cta-btn">הרשמה ←</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">המלצה לתמונה</div>
+          <div class="image-tip">עיצוב גרפי נקי עם הכיתוב "49₪/חודש" ורשימת תכונות עם ✓ לצד כל אחת. רקע ורוד עדין / nude עם לוגו BeautySite.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD 4 -->
+    <div class="ad-card">
+      <div class="ad-card-header">
+        <div class="ad-number">מודעה 04</div>
+        <div class="ad-type-badge">⏰ Urgency</div>
+      </div>
+      <div class="ad-card-body">
+        <div class="ad-field full-width">
+          <div class="field-label">Headline — כותרת ראשית <span class="char-limit">עד 40 תווים</span></div>
+          <div class="field-value headline">3 מקומות נותרו לחודש זה</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">Primary Text — טקסט ראשי <span class="char-limit">עד 125 תווים</span></div>
+          <div class="field-value">אנחנו בונים אתרים ידנית, לא אוטומטי. לכן כל חודש יש מכסה. הצטרפי עכשיו.</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">Description — תיאור <span class="char-limit">עד 30 תווים</span></div>
+          <div class="field-value">ללא חיוב לשבוע ראשון</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">כפתור CTA</div>
+          <div class="cta-btn">הרשמה ←</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">המלצה לתמונה</div>
+          <div class="image-tip">טיימר ספירה לאחור או "3/10 מקומות נלקחו" עם progress bar. ויזואל שמעביר דחיפות — תאריך סיום החודש.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AD 5 -->
+    <div class="ad-card">
+      <div class="ad-card-header">
+        <div class="ad-number">מודעה 05</div>
+        <div class="ad-type-badge">📖 Story / Reels</div>
+      </div>
+      <div class="ad-card-body">
+        <div class="ad-field full-width">
+          <div class="field-label">Headline — כותרת ראשית <span class="char-limit">עד 40 תווים</span></div>
+          <div class="field-value headline">מסלון ביתי — לעסק שמוצאים בגוגל</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">Primary Text — טקסט ראשי <span class="char-limit">עד 125 תווים</span></div>
+          <div class="field-value">שירה פתחה סלון ציפורניים בבית. חיפשה דרך להביא לקוחות חדשות. היום 12 פניות בשבוע דרך האתר.</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">Description — תיאור <span class="char-limit">עד 30 תווים</span></div>
+          <div class="field-value">הסיפור שלה</div>
+        </div>
+        <div class="ad-field">
+          <div class="field-label">כפתור CTA</div>
+          <div class="cta-btn">למידע נוסף ←</div>
+        </div>
+        <div class="ad-field full-width">
+          <div class="field-label">המלצה לפורמט</div>
+          <div class="image-tip">וידאו Reels/Stories אנכי 9:16. שירה מדברת ישירות למצלמה 30 שניות. כתוביות חיוניות! חיתוך מהיר: סלון → אתר → טלפון עם הודעות נכנסות.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 3: Tips -->
+  <div class="section-title">
+    <div class="icon">💡</div>
+    <div>
+      <h2>טיפים לאופטימיזציה</h2>
+      <p>Landing Page & Campaign Optimization</p>
+    </div>
+  </div>
+
+  <div class="tips-card">
+    <div class="tip-item">
+      <div class="tip-icon">🧪</div>
+      <div class="tip-text">
+        <strong>A/B Test על הכותרת</strong>
+        <span>הריצי 2 גרסאות של הכותרת במקביל — אחרי 3-5 ימים תדעי מה עובד. תקציב זהה לכל אחת.</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">🎬</div>
+      <div class="tip-text">
+        <strong>וידאו מנצח תמונה</strong>
+        <span>נסי גרסת וידאו של כל מודעה — לרוב CTR גבוה ב-30-50%. Reels עם captions מביאים הכי הרבה.</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">⏰</div>
+      <div class="tip-text">
+        <strong>זמני פרסום מומלצים</strong>
+        <span>ראשון–חמישי, 19:00–22:00 — שיא הגלישה של הקהל שלנו. שישי בבוקר עובד גם טוב.</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">📱</div>
+      <div class="tip-text">
+        <strong>Mobile First תמיד</strong>
+        <span>בדקי שהלנדינג פייג' נטענת תוך 3 שניות במובייל. כל שנייה נוספת = 20% ירידה בהמרות.</span>
+      </div>
+    </div>
+    <div class="tip-item">
+      <div class="tip-icon">🔄</div>
+      <div class="tip-text">
+        <strong>Retargeting חכם</strong>
+        <span>צרי קהל Retargeting מכל מי שביקר בדף ב-14 ימים האחרונים. הצגי להם מודעת Social Proof או Urgency.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  BeautySite · מסמך פנימי לשימוש הצוות · עודכן 2026
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>לוח בקרה — BeautySite</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #151515;
+    --surface2: #1e1e1e;
+    --surface3: #252525;
+    --border: #2a2a2a;
+    --mauve: #c4837a;
+    --mauve-light: #d4998f;
+    --mauve-dark: #a06b63;
+    --green: #6fcf97;
+    --green-dim: rgba(111,207,151,0.12);
+    --blue: #56b4e9;
+    --blue-dim: rgba(86,180,233,0.12);
+    --gold: #f0c040;
+    --gold-dim: rgba(240,192,64,0.12);
+    --red: #e07070;
+    --red-dim: rgba(224,112,112,0.12);
+    --text: #f0ece8;
+    --text-muted: #888;
+    --text-dim: #555;
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  /* ─── Top Bar ─── */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--mauve-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .topbar-logo span { font-size: 13px; color: var(--text-muted); font-family: 'Heebo', sans-serif; font-weight: 400; }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .topbar-date {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .topbar-greeting {
+    font-size: 14px;
+    color: var(--text);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 6px 14px;
+  }
+
+  /* ─── Main Layout ─── */
+  .main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── Metrics Row ─── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 900px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .metrics-grid { grid-template-columns: 1fr; } }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .metric-card:hover {
+    border-color: var(--mauve-dark);
+    transform: translateY(-2px);
+  }
+
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .metric-card.green::before { background: var(--green); }
+  .metric-card.blue::before { background: var(--blue); }
+  .metric-card.gold::before { background: var(--gold); }
+  .metric-card.red::before { background: var(--red); }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .metric-value {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-card.green .metric-value { color: var(--green); }
+  .metric-card.blue .metric-value { color: var(--blue); }
+  .metric-card.gold .metric-value { color: var(--gold); }
+  .metric-card.red .metric-value { color: var(--red); }
+
+  .metric-sub {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .metric-icon {
+    position: absolute;
+    left: 18px;
+    top: 18px;
+    font-size: 28px;
+    opacity: 0.2;
+  }
+
+  /* ─── Plan Breakdown ─── */
+  .plans-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+
+  .plan-row {
+    margin-bottom: 22px;
+  }
+
+  .plan-row:last-child { margin-bottom: 0; }
+
+  .plan-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .plan-name {
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .plan-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .badge-basic { background: rgba(86,180,233,0.15); color: var(--blue); }
+  .badge-pro { background: rgba(196,131,122,0.15); color: var(--mauve-light); }
+  .badge-growth { background: rgba(240,192,64,0.15); color: var(--gold); }
+
+  .plan-formula {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .plan-bar-wrap {
+    background: var(--surface3);
+    border-radius: 99px;
+    height: 10px;
+    overflow: hidden;
+  }
+
+  .plan-bar {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 1s ease;
+  }
+
+  .bar-basic { background: linear-gradient(90deg, #3a7fb5, var(--blue)); width: 0%; }
+  .bar-pro { background: linear-gradient(90deg, var(--mauve-dark), var(--mauve-light)); width: 0%; }
+  .bar-growth { background: linear-gradient(90deg, #c9903a, var(--gold)); width: 0%; }
+
+  /* ─── Two-Column Layout ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ─── Table ─── */
+  .table-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+
+  .table-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .table-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .table-count {
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--surface2);
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 20px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody td {
+    padding: 14px 20px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  tbody tr:hover { background: var(--surface2); }
+
+  .status-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 99px;
+    display: inline-block;
+  }
+
+  .status-active { background: rgba(111,207,151,0.15); color: var(--green); }
+  .status-pending { background: rgba(240,192,64,0.15); color: var(--gold); }
+  .status-canceled { background: rgba(224,112,112,0.15); color: var(--red); }
+
+  /* ─── Empty State ─── */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; display: block; }
+  .empty-state p { font-size: 15px; line-height: 1.6; }
+  .empty-state strong { color: var(--text); }
+
+  /* ─── Action Items ─── */
+  .actions-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+    border: 1px solid transparent;
+    margin-bottom: 8px;
+  }
+
+  .action-item:last-child { margin-bottom: 0; }
+
+  .action-item:hover { background: var(--surface2); border-color: var(--border); }
+
+  .action-item.done { opacity: 0.45; }
+
+  .action-checkbox {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    background: var(--surface2);
+  }
+
+  .action-item.done .action-checkbox {
+    background: var(--mauve-dark);
+    border-color: var(--mauve-dark);
+  }
+
+  .action-item.done .action-checkbox::after {
+    content: '✓';
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .action-text {
+    font-size: 14px;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .action-item.done .action-text { text-decoration: line-through; }
+
+  .action-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 99px;
+    background: var(--surface3);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  /* ─── Links Section ─── */
+  .links-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 700px) { .links-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 400px) { .links-grid { grid-template-columns: 1fr; } }
+
+  .link-card {
+    display: block;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .link-card:hover {
+    border-color: var(--mauve-dark);
+    background: #1e1618;
+    transform: translateY(-2px);
+  }
+
+  .link-card .link-icon { font-size: 24px; display: block; margin-bottom: 8px; }
+  .link-card .link-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .link-card .link-url { font-size: 11px; color: var(--text-muted); }
+
+  /* ─── Divider ─── */
+  .section-gap { margin-bottom: 36px; }
+</style>
+</head>
+<body>
+
+<!-- ─── Top Bar ─── -->
+<div class="topbar">
+  <div class="topbar-logo">
+    לוח בקרה — BeautySite ✨
+    <span>v1.0</span>
+  </div>
+  <div class="topbar-right">
+    <div class="topbar-date" id="current-date"></div>
+    <div class="topbar-greeting">👋 שלום, בעלת העסק</div>
+  </div>
+</div>
+
+<!-- ─── Main ─── -->
+<div class="main">
+
+  <!-- ══ METRICS ══ -->
+  <div class="section-title">מדדים מרכזיים</div>
+  <div class="metrics-grid section-gap">
+
+    <div class="metric-card green">
+      <div class="metric-icon">💰</div>
+      <div class="metric-label">הכנסה חודשית חוזרת (MRR)</div>
+      <div class="metric-value">₪0</div>
+      <div class="metric-sub">עדיין אין מנויים פעילים</div>
+    </div>
+
+    <div class="metric-card blue">
+      <div class="metric-icon">👥</div>
+      <div class="metric-label">מנויים פעילים</div>
+      <div class="metric-value">0</div>
+      <div class="metric-sub">סה"כ לקוחות משלמות</div>
+    </div>
+
+    <div class="metric-card gold">
+      <div class="metric-icon">🌟</div>
+      <div class="metric-label">הצטרפות החודש</div>
+      <div class="metric-value">0</div>
+      <div class="metric-sub">מנויות חדשות בחודש זה</div>
+    </div>
+
+    <div class="metric-card red">
+      <div class="metric-icon">📉</div>
+      <div class="metric-label">נטישה החודש (Churn)</div>
+      <div class="metric-value" id="churn-value">0%</div>
+      <div class="metric-sub">מתחת ל-5% = תקין ✅</div>
+    </div>
+
+  </div>
+
+  <!-- ══ PLAN BREAKDOWN ══ -->
+  <div class="section-title">פירוט לפי חבילה</div>
+  <div class="plans-section section-gap">
+
+    <div class="plan-row">
+      <div class="plan-meta">
+        <div class="plan-name">
+          <span class="plan-badge badge-basic">Basic</span>
+          חבילה בסיסית
+        </div>
+        <div class="plan-formula">0 לקוחות × 49₪ = <strong style="color:var(--blue)">₪0/חודש</strong></div>
+      </div>
+      <div class="plan-bar-wrap">
+        <div class="plan-bar bar-basic" id="bar-basic"></div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="plan-meta">
+        <div class="plan-name">
+          <span class="plan-badge badge-pro">PRO</span>
+          חבילה מקצועית
+        </div>
+        <div class="plan-formula">0 לקוחות × 97₪ = <strong style="color:var(--mauve-light)">₪0/חודש</strong></div>
+      </div>
+      <div class="plan-bar-wrap">
+        <div class="plan-bar bar-pro" id="bar-pro"></div>
+      </div>
+    </div>
+
+    <div class="plan-row">
+      <div class="plan-meta">
+        <div class="plan-name">
+          <span class="plan-badge badge-growth">GROWTH</span>
+          חבילת צמיחה
+        </div>
+        <div class="plan-formula">0 לקוחות × 197₪ = <strong style="color:var(--gold)">₪0/חודש</strong></div>
+      </div>
+      <div class="plan-bar-wrap">
+        <div class="plan-bar bar-growth" id="bar-growth"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ RECENT SIGNUPS TABLE ══ -->
+  <div class="section-title">לקוחות אחרונות</div>
+  <div class="table-section section-gap">
+    <div class="table-header">
+      <h3>הצטרפויות אחרונות</h3>
+      <span class="table-count">0 לקוחות</span>
+    </div>
+
+    <div class="empty-state">
+      <span class="empty-icon">🚀</span>
+      <p><strong>עדיין אין לקוחות — הפאנל מוכן ומחכה!</strong><br>
+      כשהלקוחה הראשונה תצטרף, היא תופיע כאן עם כל הפרטים</p>
+    </div>
+
+    <!-- Template for when customers exist — hidden by default -->
+    <div style="display:none">
+      <table>
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th>עסק</th>
+            <th>חבילה</th>
+            <th>תאריך</th>
+            <th>סטטוס</th>
+          </tr>
+        </thead>
+        <tbody id="signups-tbody">
+          <tr>
+            <td>שרה כהן</td>
+            <td>Studio Nails</td>
+            <td><span class="plan-badge badge-pro">PRO</span></td>
+            <td>01/03/2026</td>
+            <td><span class="status-badge status-active">פעילה</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ ACTION ITEMS ══ -->
+  <div class="section-title">משימות להפעלה</div>
+  <div class="actions-section section-gap">
+
+    <div class="action-item" id="action-1" onclick="toggleAction('action-1')">
+      <div class="action-checkbox"></div>
+      <div class="action-text">חבר <strong>Polar.sh</strong> לקבלת תשלומים אמיתיים — polar.sh/signup</div>
+      <span class="action-tag">תשלומים</span>
+    </div>
+
+    <div class="action-item" id="action-2" onclick="toggleAction('action-2')">
+      <div class="action-checkbox"></div>
+      <div class="action-text">הגדר <strong>WATI</strong> לוואטסאפ אוטומטי — wati.io</div>
+      <span class="action-tag">אוטומציה</span>
+    </div>
+
+    <div class="action-item" id="action-3" onclick="toggleAction('action-3')">
+      <div class="action-checkbox"></div>
+      <div class="action-text">פרסם <strong>Meta ad</strong> ראשון — קהל יעד: בעלות עסקי יופי בישראל</div>
+      <span class="action-tag">שיווק</span>
+    </div>
+
+    <div class="action-item" id="action-4" onclick="toggleAction('action-4')">
+      <div class="action-checkbox"></div>
+      <div class="action-text">גייס <strong>פרילנסר</strong> לבניית אתרים — fiverr.com / facebook groups</div>
+      <span class="action-tag">גיוס</span>
+    </div>
+
+    <div class="action-item" id="action-5" onclick="toggleAction('action-5')">
+      <div class="action-checkbox"></div>
+      <div class="action-text">שלח קישור לפאנל ל-<strong>10 בעלות עסקי יופי</strong> — ותצפי לתגובות</div>
+      <span class="action-tag">מכירות</span>
+    </div>
+
+  </div>
+
+  <!-- ══ QUICK LINKS ══ -->
+  <div class="section-title">קישורים מהירים לפאנל</div>
+  <div class="links-section">
+    <div class="links-grid">
+
+      <a href="index.html" class="link-card">
+        <span class="link-icon">🏠</span>
+        <div class="link-name">דף בית</div>
+        <div class="link-url">index.html</div>
+      </a>
+
+      <a href="thank-you.html" class="link-card">
+        <span class="link-icon">🎉</span>
+        <div class="link-name">תודה על הרכישה</div>
+        <div class="link-url">thank-you.html</div>
+      </a>
+
+      <a href="purchase-success.html" class="link-card">
+        <span class="link-icon">✅</span>
+        <div class="link-name">אישור רכישה</div>
+        <div class="link-url">purchase-success.html</div>
+      </a>
+
+      <a href="questionnaire.html" class="link-card">
+        <span class="link-icon">📋</span>
+        <div class="link-name">שאלון עיצוב</div>
+        <div class="link-url">questionnaire.html</div>
+      </a>
+
+      <a href="terms.html" class="link-card">
+        <span class="link-icon">📜</span>
+        <div class="link-name">תנאי שימוש</div>
+        <div class="link-url">terms.html</div>
+      </a>
+
+      <a href="privacy.html" class="link-card">
+        <span class="link-icon">🔒</span>
+        <div class="link-name">מדיניות פרטיות</div>
+        <div class="link-url">privacy.html</div>
+      </a>
+
+      <a href="sop.html" class="link-card">
+        <span class="link-icon">📖</span>
+        <div class="link-name">נהלי עבודה (SOP)</div>
+        <div class="link-url">sop.html</div>
+      </a>
+
+      <a href="contract.html" class="link-card">
+        <span class="link-icon">🤝</span>
+        <div class="link-name">חוזה לקוח</div>
+        <div class="link-url">contract.html</div>
+      </a>
+
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  // ─── Date ───
+  const now = new Date();
+  const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  document.getElementById('current-date').textContent = now.toLocaleDateString('he-IL', opts);
+
+  // ─── Action Items — localStorage ───
+  const STORAGE_KEY = 'beautysite_actions';
+
+  function loadActions() {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    Object.entries(saved).forEach(([id, done]) => {
+      if (done) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('done');
+      }
+    });
+  }
+
+  function toggleAction(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('done');
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    saved[id] = el.classList.contains('done');
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+  }
+
+  loadActions();
+
+  // ─── Animate bars on load ───
+  setTimeout(() => {
+    // All zero for now — when data comes in, set widths here
+    document.getElementById('bar-basic').style.width = '0%';
+    document.getElementById('bar-pro').style.width = '0%';
+    document.getElementById('bar-growth').style.width = '0%';
+  }, 300);
+
+  // ─── Churn color logic ───
+  const churnEl = document.getElementById('churn-value');
+  const churnPct = parseFloat(churnEl.textContent);
+  if (churnPct > 5) {
+    churnEl.style.color = 'var(--red)';
+  } else {
+    churnEl.style.color = 'var(--green)';
+  }
+</script>
+</body>
+</html>

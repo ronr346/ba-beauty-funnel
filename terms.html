@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>תנאי שימוש | BeautySite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background-color: #faf7f4;
+      color: #2d2d2d;
+      direction: rtl;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* Header */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e8e0d8;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2d2d2d;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #c9956b;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #666;
+      font-size: 14px;
+      font-weight: 500;
+      margin-right: 24px;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: #c9956b; }
+
+    /* Main */
+    main {
+      max-width: 800px;
+      margin: 48px auto;
+      padding: 0 24px 80px;
+    }
+
+    .page-header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #e8e0d8;
+    }
+
+    .updated-tag {
+      display: inline-block;
+      background: #f0e8e0;
+      color: #8a6a50;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 15px;
+    }
+
+    /* TOC */
+    .toc {
+      background: #fff;
+      border: 1px solid #e8e0d8;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+    }
+
+    .toc h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      padding-right: 20px;
+    }
+
+    .toc li {
+      margin-bottom: 6px;
+    }
+
+    .toc a {
+      color: #c9956b;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    .toc a:hover { text-decoration: underline; }
+
+    /* Sections */
+    section {
+      margin-bottom: 48px;
+      scroll-margin-top: 24px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e8e0d8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: #c9956b;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #3a3a3a;
+    }
+
+    ul, ol {
+      padding-right: 20px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #3a3a3a;
+    }
+
+    /* Package cards */
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .package-card {
+      background: #fff;
+      border: 1px solid #e8e0d8;
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .package-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #c9956b;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .package-card ul {
+      padding-right: 16px;
+      margin: 0;
+    }
+
+    .package-card li {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: #fff8f3;
+      border-right: 4px solid #c9956b;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .highlight-box p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    /* Info box */
+    .info-box {
+      background: #f0f7ff;
+      border: 1px solid #bdd4f0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .info-box p {
+      margin: 0;
+      font-size: 14px;
+      color: #2a4a7a;
+    }
+
+    strong { font-weight: 600; color: #1a1a1a; }
+
+    a { color: #c9956b; }
+
+    /* Footer */
+    footer {
+      background: #2d2d2d;
+      color: #aaa;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 14px;
+    }
+
+    footer a { color: #c9956b; text-decoration: none; }
+    footer .footer-links { margin-bottom: 12px; }
+    footer .footer-links a { margin: 0 12px; }
+
+    @media (max-width: 600px) {
+      .packages { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+      header { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">Beauty<span>Site</span></a>
+  <nav>
+    <a href="index.html">בית</a>
+    <a href="privacy.html">מדיניות פרטיות</a>
+    <a href="mailto:hello@beautysite.co.il">צור קשר</a>
+  </nav>
+</header>
+
+<main>
+  <div class="page-header">
+    <span class="updated-tag">עודכן לאחרונה: מרץ 2026</span>
+    <h1>תנאי שימוש</h1>
+    <p class="subtitle">אנא קראי את התנאים הבאים בעיון לפני השימוש בשירות BeautySite</p>
+  </div>
+
+  <div class="toc">
+    <h3>תוכן עניינים</h3>
+    <ol>
+      <li><a href="#general">כללי</a></li>
+      <li><a href="#agreement">ההתקשרות</a></li>
+      <li><a href="#service">השירות</a></li>
+      <li><a href="#payments">תשלומים וחיוב</a></li>
+      <li><a href="#cancellation">ביטול</a></li>
+      <li><a href="#ip">קניין רוחני</a></li>
+      <li><a href="#liability">אחריות ומגבלות</a></li>
+      <li><a href="#privacy">שמירת מידע</a></li>
+      <li><a href="#changes">שינויים בתנאים</a></li>
+      <li><a href="#jurisdiction">סמכות שיפוט</a></li>
+      <li><a href="#contact">יצירת קשר</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <section id="general">
+    <h2><span class="section-num">1</span> כללי</h2>
+    <p>ברוכה הבאה ל-<strong>BeautySite</strong>. אנו חברה המספקת שירותי בניית אתרים ייעודיים לעסקי יופי בישראל, במודל מנוי חודשי. השירות מיועד לבעלות ועובדות של עסקי יופי — ספרות, קוסמטיקאיות, מעצבות ציפורניים, מאפרות ועוד.</p>
+    <p>תנאי שימוש אלו ("התנאים") מסדירים את מערכת היחסים בין BeautySite ("אנחנו", "החברה") לבין הלקוחה ("את", "הלקוחה") בעת השימוש בשירותינו.</p>
+    <p>כתובת העסק ופרטי יצירת קשר: <a href="mailto:hello@beautysite.co.il">hello@beautysite.co.il</a></p>
+  </section>
+
+  <!-- Section 2 -->
+  <section id="agreement">
+    <h2><span class="section-num">2</span> ההתקשרות</h2>
+    <p>השימוש בשירות BeautySite מהווה הסכמה מלאה לתנאים אלו. אם אינך מסכימה לתנאים — אנא אל תשתמשי בשירות.</p>
+    <ul>
+      <li><strong>גיל מינימום:</strong> השירות מיועד לבנות 18 ומעלה בלבד. שימוש בשירות על-ידי קטינות אסור.</li>
+      <li><strong>כשירות משפטית:</strong> בהרשמה לשירות את מצהירה כי הינך כשירה משפטית להתקשר בחוזה מחייב על פי דין.</li>
+      <li><strong>פרטים נכונים:</strong> את מתחייבת למסור פרטים אמיתיים ומדויקים בעת ההרשמה.</li>
+      <li><strong>שימוש עסקי:</strong> השירות מיועד לשימוש עסקי חוקי בלבד.</li>
+    </ul>
+    <div class="highlight-box">
+      <p>הרשמה לשירות, מסירת פרטי תשלום, או שימוש בפועל באתר המנוהל עבורך — כולם מהווים הסכמה לתנאים אלו.</p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section id="service">
+    <h2><span class="section-num">3</span> השירות</h2>
+    <p>BeautySite מספקת שירות מנוי חודשי לבניה ותחזוקה שוטפת של אתרי אינטרנט לעסקי יופי. השירות כולל בניית אתר, אחסון, עדכונים שוטפים ותמיכה טכנית — הכל בחבילה אחת.</p>
+
+    <p><strong>החבילות הזמינות:</strong></p>
+    <div class="packages">
+      <div class="package-card">
+        <h4>Basic</h4>
+        <ul>
+          <li>אתר תדמית עד 5 עמודים</li>
+          <li>טופס יצירת קשר</li>
+          <li>גלריית תמונות</li>
+          <li>אחסון ודומיין</li>
+          <li>תמיכה במייל</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <h4>Pro</h4>
+        <ul>
+          <li>כל מה שב-Basic</li>
+          <li>מערכת הזמנות אונליין</li>
+          <li>עמוד שירותים ומחירים</li>
+          <li>אינטגרציה עם וואטסאפ</li>
+          <li>תמיכה מועדפת</li>
+        </ul>
+      </div>
+      <div class="package-card">
+        <h4>Growth</h4>
+        <ul>
+          <li>כל מה שב-Pro</li>
+          <li>קופונים ומבצעים</li>
+          <li>דף נחיתה שיווקי</li>
+          <li>דוחות Analytics</li>
+          <li>עדכוני תוכן שוטפים</li>
+        </ul>
+      </div>
+    </div>
+
+    <p><strong>מה לא כלול בשירות:</strong></p>
+    <ul>
+      <li>פרסום בתשלום (גוגל, פייסבוק, אינסטגרם) — אלא אם צוין במפורש</li>
+      <li>צילום מקצועי או עיצוב לוגו (ניתן כשירות נפרד)</li>
+      <li>ניהול רשתות חברתיות</li>
+      <li>פיתוח תוכנה מותאם אישית מעבר לכלול בחבילה</li>
+      <li>שירותי SEO מתקדמים (אלא אם כלולים בחבילה ספציפית)</li>
+    </ul>
+    <p>אנו שומרים לעצמנו את הזכות לשנות ולעדכן את תכולת החבילות בהודעה מוקדמת של 30 יום.</p>
+  </section>
+
+  <!-- Section 4 -->
+  <section id="payments">
+    <h2><span class="section-num">4</span> תשלומים וחיוב</h2>
+    <ul>
+      <li><strong>מחזור חיוב חודשי:</strong> החיוב מתבצע אחת לחודש, ביום הרשמתך לשירות (או ביום המקביל בכל חודש).</li>
+      <li><strong>ניסיון חינם:</strong> אנו מציעים תקופת ניסיון חינם של <strong>7 ימים</strong> ממועד ההרשמה. בתקופה זו לא יחויב כרטיס האשראי שלך. לאחר 7 הימים, יחל החיוב החודשי אוטומטית.</li>
+      <li><strong>מע"מ:</strong> כל המחירים המוצגים כוללים מע"מ כחוק (17%), אלא אם צוין אחרת במפורש.</li>
+      <li><strong>אמצעי תשלום:</strong> ניתן לשלם באמצעות כרטיס אשראי/דביט. פרטי כרטיס האשראי מעובדים באופן מאובטח דרך ספק תשלומים מורשה.</li>
+      <li><strong>כשל בתשלום:</strong> במקרה של כשל בחיוב, נשלח הודעה ונאפשר 7 ימי חסד לתיקון. לאחר מכן, השירות עשוי להיות מושהה עד להסדרת התשלום.</li>
+      <li><strong>החזר כספי:</strong> תקופת הניסיון החינמית מאפשרת ביטול ללא תשלום. לאחריה, ר' סעיף ביטול להלן.</li>
+    </ul>
+    <div class="info-box">
+      <p>💡 החיוב יופיע בדף חשבון הכרטיס שלך בשם "BeautySite" או "BEAUTYSITE IL".</p>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section id="cancellation">
+    <h2><span class="section-num">5</span> ביטול</h2>
+    <p><strong>זכות ביטול לפי חוק הגנת הצרכן:</strong></p>
+    <p>בהתאם לחוק הגנת הצרכן, התשמ"א-1981, ותקנות הגנת הצרכן (ביטול עסקה), התשע"א-2010, יש לך זכות לבטל את העסקה תוך <strong>14 יום</strong> ממועד ביצוע העסקה או קבלת מסמך הגילוי (המאוחר ביניהם).</p>
+
+    <div class="highlight-box">
+      <p><strong>לתשומת לבך:</strong> מאחר שמדובר בשירות דיגיטלי שהחל לפעול לבקשתך, ייתכן שזכות הביטול מוגבלת. מומלץ לנצל את תקופת הניסיון החינמית של 7 ימים לפני מסירת פרטי תשלום.</p>
+    </div>
+
+    <p><strong>כיצד לבטל:</strong></p>
+    <ul>
+      <li>שלחי מייל לכתובת <a href="mailto:hello@beautysite.co.il">hello@beautysite.co.il</a> עם הנושא "ביטול מנוי"</li>
+      <li>פנייה דרך WhatsApp: <a href="https://wa.me/972000000000">972-000-000-000</a></li>
+      <li>ביטול דרך פאנל הניהול באזור האישי שלך (אם זמין)</li>
+    </ul>
+
+    <p><strong>מה קורה לאתר לאחר ביטול:</strong></p>
+    <ul>
+      <li>האתר יישאר פעיל עד תום תקופת החיוב הנוכחית.</li>
+      <li>לאחר מכן, האתר יוסתר/יושבת.</li>
+      <li>כל התכנים, הטקסטים והתמונות שסיפקת יוחזרו לך לפי בקשה תוך 30 יום.</li>
+      <li>לא יהיה חיוב נוסף לאחר אישור הביטול.</li>
+      <li>לא תינתן זיכוי יחסי על ימים שלא נוצלו, אלא במקרה של ביטול בתוך 14 הימים הראשונים לפי החוק.</li>
+    </ul>
+
+    <p>ביטול אחרי 14 הימים: ניתן לבטל בכל עת; הביטול ייכנס לתוקף בתחילת מחזור החיוב הבא.</p>
+  </section>
+
+  <!-- Section 6 -->
+  <section id="ip">
+    <h2><span class="section-num">6</span> קניין רוחני</h2>
+    <ul>
+      <li><strong>תכנים שלך:</strong> כל התכנים שסיפקת — טקסטים, תמונות, לוגו, מחירון — הם רכושך הבלעדי. BeautySite לא תעשה בהם כל שימוש מחוץ לבנייה ותחזוקת האתר שלך.</li>
+      <li><strong>האתר שנבנה:</strong> עיצוב האתר הספציפי שנבנה עבורך, לאחר סיום כל תשלומיך, שייך לך. אנו נספק לך גיבוי של הקבצים לפי בקשה.</li>
+      <li><strong>הקוד וה-Framework:</strong> קוד הבסיס, תבניות העיצוב, הספריות וכלי הפיתוח שבהם אנו משתמשים — הם רכוש BeautySite ו/או ספקי הטכנולוגיה שלנו ואינם עוברים ללקוחה.</li>
+      <li><strong>שם המותג:</strong> שם BeautySite, הלוגו וכל סימני המסחר שלנו — שמורים לנו בלבד.</li>
+      <li><strong>רשיון שימוש:</strong> אנו מעניקים לך רישיון שימוש מוגבל, לא-בלעדי ובלתי-ניתן-להעברה לשימוש בשירות לצורכי עסקך בלבד.</li>
+    </ul>
+  </section>
+
+  <!-- Section 7 -->
+  <section id="liability">
+    <h2><span class="section-num">7</span> אחריות ומגבלות</h2>
+    <p>BeautySite מספקת את שירותיה "כפי שהם" (AS IS) ושואפת לזמינות מרבית, אך אינה מתחייבת לזמינות של 100% בכל עת.</p>
+
+    <p><strong>הגבלת אחריות:</strong></p>
+    <ul>
+      <li>BeautySite לא תישא באחריות לנזקים עקיפים, תוצאתיים, מיוחדים או עונשיים, לרבות אובדן הכנסות, אובדן לקוחות או נזק למוניטין, הנובעים משימוש בשירות או מאי-יכולת להשתמש בו.</li>
+      <li>האחריות הכוללת של BeautySite כלפיך, בכל עילה שהיא, לא תעלה על <strong>סכום התשלומים ששילמת לנו ב-12 החודשים שקדמו לאירוע</strong> שגרם לנזק.</li>
+      <li>BeautySite לא תישא באחריות לנזקים הנובעים מתוכן שסיפקת לאתר, מהפרת זכויות יוצרים של צד שלישי על-ידך, או משימוש בלתי-חוקי בשירות.</li>
+      <li>אנו לא אחראים לנזקים עקב כוח עליון, תקלות בתשתיות אינטרנט, מתקפות סייבר, או פעולות צדדים שלישיים.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p>מגבלות אחריות אלו חלות במידה המקסימלית המותרת על-פי דין ישראלי. הן אינן גורעות מזכויות קוגנטיות המוקנות לך בחוק.</p>
+    </div>
+  </section>
+
+  <!-- Section 8 -->
+  <section id="privacy">
+    <h2><span class="section-num">8</span> שמירת מידע</h2>
+    <p>BeautySite מחויבת לשמירה על פרטיותך בהתאם לחוק הגנת הפרטיות, התשמ"א-1981, ותקנותיו.</p>
+    <ul>
+      <li><strong>איסוף מידע:</strong> אנו אוספים רק את המידע הנדרש לצורך מתן השירות — שם, כתובת מייל, טלפון ופרטי עסק.</li>
+      <li><strong>שימוש במידע:</strong> המידע ישמש אך ורק לצורך מתן השירות, תקשורת עסקית איתך וחיוב חודשי.</li>
+      <li><strong>לא מוכרים:</strong> אנו לא מוכרים, משכירים, או מעבירים את פרטיך האישיים לצדדים שלישיים לצורכי שיווק.</li>
+      <li><strong>שיתוף מוגבל:</strong> פרטים עשויים להיות מועברים לספקי שירות הכרחיים (כגון ספק תשלומים) בכפוף להסכמי סודיות.</li>
+      <li><strong>אבטחה:</strong> אנו נוקטים אמצעי אבטחה סבירים להגנה על המידע שברשותנו.</li>
+    </ul>
+    <p>למדיניות הפרטיות המלאה, ראי את <a href="privacy.html">עמוד מדיניות הפרטיות שלנו</a>.</p>
+  </section>
+
+  <!-- Section 9 -->
+  <section id="changes">
+    <h2><span class="section-num">9</span> שינויים בתנאים</h2>
+    <p>BeautySite שומרת לעצמה את הזכות לעדכן ולשנות תנאים אלו מעת לעת. שינויים מהותיים יפורסמו בהודעה מוקדמת של <strong>לפחות 30 יום</strong> לפני כניסתם לתוקף.</p>
+    <p>הודעה תישלח לכתובת המייל הרשומה בחשבונך. המשך השימוש בשירות לאחר כניסת השינויים לתוקף יהווה הסכמה לתנאים המעודכנים.</p>
+    <p>אם אינך מסכימה לשינויים, תוכלי לבטל את המנוי לפי הנהלים המפורטים בסעיף 5 לעיל.</p>
+  </section>
+
+  <!-- Section 10 -->
+  <section id="jurisdiction">
+    <h2><span class="section-num">10</span> סמכות שיפוט</h2>
+    <p>תנאים אלו כפופים לדיני מדינת ישראל, ויפורשו בהתאם להם, ללא התחשבות בכללי ברירת הדין.</p>
+    <p>סמכות השיפוט הבלעדית לכל סכסוך הנובע מתנאים אלו או מהשימוש בשירות תהא לבתי המשפט המוסמכים בישראל.</p>
+    <p>הצדדים מתחייבים לנסות ראשית ליישב כל מחלוקת בדרכי שלום ובתום לב, לפני פנייה לערכאות משפטיות.</p>
+  </section>
+
+  <!-- Section 11 -->
+  <section id="contact">
+    <h2><span class="section-num">11</span> יצירת קשר</h2>
+    <p>לשאלות, הבהרות או כל עניין הקשור לתנאים אלו, ניתן לפנות אלינו:</p>
+    <ul>
+      <li>📧 <strong>מייל:</strong> <a href="mailto:hello@beautysite.co.il">hello@beautysite.co.il</a></li>
+      <li>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/972000000000">972-000-000-000</a></li>
+    </ul>
+    <p>אנו מתחייבים להשיב לכל פנייה תוך 2 ימי עסקים.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">בית</a>
+    <a href="terms.html">תנאי שימוש</a>
+    <a href="privacy.html">מדיניות פרטיות</a>
+    <a href="mailto:hello@beautysite.co.il">צור קשר</a>
+  </div>
+  <p>© 2026 BeautySite. כל הזכויות שמורות.</p>
+</footer>
+
+</body>
+</html>

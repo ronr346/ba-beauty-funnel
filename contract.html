@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>הסכם שירות — BeautySite ולקוחה</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f5f0;
+      color: #2c2c2c;
+      font-family: 'Heebo', sans-serif;
+      font-size: 15px;
+      line-height: 1.9;
+      direction: rtl;
+      padding: 40px 20px 80px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 52px 60px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+    }
+
+    /* Print button */
+    .print-bar {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .btn-print {
+      background: #2c2c2c;
+      color: #fff;
+      border: none;
+      padding: 11px 28px;
+      border-radius: 6px;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-print:hover { background: #444; }
+
+    /* Page header */
+    .doc-header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 2px solid #2c2c2c;
+    }
+    .doc-header .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .doc-header h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .doc-header .doc-meta {
+      font-size: 0.82rem;
+      color: #aaa;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e0e0e0;
+    }
+    .section-title .snum {
+      background: #2c2c2c;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Parties */
+    .party-block {
+      background: #fafafa;
+      border: 1px solid #e4e4e4;
+      border-radius: 6px;
+      padding: 18px 22px;
+      margin-bottom: 12px;
+    }
+    .party-block:last-child { margin-bottom: 0; }
+    .party-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+    }
+    .party-row {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 4px;
+      font-size: 0.93rem;
+    }
+    .party-row .field-label {
+      color: #666;
+      font-weight: 500;
+      min-width: 100px;
+      flex-shrink: 0;
+    }
+    .field-line {
+      flex: 1;
+      border-bottom: 1px solid #bbb;
+      min-width: 120px;
+      min-height: 22px;
+    }
+
+    /* Service description */
+    .service-desc p {
+      color: #444;
+      margin-bottom: 10px;
+      font-size: 0.93rem;
+    }
+
+    /* Package selector */
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .package-box {
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .package-box .pkg-check {
+      display: block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #bbb;
+      border-radius: 3px;
+      margin: 0 auto 8px;
+    }
+    .package-box .pkg-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+    .package-box .pkg-price {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #2c2c2c;
+    }
+    .package-box .pkg-period {
+      font-size: 0.75rem;
+      color: #999;
+    }
+
+    /* Clause list */
+    .clause-list {
+      list-style: none;
+      padding: 0;
+    }
+    .clause-list li {
+      padding: 8px 0 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #444;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .clause-list li:last-child { border-bottom: none; }
+    .clause-list li::before {
+      content: '•';
+      color: #bbb;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .clause-list strong { color: #1a1a1a; }
+
+    /* Signatures */
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 12px;
+    }
+    .sig-block { }
+    .sig-party {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 40px;
+    }
+    .sig-line {
+      border-bottom: 1px solid #555;
+      margin-bottom: 6px;
+    }
+    .sig-label {
+      font-size: 0.78rem;
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+    .sig-date-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    .sig-date-line {
+      border-bottom: 1px solid #aaa;
+      flex: 1;
+      min-height: 20px;
+    }
+
+    .digital-notice {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      color: #777;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    /* Footer */
+    .doc-footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #bbb;
+      font-size: 0.8rem;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .container { box-shadow: none; border: none; padding: 20px 40px; }
+      .print-bar { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 28px 20px; }
+      .packages { grid-template-columns: 1fr; }
+      .sig-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Print Button -->
+  <div class="print-bar">
+    <button class="btn-print" onclick="window.print()">🖨️ הדפס / שמור PDF</button>
+  </div>
+
+  <!-- Document Header -->
+  <div class="doc-header">
+    <div class="logo">BeautySite</div>
+    <h1>הסכם שירות — BeautySite ולקוחה</h1>
+    <div class="doc-meta">מסמך משפטי מחייב · גרסה 1.0 · תאריך: ___________</div>
+  </div>
+
+  <!-- Section 1: Parties -->
+  <div class="section">
+    <div class="section-title"><span class="snum">1</span> פרטי הצדדים</div>
+    <div class="party-block">
+      <div class="party-label">נותן השירות</div>
+      <div class="party-row">
+        <span class="field-label">שם:</span>
+        <span style="font-weight:700; color:#1a1a1a;">BeautySite</span>
+      </div>
+      <div class="party-row">
+        <span class="field-label">כתובת:</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="party-row">
+        <span class="field-label">ח.פ. / ע.מ.:</span>
+        <span style="color:#999;">[TO BE FILLED]</span>
+      </div>
+    </div>
+    <div class="party-block">
+      <div class="party-label">מקבל/ת השירות</div>
+      <div class="party-row">
+        <span class="field-label">שם העסק:</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="party-row">
+        <span class="field-label">שם מלא:</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="party-row">
+        <span class="field-label">תעודת זהות:</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="party-row">
+        <span class="field-label">טלפון:</span>
+        <span class="field-line"></span>
+      </div>
+      <div class="party-row">
+        <span class="field-label">דוא"ל:</span>
+        <span class="field-line"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Service -->
+  <div class="section">
+    <div class="section-title"><span class="snum">2</span> מהות השירות</div>
+    <div class="service-desc">
+      <p>BeautySite תספק ללקוחה בניית אתר אינטרנט מקצועי לעסק יופי, בהתאם לפרטי השאלון שתמלא הלקוחה.</p>
+      <p>זמן בנייה: עד <strong>48 שעות</strong> מרגע קבלת שאלון העיצוב המלא.</p>
+    </div>
+
+    <p style="font-size:0.9rem; font-weight:700; color:#555; margin: 16px 0 8px;">בחרי חבילה:</p>
+    <div class="packages">
+      <div class="package-box">
+        <span class="pkg-check"></span>
+        <div class="pkg-name">בסיסי</div>
+        <div class="pkg-price">49₪</div>
+        <div class="pkg-period">לחודש</div>
+      </div>
+      <div class="package-box">
+        <span class="pkg-check"></span>
+        <div class="pkg-name">PRO</div>
+        <div class="pkg-price">87₪</div>
+        <div class="pkg-period">לחודש</div>
+      </div>
+      <div class="package-box">
+        <span class="pkg-check"></span>
+        <div class="pkg-name">GROWTH</div>
+        <div class="pkg-price">197₪</div>
+        <div class="pkg-period">לחודש</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Payment -->
+  <div class="section">
+    <div class="section-title"><span class="snum">3</span> תנאי תשלום</div>
+    <ul class="clause-list">
+      <li>השירות מתבצע במנוי חודשי עם <strong>חיוב אוטומטי</strong> בתאריך קבוע בכל חודש.</li>
+      <li>הלקוחה זכאית ל-<strong>7 ימי ניסיון חינם</strong> מיום תחילת השירות.</li>
+      <li>ביטול המנוי יתאפשר בכל עת בהודעה בכתב בלבד (WhatsApp / מייל).</li>
+      <li>לאחר מתן הודעת הביטול, האתר יישאר פעיל עד סוף תקופת החיוב הנוכחית ויורד לאחר מכן.</li>
+      <li>לא יינתנו החזרים על תקופות חיוב שכבר שולמו.</li>
+    </ul>
+  </div>
+
+  <!-- Section 4: IP -->
+  <div class="section">
+    <div class="section-title"><span class="snum">4</span> זכויות קניין רוחני</div>
+    <ul class="clause-list">
+      <li><strong>תוכן שסיפקה הלקוחה</strong> — תמונות, טקסטים, לוגו וחומרים שיווקיים — שייכים ללקוחה בלבד.</li>
+      <li><strong>קוד האתר, תשתית הטכנולוגיה, ותבניות העיצוב</strong> — שייכים ל-BeautySite.</li>
+      <li>BeautySite רשאית לכלול את האתר בתיק העבודות שלה, אלא אם הלקוחה ביקשה אחרת בכתב.</li>
+    </ul>
+  </div>
+
+  <!-- Section 5: Liability -->
+  <div class="section">
+    <div class="section-title"><span class="snum">5</span> אחריות ומגבלות</div>
+    <ul class="clause-list">
+      <li>BeautySite מתחייבת לזמינות שרת של <strong>99.5%</strong> בממוצע שנתי.</li>
+      <li>BeautySite אינה אחראית לנזקים עקיפים, אובדן הכנסה, או נזקים הנובעים משימוש או אי-שימוש באתר.</li>
+      <li><strong>הגבלת אחריות:</strong> סכום הפיצוי המרבי לא יעלה על 3 חודשי תשלום של הלקוחה.</li>
+      <li>BeautySite לא תישא באחריות לנזקים שנגרמו עקב שינויים שביצעה הלקוחה באופן עצמאי.</li>
+    </ul>
+  </div>
+
+  <!-- Section 6: Signatures -->
+  <div class="section">
+    <div class="section-title"><span class="snum">6</span> חתימות</div>
+    <div class="sig-grid">
+      <div class="sig-block">
+        <div class="sig-party">נותן השירות — BeautySite</div>
+        <div class="sig-line"></div>
+        <div class="sig-label">חתימה</div>
+        <div class="sig-date-row">
+          <span>תאריך:</span>
+          <span class="sig-date-line"></span>
+        </div>
+      </div>
+      <div class="sig-block">
+        <div class="sig-party">מקבל/ת השירות — הלקוחה</div>
+        <div class="sig-line"></div>
+        <div class="sig-label">חתימה</div>
+        <div class="sig-date-row">
+          <span>תאריך:</span>
+          <span class="sig-date-line"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="digital-notice">
+      ⚖️ חתימה דיגיטלית (הקלדת שם / לחיצת אישור) מחייבת כחתימה רגילה לפי חוק חתימה אלקטרונית, התשס"א–2001.
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    BeautySite · הסכם שירות · גרסה 1.0<br/>
+    מסמך זה הופק אוטומטית · לשאלות משפטיות פנה/י לעורך/ת דין
+  </div>
+
+</div>
+</body>
+</html>

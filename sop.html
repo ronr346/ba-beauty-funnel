@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📖 SOP — מדריך עבודה לבניית אתרי יופי | BeautySite</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a1a;
+      color: #e8e8e8;
+      font-family: 'Heebo', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      direction: rtl;
+      padding: 40px 20px 80px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #333;
+    }
+    .page-header .badge {
+      display: inline-block;
+      background: #c9a96e;
+      color: #1a1a1a;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .page-header p {
+      color: #888;
+      font-size: 0.95rem;
+    }
+
+    /* Section card */
+    .section {
+      background: #242424;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 32px 36px;
+      margin-bottom: 28px;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #c9a96e;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .num {
+      background: #c9a96e;
+      color: #1a1a1a;
+      font-size: 0.8rem;
+      font-weight: 800;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Intro info boxes */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .info-box {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+    .info-box .label {
+      font-size: 0.75rem;
+      color: #888;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 4px;
+    }
+    .info-box .value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e8e8e8;
+    }
+    .info-box .value.highlight {
+      color: #c9a96e;
+    }
+
+    /* Steps */
+    .step {
+      border-right: 3px solid #333;
+      padding-right: 20px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: #c9a96e;
+      border-radius: 50%;
+      position: absolute;
+      right: -6.5px;
+      top: 6px;
+    }
+    .step-header {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+    .step-header .step-num {
+      color: #c9a96e;
+      margin-left: 6px;
+    }
+    .step ul {
+      list-style: none;
+      padding: 0;
+    }
+    .step ul li {
+      color: #c0c0c0;
+      padding: 3px 0;
+      padding-right: 18px;
+      position: relative;
+      font-size: 0.95rem;
+    }
+    .step ul li::before {
+      content: '›';
+      color: #c9a96e;
+      position: absolute;
+      right: 0;
+      font-weight: 700;
+    }
+
+    /* Checklist */
+    .checklist {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 0.95rem;
+      color: #c0c0c0;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist .box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #555;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .checklist .note {
+      font-size: 0.8rem;
+      color: #c9a96e;
+      font-weight: 600;
+    }
+
+    /* WA Templates */
+    .wa-template {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .wa-template:last-child { margin-bottom: 0; }
+    .wa-template .wa-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #c9a96e;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .wa-template .wa-body {
+      font-size: 0.92rem;
+      color: #c0c0c0;
+      white-space: pre-line;
+      line-height: 1.7;
+    }
+
+    /* Iron rules */
+    .rules-list {
+      list-style: none;
+      padding: 0;
+    }
+    .rules-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #2a2a2a;
+      font-size: 0.95rem;
+      color: #c0c0c0;
+    }
+    .rules-list li:last-child { border-bottom: none; }
+    .rules-list .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* Tools */
+    .tools-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .tool-item {
+      background: #1a1a1a;
+      border: 1px solid #2e2e2e;
+      border-radius: 8px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tool-item .tool-name {
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+    .tool-item .tool-desc {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 2px;
+    }
+    .tool-item .tool-cred {
+      font-size: 0.8rem;
+      color: #c9a96e;
+      background: rgba(201,169,110,0.12);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      margin-top: 48px;
+      color: #555;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 24px 20px; }
+      .page-header h1 { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="badge">Internal Document</div>
+    <h1>📖 SOP — מדריך עבודה לבניית אתרי יופי</h1>
+    <p>BeautySite · גרסה 1.0 · למשתמש פנימי בלבד</p>
+  </div>
+
+  <!-- Section 1: Welcome -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span> ברוכ/ה הבא/ה לצוות BeautySite</div>
+    <p style="color:#c0c0c0; margin-bottom: 20px;">
+      אנחנו שמחים שהצטרפת! תפקידך הוא לבנות אתרי יופי מקצועיים ללקוחות שלנו — מהר, יפה, ומדויק.
+      המדריך הזה הוא המסמך הרשמי שמנחה אותך בכל שלב.
+    </p>
+    <div class="info-grid">
+      <div class="info-box">
+        <div class="label">תפקיד</div>
+        <div class="value">בונה אתרי יופי</div>
+      </div>
+      <div class="info-box">
+        <div class="label">זמן בנייה</div>
+        <div class="value highlight">48 שעות</div>
+      </div>
+      <div class="info-box">
+        <div class="label">תגמול לאתר</div>
+        <div class="value highlight">[X₪ — TO BE FILLED]</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Work Process -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span> תהליך עבודה שלב-שלב</div>
+
+    <div class="step">
+      <div class="step-header"><span class="step-num">שלב 1 ›</span> קבלת הזמנה</div>
+      <ul>
+        <li>תקבל/י הודעת WhatsApp עם: שם לקוחה, שם עסק, חבילה, קישור לשאלון</li>
+        <li>כנס/י ל-Notion ופתח/י כרטיס משימה חדש</li>
+        <li>עדכן/י סטטוס ל: <strong style="color:#c9a96e">"בעבודה"</strong></li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-header"><span class="step-num">שלב 2 ›</span> קריאת השאלון <span style="font-weight:400; color:#888; font-size:0.85rem">(15 דקות)</span></div>
+      <ul>
+        <li>עבור/י על כל תשובות השאלון בקפידה</li>
+        <li>אם משהו לא ברור — שלח/י WhatsApp ללקוחה תוך שעה</li>
+        <li>חלץ/י: סגנון עיצוב, צבעים, שירותים, טקסטים</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-header"><span class="step-num">שלב 3 ›</span> בנייה <span style="font-weight:400; color:#888; font-size:0.85rem">(Lovable / Webflow / WordPress)</span></div>
+      <ul>
+        <li>השתמש/י ב-template המתאים לסגנון שנבחר</li>
+        <li>4 templates מצורפים — <span style="color:#c9a96e">[links: TO BE ADDED]</span></li>
+        <li><strong style="color:#ffffff">כלל ברזל:</strong> אתר חייב לכלול: Hero + שירותים + ביקורות + צור קשר + WhatsApp button</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-header"><span class="step-num">שלב 4 ›</span> בדיקות לפני מסירה</div>
+      <ul class="checklist" style="margin-top: 8px;">
+        <li><span class="box"></span><span>נטען תוך 3 שניות — בדוק ב-PageSpeed</span></li>
+        <li><span class="box"></span><span>מותאם מובייל 100%</span></li>
+        <li><span class="box"></span><span>כפתור WhatsApp עובד</span></li>
+        <li><span class="box"></span><span>כל הטקסטים נכונים ואין שגיאות כתיב</span></li>
+        <li><span class="box"></span><span>דומיין מחובר ו-SSL פעיל</span></li>
+        <li><span class="box"></span><span>אם חבילת PRO — <span class="note">Calendly מחובר</span></span></li>
+        <li><span class="box"></span><span>אם חבילת GROWTH — <span class="note">גלריה אינסטגרם מחוברת</span></span></li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-header"><span class="step-num">שלב 5 ›</span> מסירה ללקוחה</div>
+      <ul>
+        <li>שלח/י לינק לאתר + screenshot ל-WhatsApp</li>
+        <li>השתמש/י בהודעת מסירה (template מוכן בסעיף 3)</li>
+        <li>עדכן/י Notion: <strong style="color:#c9a96e">"הושלם"</strong></li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <div class="step-header"><span class="step-num">שלב 6 ›</span> תמיכה שוטפת <span style="font-weight:400; color:#888; font-size:0.85rem">(PRO / GROWTH)</span></div>
+      <ul>
+        <li>עדכוני תוכן: בצע/י תוך <strong style="color:#c9a96e">48 שעות</strong></li>
+        <li>שינויי עיצוב: תוך <strong style="color:#c9a96e">72 שעות</strong></li>
+        <li>בעיות דחופות: תגובה תוך <strong style="color:#c9a96e">4 שעות</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 3: WA Templates -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span> Templates הודעות WhatsApp</div>
+
+    <div class="wa-template">
+      <div class="wa-title">💬 הודעת פתיחה ללקוחה חדשה</div>
+      <div class="wa-body">היי [שם לקוחה]! 👋
+אני [שמך] מצוות BeautySite.
+קיבלתי את ההזמנה שלך ואני כבר בעבודה על האתר של [שם עסק].
+אסיים תוך 48 שעות ואעדכן אותך ✅
+אם יש שאלות — אני כאן!</div>
+    </div>
+
+    <div class="wa-template">
+      <div class="wa-title">❓ הודעת שאלה לגבי השאלון</div>
+      <div class="wa-body">היי [שם לקוחה]!
+עברתי על השאלון ויש לי שאלה קטנה:
+[פרט את השאלה בצורה ברורה ומקצועית]
+כדי שהאתר יצא מושלם, אשמח לתשובה 🙏</div>
+    </div>
+
+    <div class="wa-template">
+      <div class="wa-title">🎉 הודעת מסירת האתר</div>
+      <div class="wa-body">היי [שם לקוחה]! 🌸
+האתר של [שם עסק] מוכן!
+🔗 [קישור לאתר]
+
+מה כלול:
+✅ עיצוב מותאם לסגנון שלך
+✅ כל השירותים
+✅ כפתור WhatsApp
+✅ מותאם לנייד 100%
+
+מחכה לתגובה שלך! 💕</div>
+    </div>
+
+    <div class="wa-template">
+      <div class="wa-title">🔄 הודעת עדכון תוכן</div>
+      <div class="wa-body">היי [שם לקוחה]!
+קיבלתי את בקשת העדכון ✅
+אעדכן את האתר תוך 48 שעות ואודיע לך כשזה מוכן.
+תודה על הפנייה! 😊</div>
+    </div>
+  </div>
+
+  <!-- Section 4: Iron Rules -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span> כללי ברזל</div>
+    <ul class="rules-list">
+      <li>
+        <span class="icon">🚫</span>
+        <span>לעולם לא להבטיח ללקוחה דברים שלא כלולים בחבילה שלה</span>
+      </li>
+      <li>
+        <span class="icon">⬆️</span>
+        <span>כל בקשה שחורגת מהחבילה → הפנה לשדרוג בלבד, אל תבצע בחינם</span>
+      </li>
+      <li>
+        <span class="icon">🤝</span>
+        <span>תמיד להיות מנומס/ת ומקצועי/ת — גם אם הלקוחה עצבנית</span>
+      </li>
+      <li>
+        <span class="icon">🆘</span>
+        <span>בעיה שאינך יודע/ת לפתור → פנה ל-<strong style="color:#c9a96e">[שם המנהל]</strong> לפני שמבטיחים ללקוחה</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Section 5: Tools -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span> כלים שתצטרך/י</div>
+    <ul class="tools-list">
+      <li class="tool-item">
+        <div>
+          <div class="tool-name">🛠 Lovable.dev</div>
+          <div class="tool-desc">בנייה ועריכת אתרים</div>
+        </div>
+        <span class="tool-cred">credentials: [TO BE FILLED]</span>
+      </li>
+      <li class="tool-item">
+        <div>
+          <div class="tool-name">🌐 Namecheap</div>
+          <div class="tool-desc">ניהול דומיינים</div>
+        </div>
+        <span class="tool-cred">credentials: [TO BE FILLED]</span>
+      </li>
+      <li class="tool-item">
+        <div>
+          <div class="tool-name">☁️ Cloudflare</div>
+          <div class="tool-desc">DNS ו-SSL</div>
+        </div>
+        <span class="tool-cred">credentials: [TO BE FILLED]</span>
+      </li>
+      <li class="tool-item">
+        <div>
+          <div class="tool-name">📋 Notion</div>
+          <div class="tool-desc">ניהול משימות ומעקב לקוחות</div>
+        </div>
+        <span class="tool-cred">[link TO BE FILLED]</span>
+      </li>
+      <li class="tool-item">
+        <div>
+          <div class="tool-name">💬 WhatsApp Business</div>
+          <div class="tool-desc">תקשורת עם לקוחות</div>
+        </div>
+        <span class="tool-cred">[number TO BE FILLED]</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="page-footer">
+    BeautySite · מסמך פנימי · גרסה 1.0<br/>
+    לשאלות פנה/י למנהל הצוות
+  </div>
+
+</div>
+</body>
+</html>

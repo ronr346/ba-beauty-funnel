@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautySite — אתר מקצועי לעסק היופי שלך</title>
+    <meta name="description" content="אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות. בנייה חינם, החל מ-49₪ לחודש.">
+
+    <!-- Google Analytics 4 placeholder -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+
+    <!-- Facebook Pixel placeholder -->
+    <!-- <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════
+           LANDING PAGE — BeautySite (Meta Ads)
+           Hyper-focused. One goal: conversion.
+           ═══════════════════════════════════════════ */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --mauve: #c4837a;
+            --mauve-light: #d4a39a;
+            --mauve-dark: #a06a62;
+            --gold: #d4a853;
+            --gold-light: #e8c97a;
+            --text: #f5f0eb;
+            --text-muted: #8a8585;
+            --text-dim: #5a5555;
+            --red: #e05555;
+            --green: #5ec47a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ══════════════════════════════════
+           HERO — Above the fold, must convert
+           ══════════════════════════════════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        /* Animated gradient background */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: -50%;
+            background: 
+                conic-gradient(from 0deg at 30% 40%, rgba(196, 131, 122, 0.2) 0deg, transparent 90deg, transparent 360deg),
+                conic-gradient(from 180deg at 70% 60%, rgba(212, 168, 83, 0.15) 0deg, transparent 90deg, transparent 360deg),
+                radial-gradient(ellipse at 50% 50%, rgba(196, 131, 122, 0.1) 0%, transparent 50%);
+            animation: heroRotate 20s linear infinite;
+        }
+
+        @keyframes heroRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Gradient overlay for depth */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 60% at 50% 30%, rgba(196, 131, 122, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(212, 168, 83, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* CSS Floating particles */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(1);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--mauve-light) 60%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subhead {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .trust-line {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .trust-line { justify-content: center; }
+        }
+
+        .trust-stars {
+            letter-spacing: 2px;
+        }
+
+        /* ── HERO FORM ── */
+        .hero-form-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 36px 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mauve), var(--gold), var(--mauve));
+            background-size: 200% 100%;
+            animation: gradientSlide 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientSlide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--mauve);
+            box-shadow: 0 0 0 3px rgba(196, 131, 122, 0.15);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, var(--mauve), var(--mauve-light));
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: btnPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 4px 20px rgba(196, 131, 122, 0.3); }
+            50% { box-shadow: 0 8px 40px rgba(196, 131, 122, 0.5); }
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .urgency-pill {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 16px;
+            padding: 8px 16px;
+            background: rgba(224, 85, 85, 0.1);
+            border: 1px solid rgba(224, 85, 85, 0.2);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--red);
+            font-weight: 600;
+            animation: urgencyPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes urgencyPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* ══════════════════════════════════
+           SOCIAL PROOF — Compact
+           ══════════════════════════════════ */
+        .social-proof {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .testimonials-mini {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-mini {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-mini:hover {
+            transform: translateY(-3px);
+        }
+
+        .testimonial-mini .stars {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-mini .quote {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .testimonial-mini .name {
+            font-size: 0.8rem;
+            color: var(--mauve);
+            font-weight: 600;
+        }
+
+        /* Scrolling marquee */
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+            padding: 16px 0;
+        }
+
+        .marquee-container::before,
+        .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .marquee-container::before {
+            right: 0;
+            background: linear-gradient(to left, var(--bg), transparent);
+        }
+
+        .marquee-container::after {
+            left: 0;
+            background: linear-gradient(to right, var(--bg), transparent);
+        }
+
+        .marquee {
+            display: flex;
+            gap: 32px;
+            animation: marqueeScroll 25s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .marquee-item::before {
+            content: '💅';
+            font-size: 0.75rem;
+        }
+
+        /* ══════════════════════════════════
+           WHAT YOU GET
+           ══════════════════════════════════ */
+        .features {
+            padding: 60px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(196, 131, 122, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ══════════════════════════════════
+           BEFORE / AFTER
+           ══════════════════════════════════ */
+        .before-after {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .ba-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 40px;
+        }
+
+        .ba-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .ba-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .ba-arrow { transform: rotate(90deg); }
+        }
+
+        .ba-card {
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .ba-before {
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .ba-before .ba-emoji {
+            font-size: 3rem;
+            filter: grayscale(1);
+            opacity: 0.6;
+        }
+
+        .ba-before .ba-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dim);
+        }
+
+        .ba-before .ba-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ba-before .ba-items li {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            padding: 3px 0;
+        }
+
+        .ba-before .ba-items li::before {
+            content: '✕ ';
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .ba-arrow {
+            font-size: 2rem;
+            color: var(--mauve);
+            animation: arrowPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .ba-after {
+            background: linear-gradient(135deg, rgba(196, 131, 122, 0.1), rgba(212, 168, 83, 0.08));
+            border: 1px solid rgba(196, 131, 122, 0.2);
+        }
+
+        .ba-after .ba-emoji {
+            font-size: 3rem;
+        }
+
+        .ba-after .ba-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--mauve-light);
+        }
+
+        .ba-after .ba-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ba-after .ba-items li {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            padding: 3px 0;
+        }
+
+        .ba-after .ba-items li::before {
+            content: '✓ ';
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* ══════════════════════════════════
+           SECOND CTA
+           ══════════════════════════════════ */
+        .cta-bottom {
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-bottom::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(196, 131, 122, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-bottom h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .cta-form-bottom {
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .cta-guarantee {
+            margin-top: 16px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        /* ══════════════════════════════════
+           SCROLL ANIMATIONS
+           ══════════════════════════════════ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ══════════════════════════════════
+           RESPONSIVE POLISH
+           ══════════════════════════════════ */
+        @media (max-width: 480px) {
+            .hero { padding: 24px 16px; }
+            .hero-form-card { padding: 28px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // ═══ Packages (same as index.html) ═══
+    const PACKAGES = {
+        basic: { name: 'בסיסי', price: 49, period: 'חודש' },
+        growth: { name: 'GROWTH', price: 99, period: 'חודש' },
+        pro: { name: 'PRO', price: 179, period: 'חודש' }
+    };
+
+    // ═══ UTM Parameter Reading ═══
+    const urlParams = new URLSearchParams(window.location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(k => {
+        const v = urlParams.get(k);
+        if (v) sessionStorage.setItem(k, v);
+    });
+</script>
+
+<!-- ═══════ CSS PARTICLES (generated via JS) ═══════ -->
+<div id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden;"></div>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+    <div class="hero-content">
+        <!-- Text side -->
+        <div class="hero-text">
+            <h1>הלקוחה הבאה שלך מחפשת אותך עכשיו.</h1>
+            <p class="subhead">אתר מקצועי לעסק היופי שלך — מוכן תוך 48 שעות, בנייה חינם</p>
+            <div class="trust-line">
+                <span class="trust-stars">⭐️⭐️⭐️⭐️⭐️</span>
+                <span>500+ עסקי יופי מרוצים</span>
+            </div>
+        </div>
+
+        <!-- Form side -->
+        <div class="hero-form-card">
+            <div class="form-title">קבלי הצעה חינם ✨</div>
+            <form id="heroForm" onsubmit="return handleSubmit(event, 'hero')">
+                <div class="form-group">
+                    <label for="hero-name">שם פרטי</label>
+                    <input type="text" id="hero-name" name="name" placeholder="השם שלך" required autocomplete="given-name">
+                </div>
+                <div class="form-group">
+                    <label for="hero-business">שם העסק</label>
+                    <input type="text" id="hero-business" name="business" placeholder="איך קוראים לעסק?" required>
+                </div>
+                <button type="submit" class="submit-btn">קבלי הצעה חינם ←</button>
+            </form>
+            <div class="urgency-pill">
+                <span>⏰</span>
+                <span>נותרו 3 מקומות לחודש מרץ</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ SOCIAL PROOF ═══════ -->
+<section class="social-proof fade-up">
+    <div class="testimonials-mini">
+        <div class="testimonial-mini">
+            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+            <div class="quote">״תוך יומיים היה לי אתר שנראה כמו של מותג יוקרה. מדהים.״</div>
+            <div class="name">מאיה ל. — סטודיו לעיצוב שיער, ת"א</div>
+        </div>
+        <div class="testimonial-mini">
+            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+            <div class="quote">״הלקוחות שלי מגיעות מגוגל עכשיו, בלי שאני משקיעה שקל על פרסום.״</div>
+            <div class="name">שירה כ. — ביוטי בר, חיפה</div>
+        </div>
+        <div class="testimonial-mini">
+            <div class="stars">⭐️⭐️⭐️⭐️⭐️</div>
+            <div class="quote">״פשוט, מהיר, ויפה. מה עוד צריך?״</div>
+            <div class="name">נועה מ. — נייל ארט, רמת גן</div>
+        </div>
+    </div>
+
+    <!-- Marquee -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <span class="marquee-item">סטודיו מאיה, ת"א</span>
+            <span class="marquee-item">ביוטי בר, חיפה</span>
+            <span class="marquee-item">נייל ארט, רמת גן</span>
+            <span class="marquee-item">ספא סנסיטיב, נתניה</span>
+            <span class="marquee-item">לאשר ביוטי, באר שבע</span>
+            <span class="marquee-item">סטודיו רוז, הרצליה</span>
+            <span class="marquee-item">גלאם, ראשון לציון</span>
+            <span class="marquee-item">ביוטי לאב, פ"ת</span>
+            <span class="marquee-item">קליניק דרמה, ירושלים</span>
+            <span class="marquee-item">נויה ספא, אילת</span>
+            <!-- duplicate for seamless loop -->
+            <span class="marquee-item">סטודיו מאיה, ת"א</span>
+            <span class="marquee-item">ביוטי בר, חיפה</span>
+            <span class="marquee-item">נייל ארט, רמת גן</span>
+            <span class="marquee-item">ספא סנסיטיב, נתניה</span>
+            <span class="marquee-item">לאשר ביוטי, באר שבע</span>
+            <span class="marquee-item">סטודיו רוז, הרצליה</span>
+            <span class="marquee-item">גלאם, ראשון לציון</span>
+            <span class="marquee-item">ביוטי לאב, פ"ת</span>
+            <span class="marquee-item">קליניק דרמה, ירושלים</span>
+            <span class="marquee-item">נויה ספא, אילת</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ WHAT YOU GET ═══════ -->
+<section class="features fade-up">
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🌐</div>
+            <div class="feature-title">אתר מקצועי מותאם אישית</div>
+            <div class="feature-desc">עיצוב ייחודי שמייצג את העסק שלך בדיוק כמו שדמיינת</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-title">מוכן תוך 48 שעות</div>
+            <div class="feature-desc">לא שבועות, לא חודשים. יומיים ויש לך אתר פעיל</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <div class="feature-title">החל מ-49₪/חודש בלבד</div>
+            <div class="feature-desc">בלי עלויות נסתרות. בלי הפתעות. מחיר אחד ברור</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ BEFORE / AFTER ═══════ -->
+<section class="before-after fade-up">
+    <h2 class="ba-title">תראי את ההבדל 👇</h2>
+    <div class="ba-grid">
+        <div class="ba-card ba-before">
+            <div class="ba-emoji">😔</div>
+            <div class="ba-label">בלי אתר</div>
+            <ul class="ba-items">
+                <li>לקוחות לא מוצאות אותך</li>
+                <li>נראית לא מקצועית</li>
+                <li>תלויה רק באינסטגרם</li>
+                <li>מפספסת הזמנות</li>
+            </ul>
+        </div>
+
+        <div class="ba-arrow">→</div>
+
+        <div class="ba-card ba-after">
+            <div class="ba-emoji">🤩</div>
+            <div class="ba-label">עם BeautySite</div>
+            <ul class="ba-items">
+                <li>נמצאת בגוגל במקום ראשון</li>
+                <li>נראית כמו מותג יוקרה</li>
+                <li>לקוחות מזמינות 24/7</li>
+                <li>העסק צומח לבד</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ SECOND CTA ═══════ -->
+<section class="cta-bottom fade-up">
+    <h2>מה מחכים? 🚀</h2>
+
+    <div class="cta-form-bottom">
+        <form id="bottomForm" onsubmit="return handleSubmit(event, 'bottom')">
+            <div class="form-group">
+                <label for="bottom-name">שם פרטי</label>
+                <input type="text" id="bottom-name" name="name" placeholder="השם שלך" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+                <label for="bottom-business">שם העסק</label>
+                <input type="text" id="bottom-business" name="business" placeholder="איך קוראים לעסק?" required>
+            </div>
+            <button type="submit" class="submit-btn">קבלי הצעה חינם ←</button>
+        </form>
+        <p class="cta-guarantee">ביטול בכל עת · ללא חוזה · ללא סיכון</p>
+    </div>
+</section>
+
+<script>
+    // ═══ Form submission ═══
+    function handleSubmit(e, source) {
+        e.preventDefault();
+        const form = e.target;
+        const nameInput = form.querySelector('input[name="name"]');
+        const businessInput = form.querySelector('input[name="business"]');
+
+        const name = nameInput.value.trim();
+        const business = businessInput.value.trim();
+
+        if (!name || !business) return false;
+
+        // Save to localStorage
+        localStorage.setItem('bs_name', name);
+        localStorage.setItem('bs_business', business);
+        localStorage.setItem('bs_plan', 'basic');
+        localStorage.setItem('bs_source', 'landing_' + source);
+
+        // Save UTM data from session
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(k => {
+            const v = sessionStorage.getItem(k);
+            if (v) localStorage.setItem(k, v);
+        });
+
+        // Track conversion (Facebook Pixel placeholder)
+        // fbq('track', 'Lead', { content_name: business });
+
+        // Track conversion (GA4 placeholder)
+        // gtag('event', 'generate_lead', { event_category: 'landing', event_label: source });
+
+        // Redirect
+        window.location.href = 'thank-you.html';
+        return false;
+    }
+
+    // ═══ Scroll animation observer ═══
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ═══ CSS Particles generator ═══
+    (function generateParticles() {
+        const container = document.getElementById('particles');
+        const colors = ['rgba(196,131,122,0.4)', 'rgba(212,168,83,0.3)', 'rgba(196,131,122,0.2)', 'rgba(232,201,122,0.25)'];
+        
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 4 + 2;
+            p.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                left: ${Math.random() * 100}%;
+                animation-duration: ${Math.random() * 10 + 10}s;
+                animation-delay: ${Math.random() * 10}s;
+            `;
+            container.appendChild(p);
+        }
+    })();
+</script>
+
+</body>
+</html>

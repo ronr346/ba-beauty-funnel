@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeautySite — הפורטפוליו שלנו | אתרים לעסקי יופי</title>
+    <meta name="description" content="צפי באתרים המדהימים שבנינו לעסקי יופי בכל הארץ. כל אתר מותאם אישית, כל תוצאה מדהימה.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           PORTFOLIO — BeautySite
+           ═══════════════════════════════════════════ */
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0d0d0d;
+            --bg-card: #1a1a1a;
+            --mauve: #c4837a;
+            --mauve-light: #d4a39a;
+            --mauve-glow: rgba(196, 131, 122, 0.3);
+            --gold: #d4a853;
+            --gold-light: #e8c97a;
+            --text: #f5f0eb;
+            --text-muted: #8a8585;
+            --text-dim: #5a5555;
+            --pro-color: #d4a853;
+            --growth-color: #c4837a;
+            --basic-color: #7a9ec4;
+            --green: #7ac48a;
+            --pink: #c47aa0;
+            --purple: #9a7ac4;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 80px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% 0%, rgba(196, 131, 122, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 20% 80%, rgba(212, 168, 83, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(154, 122, 196, 0.06) 0%, transparent 50%);
+            animation: heroGradient 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGradient {
+            0% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--text) 0%, var(--mauve-light) 50%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-muted);
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Floating decoration dots ── */
+        .hero .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: floatDot 6s ease-in-out infinite;
+        }
+        .hero .dot:nth-child(1) { width: 6px; height: 6px; background: var(--mauve); top: 20%; right: 15%; animation-delay: 0s; }
+        .hero .dot:nth-child(2) { width: 4px; height: 4px; background: var(--gold); top: 40%; left: 10%; animation-delay: 1s; }
+        .hero .dot:nth-child(3) { width: 8px; height: 8px; background: var(--purple); bottom: 30%; right: 25%; animation-delay: 2s; }
+        .hero .dot:nth-child(4) { width: 5px; height: 5px; background: var(--pink); top: 60%; left: 20%; animation-delay: 3s; }
+
+        @keyframes floatDot {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.5); }
+        }
+
+        /* ── SECTION COMMON ── */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* ── PORTFOLIO GRID ── */
+        .portfolio-section {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 40px;
+            padding: 0 10px;
+        }
+
+        @media (max-width: 800px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ── PORTFOLIO CARD ── */
+        .portfolio-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 28px 24px 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+            position: relative;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(196, 131, 122, 0.15), 0 0 40px rgba(196, 131, 122, 0.05);
+            border-color: rgba(196, 131, 122, 0.2);
+        }
+
+        /* ── PHONE FRAME ── */
+        .phone-frame {
+            width: 100%;
+            max-width: 280px;
+            height: 480px;
+            margin: 0 auto 24px;
+            background: #000;
+            border-radius: 36px;
+            border: 3px solid #2a2a2a;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 2px 0 #1a1a1a,
+                0 4px 0 #111,
+                0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Camera notch */
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 24px;
+            background: #000;
+            border-radius: 0 0 16px 16px;
+            z-index: 10;
+        }
+
+        /* Camera dot */
+        .phone-frame::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(15px);
+            width: 8px;
+            height: 8px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            z-index: 11;
+            box-shadow: inset 0 0 2px rgba(255,255,255,0.1);
+        }
+
+        .phone-screen {
+            position: absolute;
+            inset: 0;
+            border-radius: 33px;
+            overflow: hidden;
+        }
+
+        /* ══════════════════════════════════
+           MOCKUP 1 — Studio Maya (Dark/Gold)
+           ══════════════════════════════════ */
+        .mockup-1 .phone-screen {
+            background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
+        }
+        .mockup-1 .screen-hero {
+            height: 45%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2a1a3e 40%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        .mockup-1 .screen-hero::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(212, 168, 83, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .mockup-1 .screen-hero-title {
+            font-family: 'Playfair Display', serif;
+            color: #d4a853;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 6px;
+            position: relative;
+        }
+        .mockup-1 .screen-hero-sub {
+            color: rgba(255,255,255,0.5);
+            font-size: 9px;
+            text-align: center;
+        }
+        .mockup-1 .screen-services {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mockup-1 .service-item {
+            background: rgba(212, 168, 83, 0.08);
+            border: 1px solid rgba(212, 168, 83, 0.15);
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mockup-1 .service-name {
+            color: rgba(255,255,255,0.7);
+            font-size: 9px;
+        }
+        .mockup-1 .service-price {
+            color: #d4a853;
+            font-size: 8px;
+            font-weight: 600;
+        }
+        .mockup-1 .screen-cta {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            background: #25D366;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════
+           MOCKUP 2 — Beauty Bar Haifa (Light/Pink)
+           ══════════════════════════════════ */
+        .mockup-2 .phone-screen {
+            background: #faf5f0;
+        }
+        .mockup-2 .screen-header {
+            background: #fff;
+            padding: 38px 16px 12px;
+            text-align: center;
+            border-bottom: 1px solid #f0e8e0;
+        }
+        .mockup-2 .screen-logo-text {
+            font-family: 'Playfair Display', serif;
+            color: #c4837a;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .mockup-2 .screen-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .mockup-2 .screen-nav span {
+            font-size: 7px;
+            color: #999;
+        }
+        .mockup-2 .screen-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .mockup-2 .treatment-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .mockup-2 .treatment-img {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .mockup-2 .treatment-card:nth-child(1) .treatment-img {
+            background: linear-gradient(135deg, #f8e8e0, #f0d0c0);
+        }
+        .mockup-2 .treatment-card:nth-child(2) .treatment-img {
+            background: linear-gradient(135deg, #e8f0e0, #d0e8c8);
+        }
+        .mockup-2 .treatment-card:nth-child(3) .treatment-img {
+            background: linear-gradient(135deg, #e0e8f8, #c8d0f0);
+        }
+        .mockup-2 .treatment-title {
+            font-size: 10px;
+            color: #333;
+            font-weight: 600;
+        }
+        .mockup-2 .treatment-desc {
+            font-size: 7px;
+            color: #999;
+            margin-top: 2px;
+        }
+        .mockup-2 .screen-book-btn {
+            background: #c4837a;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* ══════════════════════════════════
+           MOCKUP 3 — Nail Art (Colorful/Playful)
+           ══════════════════════════════════ */
+        .mockup-3 .phone-screen {
+            background: linear-gradient(180deg, #f8e8f8 0%, #fff 30%, #f0e0f8 100%);
+        }
+        .mockup-3 .screen-hero-3 {
+            padding: 40px 16px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #e040a0, #a040e0);
+            position: relative;
+        }
+        .mockup-3 .screen-hero-3::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(180deg, transparent, #f8e8f8);
+        }
+        .mockup-3 .screen-hero-3 h3 {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .mockup-3 .screen-hero-3 p {
+            color: rgba(255,255,255,0.8);
+            font-size: 8px;
+            margin-top: 4px;
+        }
+        .mockup-3 .nail-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            padding: 24px 12px 12px;
+        }
+        .mockup-3 .nail-swatch {
+            aspect-ratio: 1;
+            border-radius: 12px;
+        }
+        .mockup-3 .nail-swatch:nth-child(1) { background: linear-gradient(135deg, #ff6b9d, #c44569); }
+        .mockup-3 .nail-swatch:nth-child(2) { background: linear-gradient(135deg, #a040e0, #6040c0); }
+        .mockup-3 .nail-swatch:nth-child(3) { background: linear-gradient(135deg, #ff9ff3, #f368e0); }
+        .mockup-3 .nail-swatch:nth-child(4) { background: linear-gradient(135deg, #feca57, #ff6348); }
+        .mockup-3 .nail-swatch:nth-child(5) { background: linear-gradient(135deg, #48dbfb, #0abde3); }
+        .mockup-3 .nail-swatch:nth-child(6) { background: linear-gradient(135deg, #ff9ff3, #f8a5c2); }
+        .mockup-3 .screen-pricing {
+            margin: 10px 12px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 2px 10px rgba(160, 64, 224, 0.1);
+        }
+        .mockup-3 .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 8px;
+            color: #666;
+            padding: 4px 0;
+            border-bottom: 1px solid #f0e0f0;
+        }
+        .mockup-3 .price-row:last-child { border: none; }
+        .mockup-3 .price-val { color: #a040e0; font-weight: 600; }
+
+        /* ══════════════════════════════════
+           MOCKUP 4 — Spa Sensitive (Zen/Green)
+           ══════════════════════════════════ */
+        .mockup-4 .phone-screen {
+            background: #f5f0e8;
+        }
+        .mockup-4 .screen-zen-hero {
+            height: 40%;
+            background: linear-gradient(180deg, #4a7c59 0%, #6b9a6b 60%, #8ab88a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px 20px;
+            position: relative;
+        }
+        .mockup-4 .screen-zen-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, #f5f0e8, transparent);
+        }
+        .mockup-4 .zen-circle {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .mockup-4 .zen-circle::before {
+            content: '🍃';
+            font-size: 20px;
+        }
+        .mockup-4 .zen-title {
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            text-align: center;
+        }
+        .mockup-4 .zen-sub {
+            color: rgba(255,255,255,0.7);
+            font-size: 8px;
+            text-align: center;
+            margin-top: 4px;
+        }
+        .mockup-4 .zen-menu {
+            padding: 20px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mockup-4 .zen-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 10px 12px;
+            border-radius: 12px;
+        }
+        .mockup-4 .zen-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6b9a6b;
+            flex-shrink: 0;
+        }
+        .mockup-4 .zen-item-text {
+            font-size: 9px;
+            color: #4a4a4a;
+        }
+        .mockup-4 .zen-book {
+            margin: 8px 16px;
+            background: #4a7c59;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════
+           MOCKUP 5 — Lasher Beauty (Glamorous/Sparkle)
+           ══════════════════════════════════ */
+        .mockup-5 .phone-screen {
+            background: #0d0d1a;
+            overflow: hidden;
+        }
+        .mockup-5 .sparkle-hero {
+            height: 55%;
+            background: linear-gradient(135deg, #1a0a2e 0%, #2a1040 40%, #1a0a2e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px 16px;
+            position: relative;
+        }
+        /* CSS sparkle effects */
+        .mockup-5 .sparkle-hero::before {
+            content: '✨';
+            position: absolute;
+            top: 50px;
+            right: 30px;
+            font-size: 14px;
+            animation: sparkleFloat 3s ease-in-out infinite;
+        }
+        .mockup-5 .sparkle-hero::after {
+            content: '✨';
+            position: absolute;
+            bottom: 40px;
+            left: 25px;
+            font-size: 10px;
+            animation: sparkleFloat 3s ease-in-out infinite 1s;
+        }
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        .mockup-5 .glam-title {
+            font-family: 'Playfair Display', serif;
+            color: #e8c97a;
+            font-size: 15px;
+            text-align: center;
+            margin-bottom: 8px;
+            text-shadow: 0 0 20px rgba(232, 201, 122, 0.3);
+        }
+        .mockup-5 .glam-sub {
+            color: rgba(255,255,255,0.5);
+            font-size: 8px;
+            text-align: center;
+        }
+        .mockup-5 .glam-services {
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mockup-5 .glam-svc {
+            background: rgba(232, 201, 122, 0.06);
+            border: 1px solid rgba(232, 201, 122, 0.1);
+            border-radius: 10px;
+            padding: 10px 12px;
+            color: rgba(255,255,255,0.7);
+            font-size: 9px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mockup-5 .glam-svc .price {
+            color: #e8c97a;
+            font-weight: 600;
+        }
+        .mockup-5 .glam-cta {
+            margin: 8px 16px;
+            background: linear-gradient(135deg, #d4a853, #e8c97a);
+            color: #1a0a2e;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* ══════════════════════════════════
+           MOCKUP 6 — Studio Rose (Tech/Blue)
+           ══════════════════════════════════ */
+        .mockup-6 .phone-screen {
+            background: #f0f4f8;
+        }
+        .mockup-6 .tech-hero {
+            background: linear-gradient(135deg, #1a3a5c, #2a5a8c, #1a4a7c);
+            padding: 42px 16px 24px;
+            text-align: center;
+            position: relative;
+        }
+        .mockup-6 .tech-hero::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .mockup-6 .tech-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .mockup-6 .tech-title {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .mockup-6 .tech-badge {
+            display: inline-block;
+            background: rgba(122, 180, 230, 0.2);
+            color: #8ac4f0;
+            font-size: 7px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-top: 6px;
+        }
+        .mockup-6 .tech-features {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .mockup-6 .tech-feat {
+            background: #fff;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .mockup-6 .tech-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .mockup-6 .tech-feat:nth-child(1) .tech-icon { background: linear-gradient(135deg, #e8f4ff, #d0e8ff); }
+        .mockup-6 .tech-feat:nth-child(2) .tech-icon { background: linear-gradient(135deg, #e8fff0, #d0f0e0); }
+        .mockup-6 .tech-feat:nth-child(3) .tech-icon { background: linear-gradient(135deg, #f8e8ff, #f0d0ff); }
+        .mockup-6 .tech-feat-text {
+            font-size: 9px;
+            color: #4a4a4a;
+        }
+        .mockup-6 .tech-cta {
+            margin: 4px 16px;
+            background: linear-gradient(135deg, #1a3a5c, #2a5a8c);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        /* ── CARD META ── */
+        .card-meta {
+            text-align: center;
+        }
+
+        .card-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .card-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .card-badge {
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .badge-pro {
+            background: rgba(212, 168, 83, 0.15);
+            color: var(--pro-color);
+            border: 1px solid rgba(212, 168, 83, 0.3);
+        }
+
+        .badge-growth {
+            background: rgba(196, 131, 122, 0.15);
+            color: var(--growth-color);
+            border: 1px solid rgba(196, 131, 122, 0.3);
+        }
+
+        .badge-basic {
+            background: rgba(122, 158, 196, 0.15);
+            color: var(--basic-color);
+            border: 1px solid rgba(122, 158, 196, 0.3);
+        }
+
+        .card-rating {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .card-quote {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .card-quote::before {
+            content: '"';
+            color: var(--mauve);
+            font-size: 1.2rem;
+        }
+        .card-quote::after {
+            content: '"';
+            color: var(--mauve);
+            font-size: 1.2rem;
+        }
+
+        /* ── RESULTS SECTION ── */
+        .results-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--mauve), var(--gold));
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--mauve), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Counter animation */
+        .stat-card {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stat-card:nth-child(2) { transition-delay: 0.15s; }
+        .stat-card:nth-child(3) { transition-delay: 0.3s; }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px 60px;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(196, 131, 122, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--mauve), var(--mauve-light));
+            color: #fff;
+            text-decoration: none;
+            padding: 18px 48px;
+            border-radius: 14px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(196, 131, 122, 0.3);
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .cta-sub {
+            margin-top: 16px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--mauve);
+        }
+
+        .footer-copy {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+
+        /* ── SCROLL ANIMATIONS ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 480px) {
+            .phone-frame {
+                max-width: 240px;
+                height: 420px;
+            }
+            section {
+                padding: 50px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <div class="hero-content">
+        <h1>הנה מה שאנחנו בונים 💅</h1>
+        <p>כל אתר מותאם אישית. כל עסק ייחודי. כל תוצאה מדהימה.</p>
+    </div>
+</section>
+
+<!-- ═══════ PORTFOLIO GRID ═══════ -->
+<section class="portfolio-section">
+    <div class="section-title">
+        <h2>האתרים שלנו מדברים בעד עצמם</h2>
+        <p>כל אתר נבנה מאפס, מותאם במיוחד לעסק ולקהל היעד</p>
+    </div>
+
+    <div class="portfolio-grid">
+
+        <!-- CARD 1 — Studio Maya -->
+        <div class="portfolio-card fade-up">
+            <div class="phone-frame mockup-1">
+                <div class="phone-screen">
+                    <div class="screen-hero">
+                        <div class="screen-hero-title">סטודיו מאיה</div>
+                        <div class="screen-hero-sub">עיצוב שיער מקצועי · תל אביב</div>
+                    </div>
+                    <div class="screen-services">
+                        <div class="service-item">
+                            <span class="service-name">תספורת + עיצוב</span>
+                            <span class="service-price">₪180</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">צבע + החלקה</span>
+                            <span class="service-price">₪450</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">טיפול קראטין</span>
+                            <span class="service-price">₪350</span>
+                        </div>
+                    </div>
+                    <div class="screen-cta">💬 שלחי הודעה בוואטסאפ</div>
+                </div>
+            </div>
+            <div class="card-meta">
+                <div class="card-name">סטודיו מאיה — עיצוב שיער</div>
+                <div class="card-location">תל אביב</div>
+                <div><span class="card-badge badge-pro">חבילת PRO</span></div>
+                <div class="card-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                <div class="card-quote">מאז שיש לי את האתר, הלקוחות מגיעות לבד. אני לא צריכה לרדוף אחרי אף אחת</div>
+            </div>
+        </div>
+
+        <!-- CARD 2 — Beauty Bar Haifa -->
+        <div class="portfolio-card fade-up">
+            <div class="phone-frame mockup-2">
+                <div class="phone-screen">
+                    <div class="screen-header">
+                        <div class="screen-logo-text">ביוטי בר</div>
+                        <div class="screen-nav">
+                            <span>עמוד הבית</span>
+                            <span>טיפולים</span>
+                            <span>צור קשר</span>
+                        </div>
+                    </div>
+                    <div class="screen-content">
+                        <div class="treatment-card">
+                            <div class="treatment-img"></div>
+                            <div class="treatment-title">טיפול פנים עמוק</div>
+                            <div class="treatment-desc">ניקוי, פילינג והזנה</div>
+                        </div>
+                        <div class="treatment-card">
+                            <div class="treatment-img"></div>
+                            <div class="treatment-title">מיצוק ומתיחה</div>
+                            <div class="treatment-desc">טכנולוגיה מתקדמת</div>
+                        </div>
+                        <div class="treatment-card">
+                            <div class="treatment-img"></div>
+                            <div class="treatment-title">הידרו פייסל</div>
+                            <div class="treatment-desc">לחות ורעננות</div>
+                        </div>
+                        <div class="screen-book-btn">הזמיני תור עכשיו</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-meta">
+                <div class="card-name">ביוטי בר — טיפולי פנים</div>
+                <div class="card-location">חיפה</div>
+                <div><span class="card-badge badge-growth">חבילת GROWTH</span></div>
+                <div class="card-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                <div class="card-quote">העיצוב פשוט מושלם. לקוחות חדשות אומרות שהאתר נראה כמו של מותג יוקרה</div>
+            </div>
+        </div>
+
+        <!-- CARD 3 — Nail Art -->
+        <div class="portfolio-card fade-up">
+            <div class="phone-frame mockup-3">
+                <div class="phone-screen">
+                    <div class="screen-hero-3">
+                        <h3>💅 נייל ארט</h3>
+                        <p>מניקור · פדיקור · ג'ל</p>
+                    </div>
+                    <div class="nail-gallery">
+                        <div class="nail-swatch"></div>
+                        <div class="nail-swatch"></div>
+                        <div class="nail-swatch"></div>
+                        <div class="nail-swatch"></div>
+                        <div class="nail-swatch"></div>
+                        <div class="nail-swatch"></div>
+                    </div>
+                    <div class="screen-pricing">
+                        <div class="price-row">
+                            <span>מניקור ג'ל</span>
+                            <span class="price-val">₪120</span>
+                        </div>
+                        <div class="price-row">
+                            <span>פדיקור ג'ל</span>
+                            <span class="price-val">₪140</span>
+                        </div>
+                        <div class="price-row">
+                            <span>נייל ארט מיוחד</span>
+                            <span class="price-val">₪180</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-meta">
+                <div class="card-name">נייל ארט — מניקור ופדיקור</div>
+                <div class="card-location">רמת גן</div>
+                <div><span class="card-badge badge-basic">חבילת בסיסי</span></div>
+                <div class="card-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                <div class="card-quote">תוך יומיים היה לי אתר מהמם. הלקוחות שלי פשוט מתות עליו!</div>
+            </div>
+        </div>
+
+        <!-- CARD 4 — Spa Sensitive -->
+        <div class="portfolio-card fade-up">
+            <div class="phone-frame mockup-4">
+                <div class="phone-screen">
+                    <div class="screen-zen-hero">
+                        <div class="zen-circle"></div>
+                        <div class="zen-title">ספא סנסיטיב</div>
+                        <div class="zen-sub">עיסוי · אסתטיקה · רוגע</div>
+                    </div>
+                    <div class="zen-menu">
+                        <div class="zen-item">
+                            <div class="zen-dot"></div>
+                            <div class="zen-item-text">עיסוי שוודי מרגיע</div>
+                        </div>
+                        <div class="zen-item">
+                            <div class="zen-dot"></div>
+                            <div class="zen-item-text">טיפול פנים אורגני</div>
+                        </div>
+                        <div class="zen-item">
+                            <div class="zen-dot"></div>
+                            <div class="zen-item-text">אבנים חמות</div>
+                        </div>
+                    </div>
+                    <div class="zen-book">הזמיני טיפול 🌿</div>
+                </div>
+            </div>
+            <div class="card-meta">
+                <div class="card-name">ספא סנסיטיב — עיסוי ואסתטיקה</div>
+                <div class="card-location">נתניה</div>
+                <div><span class="card-badge badge-growth">חבילת GROWTH</span></div>
+                <div class="card-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                <div class="card-quote">האתר מעביר בדיוק את האווירה של הספא שלי. שקט, נקי, מזמין</div>
+            </div>
+        </div>
+
+        <!-- CARD 5 — Lasher Beauty -->
+        <div class="portfolio-card fade-up">
+            <div class="phone-frame mockup-5">
+                <div class="phone-screen">
+                    <div class="sparkle-hero">
+                        <div class="glam-title">לאשר ביוטי ✨</div>
+                        <div class="glam-sub">איפור כלות · אירועים · ביוטי VIP</div>
+                    </div>
+                    <div class="glam-services">
+                        <div class="glam-svc">
+                            <span>איפור כלה מלא</span>
+                            <span class="price">₪1,200</span>
+                        </div>
+                        <div class="glam-svc">
+                            <span>איפור ערב</span>
+                            <span class="price">₪350</span>
+                        </div>
+                        <div class="glam-svc">
+                            <span>שיעור איפור פרטי</span>
+                            <span class="price">₪500</span>
+                        </div>
+                    </div>
+                    <div class="glam-cta">הזמיני ניסיון איפור</div>
+                </div>
+            </div>
+            <div class="card-meta">
+                <div class="card-name">לאשר ביוטי — איפור כלות</div>
+                <div class="card-location">באר שבע</div>
+                <div><span class="card-badge badge-pro">חבילת PRO</span></div>
+                <div class="card-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                <div class="card-quote">קיבלתי אתר שנראה כמו חלום. הכלות שלי מתרגשות עוד לפני שהן מגיעות</div>
+            </div>
+        </div>
+
+        <!-- CARD 6 — Studio Rose -->
+        <div class="portfolio-card fade-up">
+            <div class="phone-frame mockup-6">
+                <div class="phone-screen">
+                    <div class="tech-hero">
+                        <div class="tech-title">סטודיו רוז</div>
+                        <div class="tech-badge">⚡ טכנולוגיה מתקדמת</div>
+                    </div>
+                    <div class="tech-features">
+                        <div class="tech-feat">
+                            <div class="tech-icon">💎</div>
+                            <div class="tech-feat-text">הסרת שיער בלייזר דיודה</div>
+                        </div>
+                        <div class="tech-feat">
+                            <div class="tech-icon">🔬</div>
+                            <div class="tech-feat-text">טכנולוגיית IPL מתקדמת</div>
+                        </div>
+                        <div class="tech-feat">
+                            <div class="tech-icon">🛡️</div>
+                            <div class="tech-feat-text">מאושר ע"י משרד הבריאות</div>
+                        </div>
+                    </div>
+                    <div class="tech-cta">קבעי ייעוץ חינם →</div>
+                </div>
+            </div>
+            <div class="card-meta">
+                <div class="card-name">סטודיו רוז — הסרת שיער בלייזר</div>
+                <div class="card-location">הרצליה</div>
+                <div><span class="card-badge badge-basic">חבילת בסיסי</span></div>
+                <div class="card-rating">⭐️⭐️⭐️⭐️⭐️</div>
+                <div class="card-quote">האתר נראה מקצועי ומודרני. הלקוחות מרגישות ביטחון כשהן רואות אותו</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ═══════ RESULTS ═══════ -->
+<section class="results-section">
+    <div class="section-title">
+        <h2>המספרים מדברים</h2>
+    </div>
+    <div class="results-grid">
+        <div class="stat-card">
+            <div class="stat-number" data-target="500">0</div>
+            <div class="stat-label">עסקי יופי שבנינו</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="4.9" data-decimal="true">0</div>
+            <div class="stat-label">דירוג ממוצע</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" data-target="48">0</div>
+            <div class="stat-label">שעות — זמן בנייה ממוצע</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="cta-section">
+    <h2>רוצה אתר כזה לעסק שלך? ✨</h2>
+    <a href="index.html#lead-form" class="cta-btn">התחילי עכשיו ←</a>
+    <p class="cta-sub">7 ימי ניסיון חינם · ביטול בכל עת</p>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+    <div class="footer-links">
+        <a href="index.html">עמוד הבית</a>
+        <a href="terms.html">תנאי שימוש</a>
+        <a href="privacy.html">מדיניות פרטיות</a>
+        <a href="portfolio.html">פורטפוליו</a>
+    </div>
+    <div class="footer-copy">© 2025 BeautySite. כל הזכויות שמורות.</div>
+</footer>
+
+<script>
+    // ── Intersection Observer for scroll animations ──
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Counter animation for stat cards
+                if (entry.target.classList.contains('stat-card')) {
+                    animateCounter(entry.target);
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up, .stat-card').forEach(el => observer.observe(el));
+
+    // ── Counter animation ──
+    function animateCounter(card) {
+        const numEl = card.querySelector('.stat-number');
+        const target = parseFloat(numEl.dataset.target);
+        const isDecimal = numEl.dataset.decimal === 'true';
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * target;
+
+            if (isDecimal) {
+                numEl.textContent = current.toFixed(1);
+            } else {
+                numEl.textContent = Math.floor(current) + (progress >= 1 && target === 500 ? '+' : '');
+            }
+
+            if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+    }
+
+    // ── Stagger fade-up delays ──
+    document.querySelectorAll('.portfolio-card.fade-up').forEach((card, i) => {
+        card.style.transitionDelay = `${i * 0.1}s`;
+    });
+</script>
+</body>
+</html>
